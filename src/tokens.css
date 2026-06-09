@@ -1,0 +1,132 @@
+:root {
+  --ana-red-500: #CB3727;
+  --ana-green-500: #009685;
+  --ana-navy-500: #193E4B;
+  --ana-blue-500: #0480A4;
+  --ana-orange-500: #F79348;
+  --ana-yellow-500: #FFCE34;
+  --ana-gray-900: #2F3638;
+  --ana-white: #FFFFFF;
+
+  --ana-red-100: color-mix(in srgb, var(--ana-red-500) 20%, white);
+  --ana-red-200: color-mix(in srgb, var(--ana-red-500) 40%, white);
+  --ana-green-100: color-mix(in srgb, var(--ana-green-500) 20%, white);
+  --ana-green-200: color-mix(in srgb, var(--ana-green-500) 40%, white);
+  --ana-blue-100: color-mix(in srgb, var(--ana-blue-500) 20%, white);
+  --ana-blue-200: color-mix(in srgb, var(--ana-blue-500) 40%, white);
+  --ana-navy-100: color-mix(in srgb, var(--ana-navy-500) 20%, white);
+  --ana-orange-100: color-mix(in srgb, var(--ana-orange-500) 20%, white);
+  --ana-yellow-100: color-mix(in srgb, var(--ana-yellow-500) 20%, white);
+  --ana-gray-50: color-mix(in srgb, var(--ana-gray-900) 4%, white);
+  --ana-gray-100: color-mix(in srgb, var(--ana-gray-900) 8%, white);
+  --ana-gray-200: color-mix(in srgb, var(--ana-gray-900) 18%, white);
+  --ana-gray-700: color-mix(in srgb, var(--ana-gray-900) 78%, white);
+
+  /* Semantic colors: these are the colors components should use by default. */
+  --color-text-primary: var(--ana-gray-900);
+  --color-text-secondary: var(--ana-gray-700);
+  --color-text-brand: var(--ana-navy-500);
+  --color-text-inverse: var(--ana-white);
+  --color-text-link: var(--ana-blue-500);
+  --color-text-error: var(--ana-red-500);
+  --color-text-success: var(--ana-green-500);
+  --color-text-warning: #8A4B00;
+  --color-text-info: var(--ana-blue-500);
+
+  --color-background-page: var(--ana-white);
+  --color-background-muted: var(--ana-gray-100);
+  --color-background-soft: var(--ana-gray-50);
+  --color-background-dark: var(--ana-navy-500);
+  --color-background-brand: var(--ana-green-500);
+  --color-background-info: var(--ana-blue-100);
+  --color-background-success: var(--ana-green-100);
+  --color-background-warning: var(--ana-yellow-100);
+  --color-background-error: var(--ana-red-100);
+
+  --color-border-default: var(--ana-gray-200);
+  --color-border-strong: var(--ana-gray-700);
+  --color-border-info: var(--ana-blue-500);
+  --color-border-success: var(--ana-green-500);
+  --color-border-warning: var(--ana-orange-500);
+  --color-border-error: var(--ana-red-500);
+
+  --color-link-default: var(--ana-blue-500);
+  --color-link-hover: var(--ana-navy-500);
+  --color-link-visited: #5A4B8B;
+
+  --color-action-primary: var(--ana-green-500);
+  --color-action-primary-hover: var(--ana-navy-500);
+  --color-action-secondary: var(--ana-blue-500);
+  --color-action-secondary-hover: var(--ana-navy-500);
+  --color-action-accent: var(--ana-red-500);
+  --color-action-accent-hover: var(--ana-navy-500);
+  --color-action-disabled-bg: var(--ana-gray-200);
+  --color-action-disabled-text: var(--ana-gray-700);
+
+  --color-focus-ring: var(--ana-blue-500);
+
+  --font-family-sans: "Source Sans Pro", Arial, sans-serif;
+  --font-family-fallback: Arial, sans-serif;
+  --font-body-weight: 400;
+  --font-heading-weight: 700;
+  --font-subheading-weight: 600;
+  --font-button-weight: 600;
+
+  --type-body-size: 1rem;
+  --type-body-line-height: 1.5rem;
+  --type-h1-size: 3.5rem;
+  --type-h1-line-height: 3.875rem;
+  --type-h2-size: 2.25rem;
+  --type-h2-line-height: 2.625rem;
+  --type-h3-size: 1.875rem;
+  --type-h3-line-height: 2.25rem;
+  --type-h4-size: 1.5rem;
+  --type-h4-line-height: 2rem;
+  --type-hero-size: 4.5rem;
+  --type-hero-line-height: 4.75rem;
+  --type-eyebrow-size: .875rem;
+  --type-eyebrow-line-height: 1.25rem;
+
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-button: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --duration-fast: 150ms;
+  --duration-default: 200ms;
+  --duration-slow: 300ms;
+}
+
+/* Domain semantic tokens for future ANA experiences. */
+:root {
+  --color-commerce-price: var(--ana-gray-900);
+  --color-commerce-sale: var(--ana-red-500);
+  --color-commerce-background: var(--ana-gray-50);
+  --color-member: var(--ana-blue-500);
+  --color-member-background: var(--ana-blue-100);
+  --color-donation: var(--ana-red-500);
+  --color-donation-background: var(--ana-red-100);
+  --color-impact: var(--ana-green-500);
+
+  --component-page-header-background: var(--color-background-muted);
+  --component-card-background: var(--color-background-page);
+  --component-card-border: var(--color-border-default);
+  --component-card-radius: var(--radius-md);
+  --component-quick-links-background: var(--ana-navy-500);
+}

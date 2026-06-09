@@ -1,0 +1,58 @@
+@config "../tailwind.config.js";
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+@import "tailwindcss";
+@import './tokens.css';
+
+@theme {
+  --font-sans: "Source Sans Pro", Arial, sans-serif;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-surface-page font-sans text-[var(--color-text-primary)] antialiased; }
+  h1, h2, h3, h4, h5, h6 { @apply font-sans tracking-tight text-ana-gray; }
+  h1 { font-size: var(--type-h1-size); line-height: var(--type-h1-line-height); font-weight: var(--font-heading-weight); }
+  h2 { font-size: var(--type-h2-size); line-height: var(--type-h2-line-height); font-weight: var(--font-heading-weight); }
+  h3 { font-size: var(--type-h3-size); line-height: var(--type-h3-line-height); font-weight: var(--font-heading-weight); }
+  h4 { font-size: var(--type-h4-size); line-height: var(--type-h4-line-height); font-weight: var(--font-subheading-weight); }
+  h5, h6 { font-weight: var(--font-subheading-weight); }
+  p { @apply leading-7; }
+  a { @apply text-[var(--color-link-default)] underline-offset-4 hover:text-[var(--color-link-hover)]; }
+  a:visited:not(.ds-button) { color: var(--color-link-visited); }
+  :focus-visible { outline: var(--focus-ring-width) solid var(--color-focus-ring); outline-offset: var(--focus-ring-offset); }
+}
+
+@layer components {
+  .skip-link { @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-button focus:bg-white focus:px-4 focus:py-3 focus:font-bold focus:text-ana-navy focus:shadow-ana; }
+  .ds-container { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .ds-section { @apply py-14 md:py-20; }
+  .ds-eyebrow { font-size: var(--type-eyebrow-size); line-height: var(--type-eyebrow-line-height); font-weight: var(--font-subheading-weight); @apply uppercase tracking-wider text-ana-blue; }
+  .ds-card { @apply rounded-card border border-[var(--color-border-default)] bg-white p-5 shadow-ana sm:p-6; }
+  .ds-button { font-weight: var(--font-button-weight); @apply inline-flex min-h-11 items-center justify-center rounded-button px-5 py-3 text-sm uppercase tracking-wide no-underline transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:px-6; }
+  .ds-button-primary { @apply bg-action-primary text-white hover:bg-[var(--color-action-primary-hover)] focus-visible:outline-ana-blue; }
+  .ds-button-secondary { @apply border border-ana-blue bg-white text-ana-blue hover:bg-[var(--ana-blue-100)]; }
+  .ds-button-accent { @apply bg-action-accent text-white hover:bg-[var(--color-action-accent-hover)]; }
+  .ds-button-disabled { @apply cursor-not-allowed bg-[var(--color-action-disabled-bg)] text-[var(--color-action-disabled-text)]; }
+  .ds-tag { @apply inline-flex rounded-full bg-[var(--ana-blue-100)] px-3 py-1 text-xs font-bold uppercase tracking-wide text-ana-navy; }
+  .ds-code { @apply rounded bg-slate-100 px-2 py-1 font-mono text-sm text-ana-gray; }
+  .type-hero { font-size: var(--type-hero-size); line-height: var(--type-hero-line-height); font-weight: var(--font-heading-weight); }
+  .type-h1 { font-size: var(--type-h1-size); line-height: var(--type-h1-line-height); font-weight: var(--font-heading-weight); }
+  .type-h2 { font-size: var(--type-h2-size); line-height: var(--type-h2-line-height); font-weight: var(--font-heading-weight); }
+  .type-h3 { font-size: var(--type-h3-size); line-height: var(--type-h3-line-height); font-weight: var(--font-heading-weight); }
+  .type-h4 { font-size: var(--type-h4-size); line-height: var(--type-h4-line-height); font-weight: var(--font-subheading-weight); }
+  .ds-field { @apply w-full rounded-button border border-[var(--color-border-default)] bg-white px-4 py-3 text-base text-[var(--color-text-primary)] shadow-sm; }
+  .ds-field-error { @apply border-[var(--color-border-error)]; }
+  .ds-label { @apply block text-sm font-semibold text-[var(--color-text-primary)]; }
+  .ds-help { @apply mt-1 text-sm text-[var(--color-text-secondary)]; }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --type-h1-size: 2.75rem;
+    --type-h1-line-height: 3.125rem;
+    --type-h2-size: 2rem;
+    --type-h2-line-height: 2.375rem;
+    --type-hero-size: 3.25rem;
+    --type-hero-line-height: 3.625rem;
+  }
+}
