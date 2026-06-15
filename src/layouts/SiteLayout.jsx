@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
 import { DesignKitHeader } from './DesignKitHeader'
 import { DesignKitFooter } from './DesignKitFooter'
-import { ScrollToTop } from '../components/core/ScrollToTop'
+import { ScrollToTop } from '../components/core'
 
 export function SiteLayout() {
   const navigate = useNavigate()

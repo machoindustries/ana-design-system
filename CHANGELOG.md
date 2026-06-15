@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [v0.2.3] - 2026-06-14
+
+Code cleanup and more documentation updates
+
+### Added
+
+- CONTRIBUTING.md is now available in the repository
+
+### Changed
+
+- Barrel exports to keep code just a little tidier
+
 ## [v0.2.2] - 2026-06-14
 
 Adjusting documentation format
@@ -27,7 +39,6 @@ Extracted the routing logic from the initial development file into something muc
 ### Changed
 
 - Moved all functions out of `DesignSystemHome.jsx` into `src/pages/`. Updated supporting files to enable routing from the navigation
-- Adjusted `Button.jsx` to have an actual disabled attribute
 
 ## [v0.2.0] update
 

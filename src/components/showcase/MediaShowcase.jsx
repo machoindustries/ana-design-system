@@ -1,5 +1,5 @@
 import { FiArrowRight, FiImage } from 'react-icons/fi'
-import { SectionHeading } from '../core/SectionHeading'
+import { SectionHeading } from '../core'
 
 const imageGuidance = [
   ['Alt text', 'Required for meaningful images. Decorative images should use empty alt text and be hidden from assistive technology.'],

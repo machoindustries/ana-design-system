@@ -1,7 +1,7 @@
-import { PageShell } from "../components/core/PageShell"
+import { PageShell } from "../components/core"
 import { ColorSwatch } from "../components/core/ColorSwatch"
 import { TypographyScale } from "../components/foundations/TypographyScale"
-import { DataTable } from "../components/core/DataTable"
+import { DataTable } from "../components/core"
 import { colors, semanticColors, typography } from "../data/systemData"
 
 export function FoundationsPage() {

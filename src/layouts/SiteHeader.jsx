@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FiChevronDown, FiMenu, FiSearch, FiShoppingCart, FiUser, FiX } from 'react-icons/fi'
-import { Button } from '../components/core/Button'
+import { Button } from '../components/core'
 import { primaryNav, utilityLinks } from '../data/navigation'
 
 function IconButton({ children, label, className = '', onClick }) {

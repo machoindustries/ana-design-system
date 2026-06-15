@@ -1,5 +1,5 @@
 import { FiSearch } from 'react-icons/fi'
-import { Button } from '../core/Button'
+import { Button } from '../core'
 
 export function SearchShowcase() {
   return (

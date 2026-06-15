@@ -1,4 +1,4 @@
-import { Card } from '../core/Card'
+import { Card } from '../core'
 
 const cards = [
   ['Resource Card', 'Support advocacy, policy, and education content with clear titles, excerpts, and CTAs.'],

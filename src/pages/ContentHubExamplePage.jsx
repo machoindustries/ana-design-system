@@ -1,5 +1,5 @@
 import { FiSearch, FiArrowRight, FiDownload } from "react-icons/fi"
-import { SectionHeading } from "../components/core/SectionHeading"
+import { SectionHeading } from "../components/core"
 
 
 export function ContentHubExamplePage() {

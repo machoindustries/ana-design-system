@@ -1,5 +1,5 @@
-import { PageShell } from "../components/core/PageShell"
-import { DataTable } from "../components/core/DataTable"
+import { PageShell } from "../components/core"
+import { DataTable } from "../components/core"
 
 export function PatternsPage() {
   const patternRows = [

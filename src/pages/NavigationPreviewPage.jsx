@@ -1,4 +1,4 @@
-import { PageShell } from "../components/core/PageShell"
+import { PageShell } from "../components/core"
 import { NursingWorldHeader } from "../components/navigation/NursingWorldHeader"
 import { NursingWorldFooter } from "../components/navigation/NursingWorldFooter"
 

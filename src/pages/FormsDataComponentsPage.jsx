@@ -1,4 +1,4 @@
-import { PageShell } from "../components/core/PageShell"
+import { PageShell } from "../components/core"
 import { FormShowcase } from "../components/showcase/FormShowcase"
 import { LinksShowcase } from "../components/showcase/LinksShowcase"
 import { HtmlTableShowcase } from "../components/showcase/HtmlTableShowcase"

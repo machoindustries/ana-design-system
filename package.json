@@ -1,6 +1,6 @@
 {
   "name": "ana-digital-design-system",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "description": "ANA Digital Design System reference site built with React, Vite, and Tailwind CSS v4.",
   "type": "module",

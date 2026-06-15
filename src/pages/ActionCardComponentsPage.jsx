@@ -1,4 +1,4 @@
-import { PageShell } from "../components/core/PageShell"
+import { PageShell } from "../components/core"
 import { HeroShowcase } from "../components/showcase/HeroShowcase"
 import { ButtonShowcase } from "../components/showcase/ButtonShowcase"
 import { CardShowcase } from "../components/showcase/CardShowcase"

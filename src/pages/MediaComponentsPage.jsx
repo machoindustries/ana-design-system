@@ -1,4 +1,4 @@
-import { PageShell } from "../components/core/PageShell"
+import { PageShell } from "../components/core"
 import { MediaShowcase } from "../components/showcase/MediaShowcase"
 
 export function MediaComponentsPage() {

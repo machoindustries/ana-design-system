@@ -1,4 +1,4 @@
-import { PageShell } from "../components/core/PageShell"
+import { PageShell } from "../components/core"
 import { EnterpriseComponentsShowcase } from "../components/showcase/EnterpriseComponentsShowcase"  
 
 export function ContentComponentsPage() {
