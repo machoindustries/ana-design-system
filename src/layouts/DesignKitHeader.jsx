@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { FiBookOpen, FiMenu, FiSearch, FiX } from 'react-icons/fi'
 import { designKitNavItems } from '../data/designKitNavigation'
+import { NavLink } from 'react-router-dom'
 
 function LogoMark() {
   return (
@@ -23,7 +24,6 @@ export function DesignKitHeader({ activePage, onNavigate }) {
   function navigate(id) {
     onNavigate(id)
     setMenuOpen(false)
-    window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }))
   }
 
   return (
@@ -37,14 +37,15 @@ export function DesignKitHeader({ activePage, onNavigate }) {
 
           <nav aria-label="Design kit navigation" className="hidden lg:flex lg:items-center lg:gap-1">
             {designKitNavItems.slice(1).map(item => (
-              <button
-                type="button"
-                key={item.id}
-                onClick={() => navigate(item.id)}
-                className={`rounded-button px-3 py-2 text-sm font-bold transition ${activePage === item.id ? 'bg-ana-navy text-white' : 'text-ana-navy hover:bg-surface-muted'}`}
+            <NavLink
+              key={item.id}
+              to={item.id === 'home' ? '/' : `/${item.id}`}
+              className={({ isActive }) =>
+                `rounded-button px-3 py-2 text-sm font-bold transition ${isActive ? 'bg-ana-navy text-white' : 'text-ana-navy hover:bg-surface-muted'}`
+              }
               >
-                {item.label}
-              </button>
+              {item.label}
+            </NavLink>
             ))}
           </nav>
 
@@ -72,15 +73,13 @@ export function DesignKitHeader({ activePage, onNavigate }) {
         {menuOpen ? (
           <nav aria-label="Mobile design kit navigation" className="grid gap-2 border-t border-[var(--color-border-default)] py-4 lg:hidden">
             {designKitNavItems.map(item => (
-              <button
-                type="button"
-                key={item.id}
-                onClick={() => navigate(item.id)}
-                className={`rounded-button px-4 py-3 text-left font-bold ${activePage === item.id ? 'bg-ana-navy text-white' : 'bg-surface-soft text-ana-navy'}`}
+            <NavLink
+              key={item.id}
+              to={item.id === 'home' ? '/' : `/${item.id}`}
+              className={`rounded-button px-4 py-3 text-left font-bold ${activePage === item.id ? 'bg-ana-navy text-white' : 'bg-surface-soft text-ana-navy'}`}
               >
-                {item.label}
-                <span className="mt-1 block text-sm font-normal opacity-80">{item.description}</span>
-              </button>
+              {item.label}
+            </NavLink>
             ))}
           </nav>
         ) : null}
