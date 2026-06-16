@@ -3,6 +3,7 @@ import { HeroShowcase } from "../components/showcase/HeroShowcase"
 import { ButtonShowcase } from "../components/showcase/ButtonShowcase"
 import { CardShowcase } from "../components/showcase/CardShowcase"
 import { AccordionShowcase } from "../components/showcase/AccordionShowcase"
+import { AlertModalShowcase } from "../components/showcase/AlertModalShowcase"
 import { SearchShowcase } from "../components/showcase/SearchShowcase"
 
 export function ActionCardComponentsPage() {
@@ -12,6 +13,7 @@ export function ActionCardComponentsPage() {
         <HeroShowcase />
         <section><h3 className="mb-4">Buttons</h3><ButtonShowcase /></section>
         <section><h3 className="mb-4">Cards</h3><CardShowcase /></section>
+        <section><h3>Alert and Modal</h3><AlertModalShowcase /></section>
         <section><h3 className="mb-4">Accordion</h3><AccordionShowcase /></section>
         <section><h3 className="mb-4">Search and discovery</h3><SearchShowcase /></section>
       </div>
