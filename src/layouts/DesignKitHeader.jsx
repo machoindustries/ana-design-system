@@ -1,88 +1,299 @@
-import { useState } from 'react'
-import { FiBookOpen, FiMenu, FiSearch, FiX } from 'react-icons/fi'
+import { useEffect, useRef, useState } from 'react'
+import { FiBookOpen, FiChevronDown, FiMenu, FiSearch, FiX } from 'react-icons/fi'
 import { designKitNavItems } from '../data/designKitNavigation'
-import { NavLink } from 'react-router-dom'
 
+// ---------------------------------------------------------------------------
+// LogoMark
+// ---------------------------------------------------------------------------
 function LogoMark() {
   return (
     <span className="flex items-center gap-3">
-      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-ana-red text-white" aria-hidden="true">
+      <span
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-ana-red text-white"
+        aria-hidden="true"
+      >
         <img src="/assets/flame-logo-color-rgb.svg" alt="" className="h-7 w-auto" />
       </span>
       <span>
         <span className="block text-base font-bold leading-5 text-ana-navy">ANA Design System</span>
-        <span className="block text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">Reference Kit</span>
+        <span className="block text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+          Reference Kit
+        </span>
       </span>
     </span>
   )
 }
 
+// ---------------------------------------------------------------------------
+// DropdownGroup — desktop grouped nav item with flyout panel
+// ---------------------------------------------------------------------------
+function DropdownGroup({ item, activePage, onNavigate }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+  const buttonId = `nav-group-${item.id}`
+  const panelId = `nav-panel-${item.id}`
+
+  // Close on outside click or Escape
+  useEffect(() => {
+    if (!open) return
+    function handler(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  const isGroupActive = item.children?.some(child => child.id === activePage)
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        id={buttonId}
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => setOpen(prev => !prev)}
+        className={`inline-flex items-center gap-1.5 rounded-button px-3 py-2 text-sm font-bold transition
+          ${isGroupActive ? 'bg-ana-navy text-white' : 'text-ana-navy hover:bg-surface-muted'}`}
+      >
+        {item.label}
+        <FiChevronDown
+          aria-hidden="true"
+          className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        />
+      </button>
+
+      {open && (
+        <div
+          id={panelId}
+          role="region"
+          aria-labelledby={buttonId}
+          className="absolute left-0 top-full z-50 mt-2 w-72 rounded-card border border-[var(--color-border-default)] bg-white shadow-ana-lg"
+        >
+          <ul className="p-2">
+            {item.children.map(child => (
+              <li key={child.id}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onNavigate(child.id)
+                    setOpen(false)
+                  }}
+                  className={`w-full rounded-button px-4 py-3 text-left transition
+                    ${activePage === child.id
+                      ? 'bg-ana-navy text-white'
+                      : 'text-ana-navy hover:bg-surface-muted'}`}
+                >
+                  <span className="block text-sm font-bold">{child.label}</span>
+                  <span className={`mt-0.5 block text-xs ${activePage === child.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
+                    {child.description}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// DesignKitHeader
+// ---------------------------------------------------------------------------
 export function DesignKitHeader({ activePage, onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [openMobileGroup, setOpenMobileGroup] = useState(null)
 
   function navigate(id) {
     onNavigate(id)
     setMenuOpen(false)
+    setOpenMobileGroup(null)
+    window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }))
   }
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border-default)] bg-white/95 backdrop-blur">
       <a className="skip-link" href="#main">Skip to main content</a>
+
       <div className="ds-container">
         <div className="flex min-h-20 items-center justify-between gap-4 py-3">
-          <button type="button" onClick={() => navigate('home')} className="rounded-button text-left no-underline hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ana-blue" aria-label="ANA Design System home">
+
+          {/* Logo */}
+          <button
+            type="button"
+            onClick={() => navigate('home')}
+            className="rounded-button text-left hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ana-blue"
+            aria-label="ANA Design System home"
+          >
             <LogoMark />
           </button>
 
+          {/* Desktop nav */}
           <nav aria-label="Design kit navigation" className="hidden lg:flex lg:items-center lg:gap-1">
-            {designKitNavItems.slice(1).map(item => (
-            <NavLink
-              key={item.id}
-              to={item.id === 'home' ? '/' : `/${item.id}`}
-              className={({ isActive }) =>
-                `rounded-button px-3 py-2 text-sm font-bold transition ${isActive ? 'bg-ana-navy text-white' : 'text-ana-navy hover:bg-surface-muted'}`
+            {designKitNavItems.map(item => {
+              if (item.children) {
+                return (
+                  <DropdownGroup
+                    key={item.id}
+                    item={item}
+                    activePage={activePage}
+                    onNavigate={navigate}
+                  />
+                )
               }
-              >
-              {item.label}
-            </NavLink>
-            ))}
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => navigate(item.id)}
+                  className={`rounded-button px-3 py-2 text-sm font-bold transition
+                    ${activePage === item.id
+                      ? 'bg-ana-navy text-white'
+                      : 'text-ana-navy hover:bg-surface-muted'}`}
+                >
+                  {item.label}
+                </button>
+              )
+            })}
           </nav>
 
+          {/* Utility buttons */}
           <div className="flex items-center gap-2">
-            <button type="button" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] text-ana-navy hover:bg-surface-muted" aria-label="Toggle design kit search" aria-expanded={searchOpen} onClick={() => setSearchOpen(!searchOpen)}>
+            <button
+              type="button"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] text-ana-navy hover:bg-surface-muted"
+              aria-label="Toggle design kit search"
+              aria-expanded={searchOpen}
+              onClick={() => setSearchOpen(prev => !prev)}
+            >
               <FiSearch aria-hidden="true" />
             </button>
-            <a href="/" className="hidden min-h-11 items-center gap-2 rounded-button border border-[var(--color-border-default)] px-4 text-sm font-bold no-underline hover:bg-surface-muted md:inline-flex">
+
+            <a
+              href="/"
+              className="hidden min-h-11 items-center gap-2 rounded-button border border-[var(--color-border-default)] px-4 text-sm font-bold no-underline hover:bg-surface-muted md:inline-flex"
+            >
               <FiBookOpen aria-hidden="true" /> Docs
             </a>
-            <button type="button" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-ana-navy text-white lg:hidden" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
+
+            <button
+              type="button"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-ana-navy text-white lg:hidden"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen(prev => !prev)}
+            >
               {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
             </button>
           </div>
         </div>
 
-        {searchOpen ? (
-          <form className="grid gap-3 border-t border-[var(--color-border-default)] py-4 sm:grid-cols-[1fr_auto]" role="search">
+        {/* Search bar */}
+        {searchOpen && (
+          <form
+            className="grid gap-3 border-t border-[var(--color-border-default)] py-4 sm:grid-cols-[1fr_auto]"
+            role="search"
+          >
             <label htmlFor="design-kit-search" className="sr-only">Search the design kit</label>
-            <input id="design-kit-search" className="ds-field" type="search" placeholder="Search foundations, components, templates" />
+            <input
+              id="design-kit-search"
+              className="ds-field"
+              type="search"
+              placeholder="Search foundations, components, templates"
+            />
             <button className="ds-button ds-button-primary" type="submit">Search</button>
           </form>
-        ) : null}
+        )}
 
-        {menuOpen ? (
-          <nav aria-label="Mobile design kit navigation" className="grid gap-2 border-t border-[var(--color-border-default)] py-4 lg:hidden">
-            {designKitNavItems.map(item => (
-            <NavLink
-              key={item.id}
-              to={item.id === 'home' ? '/' : `/${item.id}`}
-              className={`rounded-button px-4 py-3 text-left font-bold ${activePage === item.id ? 'bg-ana-navy text-white' : 'bg-surface-soft text-ana-navy'}`}
-              >
-              {item.label}
-            </NavLink>
-            ))}
+        {/* Mobile menu */}
+        {menuOpen && (
+          <nav
+            aria-label="Mobile design kit navigation"
+            className="border-t border-[var(--color-border-default)] py-4 lg:hidden"
+          >
+            <ul className="grid gap-1">
+              {designKitNavItems.map(item => {
+                if (item.children) {
+                  const isGroupOpen = openMobileGroup === item.id
+                  const isGroupActive = item.children.some(child => child.id === activePage)
+
+                  return (
+                    <li key={item.id}>
+                      <button
+                        type="button"
+                        aria-expanded={isGroupOpen}
+                        onClick={() => setOpenMobileGroup(isGroupOpen ? null : item.id)}
+                        className={`flex w-full items-center justify-between rounded-button px-4 py-3 text-left font-bold transition
+                          ${isGroupActive ? 'bg-surface-muted text-ana-navy' : 'bg-surface-soft text-ana-navy'}`}
+                      >
+                        <span>
+                          {item.label}
+                          <span className="mt-0.5 block text-sm font-normal text-[var(--color-text-secondary)]">
+                            {item.description}
+                          </span>
+                        </span>
+                        <FiChevronDown
+                          aria-hidden="true"
+                          className={`ml-3 shrink-0 transition-transform duration-200 ${isGroupOpen ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+
+                      {isGroupOpen && (
+                        <ul className="ml-4 mt-1 grid gap-1 border-l-2 border-[var(--color-border-default)] pl-3">
+                          {item.children.map(child => (
+                            <li key={child.id}>
+                              <button
+                                type="button"
+                                onClick={() => navigate(child.id)}
+                                className={`w-full rounded-button px-4 py-3 text-left transition
+                                  ${activePage === child.id
+                                    ? 'bg-ana-navy text-white'
+                                    : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
+                              >
+                                <span className="block font-bold">{child.label}</span>
+                                <span className={`mt-0.5 block text-sm font-normal ${activePage === child.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
+                                  {child.description}
+                                </span>
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  )
+                }
+
+                return (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      onClick={() => navigate(item.id)}
+                      className={`w-full rounded-button px-4 py-3 text-left font-bold transition
+                        ${activePage === item.id
+                          ? 'bg-ana-navy text-white'
+                          : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
+                    >
+                      {item.label}
+                      <span className={`mt-0.5 block text-sm font-normal ${activePage === item.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
+                        {item.description}
+                      </span>
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
           </nav>
-        ) : null}
+        )}
       </div>
     </header>
   )

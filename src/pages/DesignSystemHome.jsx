@@ -11,6 +11,7 @@ import { NavigationPreviewPage } from './NavigationPreviewPage'
 import { PatternsPage } from './PatternsPage'
 import { TemplatesPage } from './TemplatesPage'
 import { ContentHubExamplePage } from './ContentHubExamplePage'
+import { NursesWeek26Page } from './NursesWeek26Page'
 import { PlatformsPage } from './PlatformsPage'
 
 export function DesignSystemHome() {
@@ -29,6 +30,7 @@ export function DesignSystemHome() {
           <Route path="patterns" element={<PatternsPage />} />
           <Route path="templates" element={<TemplatesPage />} />
           <Route path="examples" element={<ContentHubExamplePage />} />
+          <Route path="examples/nurses-week-2026" element={<NursesWeek26Page />} />
           <Route path="platforms" element={<PlatformsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
