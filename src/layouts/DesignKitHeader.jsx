@@ -4,23 +4,21 @@ import { designKitNavItems } from '../data/designKitNavigation'
 
 // ---------------------------------------------------------------------------
 // LogoMark
+//
+// The ANA Enterprise lockup has a hard minimum display height of 100px.
+// Rather than forcing the nav row to grow to fit it (which would crowd
+// the nav buttons and force awkward vertical centering), the logo gets
+// its own dedicated branding row above the nav. The image is rendered at
+// its true aspect ratio (≈1.68:1) with object-contain so it's never
+// stretched or cropped — only its container size changes per breakpoint.
 // ---------------------------------------------------------------------------
 function LogoMark() {
   return (
-    <span className="flex items-center gap-3">
-      <span
-        className="flex h-11 w-11 items-center justify-center rounded-full bg-ana-red text-white"
-        aria-hidden="true"
-      >
-        <img src="/assets/flame-logo-color-rgb.svg" alt="" className="h-7 w-auto" />
-      </span>
-      <span>
-        <span className="block text-base font-bold leading-5 text-ana-navy">ANA Design System</span>
-        <span className="block text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-          Reference Kit
-        </span>
-      </span>
-    </span>
+    <img
+      src="/assets/enterprise-logo-color-rgb.svg"
+      alt="American Nurses Enterprise"
+      className="h-[100px] w-auto object-contain"
+    />
   )
 }
 
@@ -125,175 +123,188 @@ export function DesignKitHeader({ activePage, onNavigate }) {
     <header className="sticky top-0 z-50 border-b border-[var(--color-border-default)] bg-white/95 backdrop-blur">
       <a className="skip-link" href="#main">Skip to main content</a>
 
+      {/* Branding row — sized to the logo's real minimum height (100px) plus
+          vertical breathing room, kept independent from the nav row below it
+          so neither has to compromise its own sizing for the other. */}
       <div className="ds-container">
-        <div className="flex min-h-20 items-center justify-between gap-4 py-3">
-
-          {/* Logo */}
+        <div className="flex items-center justify-between gap-4 py-4">
           <button
             type="button"
             onClick={() => navigate('home')}
-            className="rounded-button text-left hover:bg-surface-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ana-blue"
+            className="rounded-button focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ana-blue"
             aria-label="ANA Design System home"
           >
             <LogoMark />
           </button>
 
-          {/* Desktop nav */}
-          <nav aria-label="Design kit navigation" className="hidden lg:flex lg:items-center lg:gap-1">
-            {designKitNavItems.map(item => {
-              if (item.children) {
-                return (
-                  <DropdownGroup
-                    key={item.id}
-                    item={item}
-                    activePage={activePage}
-                    onNavigate={navigate}
-                  />
-                )
-              }
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => navigate(item.id)}
-                  className={`rounded-button px-3 py-2 text-sm font-bold transition
-                    ${activePage === item.id
-                      ? 'bg-ana-navy text-white'
-                      : 'text-ana-navy hover:bg-surface-muted'}`}
-                >
-                  {item.label}
-                </button>
-              )
-            })}
-          </nav>
-
-          {/* Utility buttons */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] text-ana-navy hover:bg-surface-muted"
-              aria-label="Toggle design kit search"
-              aria-expanded={searchOpen}
-              onClick={() => setSearchOpen(prev => !prev)}
-            >
-              <FiSearch aria-hidden="true" />
-            </button>
-
-            <a
-              href="/"
-              className="hidden min-h-11 items-center gap-2 rounded-button border border-[var(--color-border-default)] px-4 text-sm font-bold no-underline hover:bg-surface-muted md:inline-flex"
-            >
-              <FiBookOpen aria-hidden="true" /> Docs
-            </a>
-
-            <button
-              type="button"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-ana-navy text-white lg:hidden"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen(prev => !prev)}
-            >
-              {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
-            </button>
-          </div>
+          <span className="hidden text-sm font-semibold uppercase tracking-wide text-[var(--color-text-secondary)] sm:inline">
+            Design System &middot; Reference Kit
+          </span>
         </div>
+      </div>
 
-        {/* Search bar */}
-        {searchOpen && (
-          <form
-            className="grid gap-3 border-t border-[var(--color-border-default)] py-4 sm:grid-cols-[1fr_auto]"
-            role="search"
-          >
-            <label htmlFor="design-kit-search" className="sr-only">Search the design kit</label>
-            <input
-              id="design-kit-search"
-              className="ds-field"
-              type="search"
-              placeholder="Search foundations, components, templates"
-            />
-            <button className="ds-button ds-button-primary" type="submit">Search</button>
-          </form>
-        )}
+      {/* Nav row — its own compact bar, unaffected by the logo's height */}
+      <div className="border-t border-[var(--color-border-default)] bg-surface-soft">
+        <div className="ds-container">
+          <div className="flex min-h-16 items-center justify-between gap-4">
 
-        {/* Mobile menu */}
-        {menuOpen && (
-          <nav
-            aria-label="Mobile design kit navigation"
-            className="border-t border-[var(--color-border-default)] py-4 lg:hidden"
-          >
-            <ul className="grid gap-1">
+            {/* Desktop nav */}
+            <nav aria-label="Design kit navigation" className="hidden lg:flex lg:items-center lg:gap-1">
               {designKitNavItems.map(item => {
                 if (item.children) {
-                  const isGroupOpen = openMobileGroup === item.id
-                  const isGroupActive = item.children.some(child => child.id === activePage)
+                  return (
+                    <DropdownGroup
+                      key={item.id}
+                      item={item}
+                      activePage={activePage}
+                      onNavigate={navigate}
+                    />
+                  )
+                }
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => navigate(item.id)}
+                    className={`rounded-button px-3 py-2 text-sm font-bold transition
+                      ${activePage === item.id
+                        ? 'bg-ana-navy text-white'
+                        : 'text-ana-navy hover:bg-surface-muted'}`}
+                  >
+                    {item.label}
+                  </button>
+                )
+              })}
+            </nav>
+
+            {/* Utility buttons */}
+            <div className="flex items-center gap-2 py-2">
+              <button
+                type="button"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] text-ana-navy hover:bg-surface-muted"
+                aria-label="Toggle design kit search"
+                aria-expanded={searchOpen}
+                onClick={() => setSearchOpen(prev => !prev)}
+              >
+                <FiSearch aria-hidden="true" />
+              </button>
+
+              <a
+                href="/"
+                className="hidden min-h-11 items-center gap-2 rounded-button border border-[var(--color-border-default)] px-4 text-sm font-bold no-underline hover:bg-surface-muted md:inline-flex"
+              >
+                <FiBookOpen aria-hidden="true" /> Docs
+              </a>
+
+              <button
+                type="button"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-ana-navy text-white lg:hidden"
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen(prev => !prev)}
+              >
+                {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Search bar */}
+          {searchOpen && (
+            <form
+              className="grid gap-3 border-t border-[var(--color-border-default)] py-4 sm:grid-cols-[1fr_auto]"
+              role="search"
+            >
+              <label htmlFor="design-kit-search" className="sr-only">Search the design kit</label>
+              <input
+                id="design-kit-search"
+                className="ds-field"
+                type="search"
+                placeholder="Search foundations, components, templates"
+              />
+              <button className="ds-button ds-button-primary" type="submit">Search</button>
+            </form>
+          )}
+
+          {/* Mobile menu */}
+          {menuOpen && (
+            <nav
+              aria-label="Mobile design kit navigation"
+              className="border-t border-[var(--color-border-default)] py-4 lg:hidden"
+            >
+              <ul className="grid gap-1">
+                {designKitNavItems.map(item => {
+                  if (item.children) {
+                    const isGroupOpen = openMobileGroup === item.id
+                    const isGroupActive = item.children.some(child => child.id === activePage)
+
+                    return (
+                      <li key={item.id}>
+                        <button
+                          type="button"
+                          aria-expanded={isGroupOpen}
+                          onClick={() => setOpenMobileGroup(isGroupOpen ? null : item.id)}
+                          className={`flex w-full items-center justify-between rounded-button px-4 py-3 text-left font-bold transition
+                            ${isGroupActive ? 'bg-surface-muted text-ana-navy' : 'bg-surface-soft text-ana-navy'}`}
+                        >
+                          <span>
+                            {item.label}
+                            <span className="mt-0.5 block text-sm font-normal text-[var(--color-text-secondary)]">
+                              {item.description}
+                            </span>
+                          </span>
+                          <FiChevronDown
+                            aria-hidden="true"
+                            className={`ml-3 shrink-0 transition-transform duration-200 ${isGroupOpen ? 'rotate-180' : ''}`}
+                          />
+                        </button>
+
+                        {isGroupOpen && (
+                          <ul className="ml-4 mt-1 grid gap-1 border-l-2 border-[var(--color-border-default)] pl-3">
+                            {item.children.map(child => (
+                              <li key={child.id}>
+                                <button
+                                  type="button"
+                                  onClick={() => navigate(child.id)}
+                                  className={`w-full rounded-button px-4 py-3 text-left transition
+                                    ${activePage === child.id
+                                      ? 'bg-ana-navy text-white'
+                                      : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
+                                >
+                                  <span className="block font-bold">{child.label}</span>
+                                  <span className={`mt-0.5 block text-sm font-normal ${activePage === child.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
+                                    {child.description}
+                                  </span>
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    )
+                  }
 
                   return (
                     <li key={item.id}>
                       <button
                         type="button"
-                        aria-expanded={isGroupOpen}
-                        onClick={() => setOpenMobileGroup(isGroupOpen ? null : item.id)}
-                        className={`flex w-full items-center justify-between rounded-button px-4 py-3 text-left font-bold transition
-                          ${isGroupActive ? 'bg-surface-muted text-ana-navy' : 'bg-surface-soft text-ana-navy'}`}
+                        onClick={() => navigate(item.id)}
+                        className={`w-full rounded-button px-4 py-3 text-left font-bold transition
+                          ${activePage === item.id
+                            ? 'bg-ana-navy text-white'
+                            : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
                       >
-                        <span>
-                          {item.label}
-                          <span className="mt-0.5 block text-sm font-normal text-[var(--color-text-secondary)]">
-                            {item.description}
-                          </span>
+                        {item.label}
+                        <span className={`mt-0.5 block text-sm font-normal ${activePage === item.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
+                          {item.description}
                         </span>
-                        <FiChevronDown
-                          aria-hidden="true"
-                          className={`ml-3 shrink-0 transition-transform duration-200 ${isGroupOpen ? 'rotate-180' : ''}`}
-                        />
                       </button>
-
-                      {isGroupOpen && (
-                        <ul className="ml-4 mt-1 grid gap-1 border-l-2 border-[var(--color-border-default)] pl-3">
-                          {item.children.map(child => (
-                            <li key={child.id}>
-                              <button
-                                type="button"
-                                onClick={() => navigate(child.id)}
-                                className={`w-full rounded-button px-4 py-3 text-left transition
-                                  ${activePage === child.id
-                                    ? 'bg-ana-navy text-white'
-                                    : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
-                              >
-                                <span className="block font-bold">{child.label}</span>
-                                <span className={`mt-0.5 block text-sm font-normal ${activePage === child.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
-                                  {child.description}
-                                </span>
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
                     </li>
                   )
-                }
-
-                return (
-                  <li key={item.id}>
-                    <button
-                      type="button"
-                      onClick={() => navigate(item.id)}
-                      className={`w-full rounded-button px-4 py-3 text-left font-bold transition
-                        ${activePage === item.id
-                          ? 'bg-ana-navy text-white'
-                          : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
-                    >
-                      {item.label}
-                      <span className={`mt-0.5 block text-sm font-normal ${activePage === item.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
-                        {item.description}
-                      </span>
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
-          </nav>
-        )}
+                })}
+              </ul>
+            </nav>
+          )}
+        </div>
       </div>
     </header>
   )

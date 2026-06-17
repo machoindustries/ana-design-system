@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [v0.2.6] - 2026-06-17
+
+Hosting on Vercel to provide stakeholders a way to view the kit.
+
+### Added
+
+- File for vercel routing
+
+### Changed
+
+- Adjustments to the kit navigation to display the logo.
+
 ## [v0.2.5] - 2026-06-16
 
 New round of components
