@@ -189,12 +189,14 @@ export function DesignKitHeader({ activePage, onNavigate }) {
                 <FiSearch aria-hidden="true" />
               </button>
 
-              <a
-                href="/"
-                className="hidden min-h-11 items-center gap-2 rounded-button border border-[var(--color-border-default)] px-4 text-sm font-bold no-underline hover:bg-surface-muted md:inline-flex"
+              <button
+                type="button"
+                onClick={() => navigate('docs')}
+                className={`hidden min-h-11 items-center gap-2 rounded-button border border-[var(--color-border-default)] px-4 text-sm font-bold transition md:inline-flex
+                  ${activePage === 'docs' ? 'bg-ana-navy text-white' : 'text-ana-navy hover:bg-surface-muted'}`}
               >
                 <FiBookOpen aria-hidden="true" /> Docs
-              </a>
+              </button>
 
               <button
                 type="button"

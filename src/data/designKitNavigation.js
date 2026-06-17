@@ -99,6 +99,11 @@ export const designKitNavItems = [
     label: 'Platforms',
     description: 'Optimizely and HubSpot adapter mapping.',
   },
+  {
+    id: 'docs',
+    label: 'Docs',
+    description: 'Setup, project structure, and how to add pages, components, and tokens.',
+  },
 ]
 
 /**
