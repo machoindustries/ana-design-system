@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { FiBookOpen, FiChevronDown, FiMenu, FiSearch, FiX } from 'react-icons/fi'
 import { designKitNavItems } from '../data/designKitNavigation'
+import { SearchOverlay } from '../components/core/SearchOverlay'
 
 // ---------------------------------------------------------------------------
 // LogoMark
@@ -112,6 +113,18 @@ export function DesignKitHeader({ activePage, onNavigate }) {
   const [searchOpen, setSearchOpen] = useState(false)
   const [openMobileGroup, setOpenMobileGroup] = useState(null)
 
+  // ⌘K / Ctrl+K opens search from anywhere in the kit
+  useEffect(() => {
+    function handleKey(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setSearchOpen(prev => !prev)
+      }
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [])
+
   function navigate(id) {
     onNavigate(id)
     setMenuOpen(false)
@@ -182,7 +195,7 @@ export function DesignKitHeader({ activePage, onNavigate }) {
               <button
                 type="button"
                 className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] text-ana-navy hover:bg-surface-muted"
-                aria-label="Toggle design kit search"
+                aria-label="Search the design kit (⌘K)"
                 aria-expanded={searchOpen}
                 onClick={() => setSearchOpen(prev => !prev)}
               >
@@ -210,22 +223,16 @@ export function DesignKitHeader({ activePage, onNavigate }) {
             </div>
           </div>
 
-          {/* Search bar */}
-          {searchOpen && (
-            <form
-              className="grid gap-3 border-t border-[var(--color-border-default)] py-4 sm:grid-cols-[1fr_auto]"
-              role="search"
-            >
-              <label htmlFor="design-kit-search" className="sr-only">Search the design kit</label>
-              <input
-                id="design-kit-search"
-                className="ds-field"
-                type="search"
-                placeholder="Search foundations, components, templates"
-              />
-              <button className="ds-button ds-button-primary" type="submit">Search</button>
-            </form>
-          )}
+          {/* Search overlay — rendered at the end of the header so it
+              sits above all other header content in the stacking order */}
+          <SearchOverlay
+            open={searchOpen}
+            onClose={() => setSearchOpen(false)}
+            onNavigate={(id) => {
+              navigate(id)
+              setSearchOpen(false)
+            }}
+          />
 
           {/* Mobile menu */}
           {menuOpen && (
