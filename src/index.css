@@ -45,14 +45,3 @@
   .ds-label { @apply block text-sm font-semibold text-[var(--color-text-primary)]; }
   .ds-help { @apply mt-1 text-sm text-[var(--color-text-secondary)]; }
 }
-
-@media (max-width: 767px) {
-  :root {
-    --type-h1-size: 2.75rem;
-    --type-h1-line-height: 3.125rem;
-    --type-h2-size: 2rem;
-    --type-h2-line-height: 2.375rem;
-    --type-hero-size: 3.25rem;
-    --type-hero-line-height: 3.625rem;
-  }
-}

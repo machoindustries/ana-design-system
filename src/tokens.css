@@ -72,6 +72,13 @@
   --font-subheading-weight: 600;
   --font-button-weight: 600;
 
+  /*
+   * Type scale — desktop values.
+   * Mobile overrides for this same set of tokens live in the
+   * "Type scale — mobile" block at the bottom of this file. Keeping both
+   * scales in one file (rather than splitting the mobile override into
+   * index.css) makes tokens.css the single source of truth for typography.
+   */
   --type-body-size: 1rem;
   --type-body-line-height: 1.5rem;
   --type-h1-size: 3.5rem;
@@ -129,4 +136,44 @@
   --component-card-border: var(--color-border-default);
   --component-card-radius: var(--radius-md);
   --component-quick-links-background: var(--ana-navy-500);
+}
+
+/*
+ * Type scale — mobile overrides.
+ *
+ * Display sizes (hero, h1, h2) step down substantially on small viewports
+ * because the desktop values are too large to set as running text on a
+ * phone screen. h3 gets only a small trim, and h4, body, and eyebrow hold
+ * their desktop value outright — all four are already close to their
+ * practical reading-size floor, where shrinking further would hurt
+ * legibility rather than help layout.
+ *
+ * Breakpoint matches Tailwind's `sm` boundary (768px) used elsewhere in the
+ * kit, so this scale switches at the same point as layout breakpoints.
+ *
+ * This block was previously split across two files: a partial version
+ * (h1, h2, hero only) lived in index.css, disconnected from the desktop
+ * values it was overriding. It's been consolidated here — with h3, h4,
+ * body, and eyebrow now covered — so tokens.css is a complete, single
+ * source of truth for the type scale. See index.css for the h1–h4 element
+ * rules and .type-* utility classes that consume these tokens; no
+ * additional wiring is needed there for this change to take effect.
+ */
+@media (max-width: 767px) {
+  :root {
+    --type-hero-size: 3.25rem;
+    --type-hero-line-height: 3.625rem;
+    --type-h1-size: 2.75rem;
+    --type-h1-line-height: 3.125rem;
+    --type-h2-size: 2rem;
+    --type-h2-line-height: 2.375rem;
+    --type-h3-size: 1.75rem;
+    --type-h3-line-height: 2.125rem;
+    --type-h4-size: 1.5rem;
+    --type-h4-line-height: 2rem;
+    --type-body-size: 1rem;
+    --type-body-line-height: 1.5rem;
+    --type-eyebrow-size: .875rem;
+    --type-eyebrow-line-height: 1.25rem;
+  }
 }
