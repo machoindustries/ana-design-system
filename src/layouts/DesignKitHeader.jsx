@@ -24,88 +24,6 @@ function LogoMark() {
 }
 
 // ---------------------------------------------------------------------------
-// DropdownGroup — desktop grouped nav item with flyout panel
-// ---------------------------------------------------------------------------
-function DropdownGroup({ item, activePage, onNavigate }) {
-  const [open, setOpen] = useState(false)
-  const ref = useRef(null)
-  const buttonId = `nav-group-${item.id}`
-  const panelId = `nav-panel-${item.id}`
-
-  // Close on outside click or Escape
-  useEffect(() => {
-    if (!open) return
-    function handler(e) {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
-    }
-    function onKey(e) {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    document.addEventListener('mousedown', handler)
-    document.addEventListener('keydown', onKey)
-    return () => {
-      document.removeEventListener('mousedown', handler)
-      document.removeEventListener('keydown', onKey)
-    }
-  }, [open])
-
-  const isGroupActive = item.children?.some(child => child.id === activePage)
-
-  return (
-    <div className="relative" ref={ref}>
-      <button
-        id={buttonId}
-        type="button"
-        aria-haspopup="true"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={() => setOpen(prev => !prev)}
-        className={`inline-flex items-center gap-1.5 rounded-button px-3 py-2 text-sm font-bold transition
-          ${isGroupActive ? 'bg-ana-navy text-white' : 'text-ana-navy hover:bg-surface-muted'}`}
-      >
-        {item.label}
-        <FiChevronDown
-          aria-hidden="true"
-          className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-        />
-      </button>
-
-      {open && (
-        <div
-          id={panelId}
-          role="region"
-          aria-labelledby={buttonId}
-          className="absolute left-0 top-full z-50 mt-2 w-72 rounded-card border border-[var(--color-border-default)] bg-white shadow-ana-lg"
-        >
-          <ul className="p-2">
-            {item.children.map(child => (
-              <li key={child.id}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    onNavigate(child.id)
-                    setOpen(false)
-                  }}
-                  className={`w-full rounded-button px-4 py-3 text-left transition
-                    ${activePage === child.id
-                      ? 'bg-ana-navy text-white'
-                      : 'text-ana-navy hover:bg-surface-muted'}`}
-                >
-                  <span className="block text-sm font-bold">{child.label}</span>
-                  <span className={`mt-0.5 block text-xs ${activePage === child.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
-                    {child.description}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  )
-}
-
-// ---------------------------------------------------------------------------
 // DesignKitHeader
 // ---------------------------------------------------------------------------
 export function DesignKitHeader({ activePage, onNavigate }) {
@@ -162,33 +80,7 @@ export function DesignKitHeader({ activePage, onNavigate }) {
           <div className="flex min-h-16 items-center justify-between gap-4">
 
             {/* Desktop nav */}
-            <nav aria-label="Design kit navigation" className="hidden lg:flex lg:items-center lg:gap-1">
-              {designKitNavItems.map(item => {
-                if (item.children) {
-                  return (
-                    <DropdownGroup
-                      key={item.id}
-                      item={item}
-                      activePage={activePage}
-                      onNavigate={navigate}
-                    />
-                  )
-                }
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => navigate(item.id)}
-                    className={`rounded-button px-3 py-2 text-sm font-bold transition
-                      ${activePage === item.id
-                        ? 'bg-ana-navy text-white'
-                        : 'text-ana-navy hover:bg-surface-muted'}`}
-                  >
-                    {item.label}
-                  </button>
-                )
-              })}
-            </nav>
+            
 
             {/* Utility buttons */}
             <div className="flex items-center gap-2 py-2">

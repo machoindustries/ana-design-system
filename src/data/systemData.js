@@ -48,33 +48,42 @@ export const typography = [
   ['Button', '0.875rem / 14px uppercase', 'Source Sans Pro Semibold (600)', 'Action labels, all caps.'],
 ]
 
+/**
+ * Category is now one of 9 rigid, single-home groups (Carbon/Shopify-style
+ * taxonomy — see ana-design-system-audit-reorg-plan.md, Section 3):
+ * Navigation, Layout & Structure, Media, Cards & Content Display,
+ * Data Display, Forms, Actions, Feedback & Status, Foundations.
+ * Every component has exactly one category. Do not reintroduce ad-hoc tags.
+ */
 export const components = [
   ['Global Header', 'Navigation', 'Utility links, primary nav, search, cart, account, mobile menu', 'Mobile-first, keyboard accessible, uses ANA logo assets and React Icons.'],
   ['Global Footer', 'Navigation', 'Grouped links, social links, legal links, back-to-top', 'Uses ANA lockup asset and accessible social icon labels.'],
-  ['Page Header', 'Page Structure', 'Eyebrow, title, intro, metadata, breadcrumbs', 'Separates content-page headers from marketing heroes.'],
-  ['Hero', 'Page Structure', 'Image, live text area, CTA, overlay', 'Use for high-priority landing pages and campaigns.'],
+  ['Quick Links', 'Navigation', 'Curated link list, optional icons', 'Use to help users reach high-value tasks quickly.'],
+  ['Page Header', 'Layout & Structure', 'Eyebrow, title, intro, metadata, breadcrumbs', 'Separates content-page headers from marketing heroes.'],
+  ['Hero', 'Layout & Structure', 'Image, live text area, CTA, overlay', 'Use for high-priority landing pages and campaigns.'],
+  ['Section Intro', 'Layout & Structure', 'Eyebrow, heading, description, optional CTA', 'Creates a reusable opening pattern for sections.'],
   ['Image Block', 'Media', 'Image, alt text, caption, aspect ratio', 'Use for standalone editorial and campaign images with controlled cropping.'],
   ['Image / Text Split', 'Media', 'Image, eyebrow, heading, copy, CTA', 'Use for storytelling sections and landing page promos.'],
-  ['Image Card', 'Cards / Media', 'Image, metadata, title, description, CTA', 'Use when imagery improves recognition or emotional connection.'],
-  ['Section Intro', 'Content', 'Eyebrow, heading, description, optional CTA', 'Creates a reusable opening pattern for sections.'],
-  ['Rich Text', 'Content', 'Editorial content, lists, links, tables', 'Use constrained formatting for long-form content.'],
-  ['Metadata Group', 'Content', 'Date, category, author, organization, content type', 'Use definition-list semantics for structured metadata.'],
-  ['Download Card', 'Resources', 'File type, title, description, file size, action', 'Use for PDFs, toolkits, forms, and whitepapers.'],
-  ['Quick Links', 'Navigation', 'Curated link list, optional icons', 'Use to help users reach high-value tasks quickly.'],
-  ['Timeline', 'Process', 'Steps, milestones, agendas, process details', 'Use for certification, event, and funnel steps.'],
-  ['Logo Grid', 'Trust', 'Sponsors, partners, affiliates, entities', 'Use for Foundation partners, conference sponsors, and affiliations.'],
-  ['Search Result Card', 'Search & Discovery', 'Type, title, excerpt, URL, metadata', 'Use with Optimizely Search & Navigation result sets.'],
-  ['Related Content', 'Content', 'Manual or dynamic related cards', 'Use in bottom containers and detail page next steps.'],
-  ['Content Feed', 'Dynamic Content', 'News, events, resources, products, mixed content', 'Generalizes Latest News into a reusable feed pattern.'],
-  ['Credential Badge', 'ANCC / Authority', 'Badge mark, credential, description, status', 'Use for certification and recognition experiences.'],
-  ['Membership Status Card', 'Membership / Portal', 'Status, renewal date, next action', 'Use in My Account and member portal experiences.'],
-  ['Event Schedule', 'Events', 'Time, session, location, speaker', 'Use for events, conferences, webinars, and sessions.'],
-  ['Person / Speaker Card', 'People', 'Image, name, role, bio', 'Use for speakers, authors, experts, leaders, and nurse stories.'],
-  ['Button', 'Actions', 'Primary, secondary, accent, disabled', 'Use action-specific labels and preserve 10px radius.'],
-  ['Card', 'Cards', 'Resource, news, product, event, certification', 'Use one flexible card framework with variants.'],
-  ['Form Controls', 'Forms', 'Inputs, selects, radios, checkboxes, validation', 'Use semantic labels, helper text, and clear errors.'],
+  ['Logo Grid', 'Media', 'Sponsors, partners, affiliates, entities', 'Use for Foundation partners, conference sponsors, and affiliations.'],
+  ['Image Card', 'Cards & Content Display', 'Image, metadata, title, description, CTA', 'Use when imagery improves recognition or emotional connection.'],
+  ['Download Card', 'Cards & Content Display', 'File type, title, description, file size, action', 'Use for PDFs, toolkits, forms, and whitepapers.'],
+  ['Search Result Card', 'Cards & Content Display', 'Type, title, excerpt, URL, metadata', 'Use with Optimizely Search & Navigation result sets.'],
+  ['Related Content', 'Cards & Content Display', 'Manual or dynamic related cards', 'Use in bottom containers and detail page next steps.'],
+  ['Content Feed', 'Cards & Content Display', 'News, events, resources, products, mixed content', 'Generalizes Latest News into a reusable feed pattern.'],
+  ['Credential Badge', 'Cards & Content Display', 'Badge mark, credential, description, status', 'Use for certification and recognition experiences.'],
+  ['Membership Status Card', 'Cards & Content Display', 'Status, renewal date, next action', 'Use in My Account and member portal experiences.'],
+  ['Person / Speaker Card', 'Cards & Content Display', 'Image, name, role, bio', 'Use for speakers, authors, experts, leaders, and nurse stories.'],
+  ['Card', 'Cards & Content Display', 'Resource, news, product, event, certification', 'Use one flexible card framework with variants.'],
+  ['Metadata Group', 'Data Display', 'Date, category, author, organization, content type', 'Use definition-list semantics for structured metadata.'],
+  ['Timeline', 'Data Display', 'Steps, milestones, agendas, process details', 'Use for certification, event, and funnel steps.'],
+  ['Event Schedule', 'Data Display', 'Time, session, location, speaker', 'Use for events, conferences, webinars, and sessions.'],
   ['HTML Table', 'Data Display', 'Native table with caption and mobile scroll', 'Use for tabular data only.'],
-  ['Cart / Checkout', 'Transactional', 'Cart item, order summary, forms, confirmation', 'Powered by Optimizely Commerce 14.'],
+  ['Form Controls', 'Forms', 'Inputs, selects, radios, checkboxes, validation', 'Use semantic labels, helper text, and clear errors.'],
+  ['Cart / Checkout', 'Forms', 'Cart item, order summary, forms, confirmation', 'Powered by Optimizely Commerce 14. Page-level assembly also documented under Patterns & Templates.'],
+  ['Button', 'Actions', 'Primary, secondary, accent, disabled', 'Use action-specific labels and preserve 10px radius.'],
+  ['Alert Bar', 'Feedback & Status', 'Message, severity, dismiss action', 'Use for sitewide or page-level system messages. Previously undocumented in the component matrix.'],
+  ['Modal', 'Feedback & Status', 'Title, body, actions, dismiss, focus trap', 'Use for confirmations and blocking interactions. Previously undocumented in the component matrix.'],
+  ['Rich Text', 'Foundations', 'Editorial content, lists, links, tables', 'Documented as typography/formatting guidance rather than a standalone component.'],
 ]
 
 

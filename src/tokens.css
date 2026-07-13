@@ -72,13 +72,6 @@
   --font-subheading-weight: 600;
   --font-button-weight: 600;
 
-  /*
-   * Type scale — desktop values.
-   * Mobile overrides for this same set of tokens live in the
-   * "Type scale — mobile" block at the bottom of this file. Keeping both
-   * scales in one file (rather than splitting the mobile override into
-   * index.css) makes tokens.css the single source of truth for typography.
-   */
   --type-body-size: 1rem;
   --type-body-line-height: 1.5rem;
   --type-h1-size: 3.5rem;
@@ -136,44 +129,154 @@
   --component-card-border: var(--color-border-default);
   --component-card-radius: var(--radius-md);
   --component-quick-links-background: var(--ana-navy-500);
+
+  /* NOTE: --color-donation (red) and --color-member (blue) are a
+     brand-restricted pairing (see --duo-* below — Nurses Red + Nurses
+     Blue is a documented NO). Do not place a donation-tagged and a
+     member-tagged element directly adjacent to one another (e.g. a
+     donation card next to a membership card in the same row/section).
+     This cannot be enforced at the token level — flag in page-level
+     design review. See design system backlog: "brand-compliance
+     scanner" for a possible automated adjacency check. */
 }
 
-/*
- * Type scale — mobile overrides.
- *
- * Display sizes (hero, h1, h2) step down substantially on small viewports
- * because the desktop values are too large to set as running text on a
- * phone screen. h3 gets only a small trim, and h4, body, and eyebrow hold
- * their desktop value outright — all four are already close to their
- * practical reading-size floor, where shrinking further would hurt
- * legibility rather than help layout.
- *
- * Breakpoint matches Tailwind's `sm` boundary (768px) used elsewhere in the
- * kit, so this scale switches at the same point as layout breakpoints.
- *
- * This block was previously split across two files: a partial version
- * (h1, h2, hero only) lived in index.css, disconnected from the desktop
- * values it was overriding. It's been consolidated here — with h3, h4,
- * body, and eyebrow now covered — so tokens.css is a complete, single
- * source of truth for the type scale. See index.css for the h1–h4 element
- * rules and .type-* utility classes that consume these tokens; no
- * additional wiring is needed there for this change to take effect.
- */
-@media (max-width: 767px) {
-  :root {
-    --type-hero-size: 3.25rem;
-    --type-hero-line-height: 3.625rem;
-    --type-h1-size: 2.75rem;
-    --type-h1-line-height: 3.125rem;
-    --type-h2-size: 2rem;
-    --type-h2-line-height: 2.375rem;
-    --type-h3-size: 1.75rem;
-    --type-h3-line-height: 2.125rem;
-    --type-h4-size: 1.5rem;
-    --type-h4-line-height: 2rem;
-    --type-body-size: 1rem;
-    --type-body-line-height: 1.5rem;
-    --type-eyebrow-size: .875rem;
-    --type-eyebrow-line-height: 1.25rem;
-  }
+/* ---------------------------------------------------------------
+   Approved background gradients — Brand Playbook, Section 4,
+   "Background Gradients" (p. ~64).
+   Rule: only analogous multi-color gradients are approved, or a
+   single Primary/Secondary color blended with up to 25% black.
+   Nurses Red may NEVER appear in a multi-color gradient — red is
+   only ever paired with black.
+   These are the only sanctioned gradients. Do not construct a
+   gradient from raw --ana-*-500 variables outside this list; add a
+   new named gradient here (and get brand sign-off) instead of
+   composing one ad hoc at the call site.
+   --------------------------------------------------------------- */
+:root {
+  /* Approved analogous two-color gradients */
+  --gradient-green-navy: linear-gradient(135deg, var(--ana-green-500), var(--ana-navy-500));
+  --gradient-blue-navy: linear-gradient(135deg, var(--ana-blue-500), var(--ana-navy-500));
+  --gradient-yellow-orange: linear-gradient(135deg, var(--ana-yellow-500), var(--ana-orange-500));
+
+  /* Approved single-color-to-25%-black overlays (every Primary/
+     Secondary color, including Nurses Red, may use this treatment) */
+  --gradient-red-black: linear-gradient(135deg, var(--ana-red-500), color-mix(in srgb, var(--ana-red-500) 75%, black));
+  --gradient-green-black: linear-gradient(135deg, var(--ana-green-500), color-mix(in srgb, var(--ana-green-500) 75%, black));
+  --gradient-navy-black: linear-gradient(135deg, var(--ana-navy-500), color-mix(in srgb, var(--ana-navy-500) 75%, black));
+  --gradient-blue-black: linear-gradient(135deg, var(--ana-blue-500), color-mix(in srgb, var(--ana-blue-500) 75%, black));
+  --gradient-orange-black: linear-gradient(135deg, var(--ana-orange-500), color-mix(in srgb, var(--ana-orange-500) 75%, black));
+  --gradient-yellow-black: linear-gradient(135deg, var(--ana-yellow-500), color-mix(in srgb, var(--ana-yellow-500) 75%, black));
+
+  /* EXPLICITLY UNAPPROVED — do not add tokens or utilities for these.
+     Left as documentation so the "why not" is visible in source:
+     Nurses Red + any other palette color (multi-color gradient)
+     Nurses Blue + Nurses Yellow · Nurses Green + Nurses Orange */
 }
+
+/* Gradient utility classes — use these instead of inline background-image
+   so an off-brand gradient is not constructible at the call site. */
+.ds-gradient-green-navy { background-image: var(--gradient-green-navy); }
+.ds-gradient-blue-navy { background-image: var(--gradient-blue-navy); }
+.ds-gradient-yellow-orange { background-image: var(--gradient-yellow-orange); }
+.ds-gradient-red-black { background-image: var(--gradient-red-black); }
+.ds-gradient-green-black { background-image: var(--gradient-green-black); }
+.ds-gradient-navy-black { background-image: var(--gradient-navy-black); }
+.ds-gradient-blue-black { background-image: var(--gradient-blue-black); }
+.ds-gradient-orange-black { background-image: var(--gradient-orange-black); }
+.ds-gradient-yellow-black { background-image: var(--gradient-yellow-black); }
+
+/* ---------------------------------------------------------------
+   Approved two-color "duo" combinations — Brand Playbook, Section 4,
+   "Color Combinations" (p. ~63).
+   These are the only sanctioned two-color pairings for adjacent UI
+   (split banners, two-tone tags, side-by-side badges). Each pair is
+   two solid color blocks placed next to each other — NOT one color
+   used as text on the other. Every color gets its own on-color
+   (--on-ana-*) so text stays legible regardless of which pair it's
+   used in.
+   --------------------------------------------------------------- */
+:root {
+  /* Per-color "on" text color — white for the dark/saturated hues,
+     dark gray for the two light accent hues (orange, yellow). */
+  --on-ana-red: var(--ana-white);
+  --on-ana-green: var(--ana-white);
+  --on-ana-navy: var(--ana-white);
+  --on-ana-blue: var(--ana-white);
+  --on-ana-orange: var(--ana-gray-900);
+  --on-ana-yellow: var(--ana-gray-900);
+  --on-ana-gray: var(--ana-white);
+
+  /* Approved pairs, each as [a, b] — render as two adjacent blocks,
+     each using its own --on-ana-* for text. */
+  --duo-red-gray-a: var(--ana-red-500);      --duo-red-gray-b: var(--ana-gray-900);
+  --duo-red-navy-a: var(--ana-red-500);      --duo-red-navy-b: var(--ana-navy-500);
+  --duo-red-orange-a: var(--ana-red-500);    --duo-red-orange-b: var(--ana-orange-500);
+  --duo-red-yellow-a: var(--ana-red-500);    --duo-red-yellow-b: var(--ana-yellow-500);
+
+  --duo-gray-green-a: var(--ana-gray-900);   --duo-gray-green-b: var(--ana-green-500);
+  --duo-gray-blue-a: var(--ana-gray-900);    --duo-gray-blue-b: var(--ana-blue-500);
+
+  --duo-green-orange-a: var(--ana-green-500); --duo-green-orange-b: var(--ana-orange-500);
+  --duo-green-yellow-a: var(--ana-green-500); --duo-green-yellow-b: var(--ana-yellow-500);
+  --duo-green-blue-a: var(--ana-green-500);   --duo-green-blue-b: var(--ana-blue-500);
+  --duo-green-navy-a: var(--ana-green-500);   --duo-green-navy-b: var(--ana-navy-500);
+
+  --duo-blue-navy-a: var(--ana-blue-500);     --duo-blue-navy-b: var(--ana-navy-500);
+  --duo-blue-orange-a: var(--ana-blue-500);   --duo-blue-orange-b: var(--ana-orange-500);
+  --duo-blue-yellow-a: var(--ana-blue-500);   --duo-blue-yellow-b: var(--ana-yellow-500);
+
+  --duo-orange-yellow-a: var(--ana-orange-500); --duo-orange-yellow-b: var(--ana-yellow-500);
+
+  /* EXPLICITLY UNAPPROVED — do not add duo tokens for these:
+     Nurses Red + Nurses Green · Nurses Red + Nurses Blue
+     Nurses Gray + Nurses Navy · Nurses Gray + Nurses Orange
+     Nurses Gray + Nurses Yellow */
+}
+
+/* Duo utility classes for two-tone split banners and paired badges.
+   Each is a flex row of two blocks; every block sets its own on-color
+   so no combination can accidentally end up with poor text contrast. */
+.ds-duo { display: flex; overflow: hidden; border-radius: var(--radius-md); }
+.ds-duo > span { flex: 1; padding: var(--space-3) var(--space-4); font-weight: var(--font-subheading-weight); }
+
+.ds-duo-red-gray > :first-child { background: var(--duo-red-gray-a); color: var(--on-ana-red); }
+.ds-duo-red-gray > :last-child { background: var(--duo-red-gray-b); color: var(--on-ana-gray); }
+
+.ds-duo-red-navy > :first-child { background: var(--duo-red-navy-a); color: var(--on-ana-red); }
+.ds-duo-red-navy > :last-child { background: var(--duo-red-navy-b); color: var(--on-ana-navy); }
+
+.ds-duo-red-orange > :first-child { background: var(--duo-red-orange-a); color: var(--on-ana-red); }
+.ds-duo-red-orange > :last-child { background: var(--duo-red-orange-b); color: var(--on-ana-orange); }
+
+.ds-duo-red-yellow > :first-child { background: var(--duo-red-yellow-a); color: var(--on-ana-red); }
+.ds-duo-red-yellow > :last-child { background: var(--duo-red-yellow-b); color: var(--on-ana-yellow); }
+
+.ds-duo-gray-green > :first-child { background: var(--duo-gray-green-a); color: var(--on-ana-gray); }
+.ds-duo-gray-green > :last-child { background: var(--duo-gray-green-b); color: var(--on-ana-green); }
+
+.ds-duo-gray-blue > :first-child { background: var(--duo-gray-blue-a); color: var(--on-ana-gray); }
+.ds-duo-gray-blue > :last-child { background: var(--duo-gray-blue-b); color: var(--on-ana-blue); }
+
+.ds-duo-green-orange > :first-child { background: var(--duo-green-orange-a); color: var(--on-ana-green); }
+.ds-duo-green-orange > :last-child { background: var(--duo-green-orange-b); color: var(--on-ana-orange); }
+
+.ds-duo-green-yellow > :first-child { background: var(--duo-green-yellow-a); color: var(--on-ana-green); }
+.ds-duo-green-yellow > :last-child { background: var(--duo-green-yellow-b); color: var(--on-ana-yellow); }
+
+.ds-duo-green-blue > :first-child { background: var(--duo-green-blue-a); color: var(--on-ana-green); }
+.ds-duo-green-blue > :last-child { background: var(--duo-green-blue-b); color: var(--on-ana-blue); }
+
+.ds-duo-green-navy > :first-child { background: var(--duo-green-navy-a); color: var(--on-ana-green); }
+.ds-duo-green-navy > :last-child { background: var(--duo-green-navy-b); color: var(--on-ana-navy); }
+
+.ds-duo-blue-navy > :first-child { background: var(--duo-blue-navy-a); color: var(--on-ana-blue); }
+.ds-duo-blue-navy > :last-child { background: var(--duo-blue-navy-b); color: var(--on-ana-navy); }
+
+.ds-duo-blue-orange > :first-child { background: var(--duo-blue-orange-a); color: var(--on-ana-blue); }
+.ds-duo-blue-orange > :last-child { background: var(--duo-blue-orange-b); color: var(--on-ana-orange); }
+
+.ds-duo-blue-yellow > :first-child { background: var(--duo-blue-yellow-a); color: var(--on-ana-blue); }
+.ds-duo-blue-yellow > :last-child { background: var(--duo-blue-yellow-b); color: var(--on-ana-yellow); }
+
+.ds-duo-orange-yellow > :first-child { background: var(--duo-orange-yellow-a); color: var(--on-ana-orange); }
+.ds-duo-orange-yellow > :last-child { background: var(--duo-orange-yellow-b); color: var(--on-ana-yellow); }
