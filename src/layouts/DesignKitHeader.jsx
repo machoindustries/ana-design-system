@@ -77,10 +77,10 @@ export function DesignKitHeader({ activePage, onNavigate }) {
       {/* Nav row — its own compact bar, unaffected by the logo's height */}
       <div className="border-t border-[var(--color-border-default)] bg-surface-soft">
         <div className="ds-container">
-          <div className="flex min-h-16 items-center justify-between gap-4">
+          <div className="flex min-h-16 items-center justify-end gap-4">
 
-            {/* Desktop nav */}
-            
+            {/* Desktop nav — moved to DesignKitSidebar.jsx, rendered
+                alongside <main> in SiteLayout.jsx for the lg: breakpoint. */}
 
             {/* Utility buttons */}
             <div className="flex items-center gap-2 py-2">
