@@ -47,7 +47,7 @@
 
 .ds-page-with-rail {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr);
   align-items: stretch;
   width: 100%;
   min-height: 100vh;
@@ -60,11 +60,11 @@
 
 .ds-rail {
   box-sizing: border-box;
-  width: 280px;
+  width: var(--layout-sidebar-width);
   min-height: 100%;
-  padding: 24px 16px;
-  border-right: 1px solid #d7dadd;
-  background: #fff;
+  padding: var(--density-space-5) var(--density-space-4);
+  border-right: var(--elevation-border);
+  background: var(--color-background-page);
   font-size: 0.875rem;
 }
 
@@ -76,37 +76,40 @@
 }
 
 .ds-rail-group {
-  margin-bottom: 16px;
+  margin-bottom: var(--density-space-4);
 }
 
 .ds-rail-link {
   display: block;
-  padding: 8px 12px;
-  border-radius: 4px;
-  color: #263238;
-  font-weight: 600;
+  padding: var(--density-space-2) var(--density-space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-subheading-weight);
   text-decoration: none;
 }
 
 .ds-rail-link.is-active {
-  border-left: 3px solid #007fa3;
-  background: #e5f4f8;
-  padding-left: 9px;
+  border-left: 3px solid var(--ana-blue-500);
+  background: var(--ana-blue-100);
+  padding-left: calc(var(--density-space-3) - 3px);
 }
 
 .ds-rail-sublist {
-  margin-top: 4px;
-  padding-left: 12px;
+  margin-top: var(--density-space-1);
+  padding-left: var(--density-space-3);
 }
 
 .ds-rail-sublink {
   display: block;
-  padding: 4px 12px;
-  border-radius: 4px;
-  color: #5f666b;
+  padding: var(--density-space-1) var(--density-space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
   font-size: 0.8125rem;
   text-decoration: none;
 }
+
+.ds-rail-sublink.is-active { color: var(--color-text-brand); font-weight: 600; }
+.ds-rail-sublink:hover, .ds-rail-link:hover { background: var(--elevation-tint-panel); }
 
 .ds-page-main {
   min-width: 0;

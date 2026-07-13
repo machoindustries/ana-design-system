@@ -280,3 +280,42 @@
 
 .ds-duo-orange-yellow > :first-child { background: var(--duo-orange-yellow-a); color: var(--on-ana-orange); }
 .ds-duo-orange-yellow > :last-child { background: var(--duo-orange-yellow-b); color: var(--on-ana-yellow); }
+
+/* ---------------------------------------------------------------
+   Layout & density tokens — previously specified only in the audit
+   doc's Section 4 code sample, never actually added here. This is
+   the root cause of the sidebar rendering unstyled: .ds-rail and
+   .ds-page-with-rail in index.css reference every one of these
+   variables, and undefined custom properties fail silently (the
+   declaration is just dropped) rather than throwing a build error.
+   --------------------------------------------------------------- */
+:root {
+  --density-space-1: 4px;
+  --density-space-2: 8px;
+  --density-space-3: 12px;
+  --density-space-4: 16px;
+  --density-space-5: 24px;
+  --density-space-6: 32px;
+  --density-space-7: 48px;
+
+  --layout-section-padding-y: var(--density-space-6);
+  --layout-section-padding-y-lg: var(--density-space-7);
+
+  --layout-container-max: 1280px;
+  --layout-container-with-rail-max: 1120px;
+  --layout-sidebar-width: 272px;
+  --layout-sidebar-width-collapsed: 64px;
+
+  --layout-grid-columns: 16;
+  --layout-grid-gutter: var(--density-space-4);
+  --layout-grid-margin: var(--density-space-5);
+
+  --elevation-border: 1px solid var(--color-border-default);
+  --elevation-border-strong: 1px solid var(--color-border-strong);
+  --elevation-tint-panel: var(--ana-gray-50);
+  --elevation-tint-panel-raised: var(--ana-gray-100);
+
+  --density-card-padding: var(--density-space-4);
+  --density-table-cell-padding-y: var(--density-space-2);
+  --density-table-cell-padding-x: var(--density-space-3);
+}

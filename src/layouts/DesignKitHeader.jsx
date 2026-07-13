@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiBookOpen, FiChevronDown, FiMenu, FiSearch, FiX } from 'react-icons/fi'
 import { designKitNavItems } from '../data/designKitNavigation'
 import { SearchOverlay } from '../components/core/SearchOverlay'
