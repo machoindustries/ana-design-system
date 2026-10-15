@@ -198,7 +198,7 @@ function SearchPanel({ onClose, onNavigate }) {
                             <FiArrowRight
                               aria-hidden="true"
                               size={16}
-                              className={`shrink-0 transition ${isFocused ? 'text-ana-blue' : 'text-[var(--color-text-secondary)]'}`}
+                              className={`shrink-0 transition ${isFocused ? 'text-[var(--color-text-info)]' : 'text-[var(--color-text-secondary)]'}`}
                             />
                           </button>
                         </li>

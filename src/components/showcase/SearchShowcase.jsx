@@ -7,7 +7,7 @@ export function SearchShowcase() {
       <form className="grid gap-3 sm:grid-cols-[1fr_auto]" role="search">
         <label htmlFor="component-search" className="ds-label">Search NursingWorld</label>
         <div className="relative sm:col-start-1">
-          <FiSearch className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" aria-hidden="true" />
+          <FiSearch className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-text-secondary)]" aria-hidden="true" />
           <input id="component-search" className="ds-field pl-11" type="search" placeholder="Continuing Education" />
         </div>
         <Button type="submit" className="sm:col-start-2 sm:row-start-2">Search</Button>

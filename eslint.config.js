@@ -8,6 +8,10 @@ export default [
   {
     ignores: ['dist/**', 'node_modules/**'],
   },
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: { globals: globals.node },
+  },
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx}'],

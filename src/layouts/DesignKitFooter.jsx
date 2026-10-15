@@ -12,7 +12,7 @@ export function DesignKitFooter({ onNavigate }) {
           </div>
           <nav aria-label="Design kit footer navigation" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {designKitNavItems.slice(1).map(item => (
-              <button type="button" key={item.id} onClick={() => onNavigate(item.id)} className="rounded-button border border-[var(--color-border-default)] bg-white p-4 text-left font-bold text-ana-navy shadow-sm hover:bg-surface-muted">
+              <button type="button" key={item.id} onClick={() => onNavigate(item.id)} className="rounded-button border border-[var(--color-border-default)] bg-white p-4 text-left font-bold text-[var(--color-text-brand)] shadow-sm hover:bg-surface-muted">
                 {item.label}
                 <span className="mt-1 block text-sm font-normal text-[var(--color-text-secondary)]">{item.description}</span>
               </button>

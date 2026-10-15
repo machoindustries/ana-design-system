@@ -37,7 +37,7 @@ import { SectionHeading } from '../components/core/SectionHeading'
 function CampaignHero({ eyebrow, heading, body, primaryCta, secondaryCta, imageSrc, imageAlt }) {
   return (
     <section
-      className="relative overflow-hidden bg-ana-navy text-white"
+      className="relative overflow-hidden bg-surface-dark text-white"
       aria-label={heading}
     >
       {imageSrc && (
@@ -49,7 +49,7 @@ function CampaignHero({ eyebrow, heading, body, primaryCta, secondaryCta, imageS
       )}
       <div className="relative ds-container py-20 md:py-28 lg:py-36">
         <div className="max-w-3xl">
-          {eyebrow && <p className="ds-eyebrow mb-4 text-[var(--ana-green-100)]">{eyebrow}</p>}
+          {eyebrow && <p className="ds-eyebrow mb-4 text-[var(--color-text-eyebrow-on-dark)]">{eyebrow}</p>}
           <h1 className="text-white">{heading}</h1>
           {body && <p className="mt-6 max-w-2xl text-lg text-white/90 leading-relaxed">{body}</p>}
           {(primaryCta || secondaryCta) && (
@@ -79,7 +79,7 @@ function CampaignHero({ eyebrow, heading, body, primaryCta, secondaryCta, imageS
  */
 function StatBanner({ stat, label }) {
   return (
-    <div className="bg-ana-navy text-white">
+    <div className="bg-surface-dark text-white">
       <div className="ds-container py-10 text-center">
         <p className="text-5xl font-bold text-white md:text-6xl">{stat}</p>
         <p className="mt-2 text-lg text-white/80">{label}</p>
@@ -97,7 +97,7 @@ function StatBanner({ stat, label }) {
  */
 function WebinarCard({ date, title, description, href, status = 'upcoming' }) {
   const statusLabel = {
-    upcoming: { text: 'Upcoming', classes: 'bg-[var(--color-background-info)] text-ana-blue' },
+    upcoming: { text: 'Upcoming', classes: 'bg-[var(--color-background-info)] text-[var(--color-text-info)]' },
     live: { text: 'Live now', classes: 'bg-[var(--color-background-error)] text-[var(--color-text-error)]' },
     'on-demand': { text: 'On demand', classes: 'bg-surface-muted text-[var(--color-text-secondary)]' },
   }[status]
@@ -274,7 +274,7 @@ export function NursesWeek26Page() {
                     'Paths to up-level local events',
                   ].map(item => (
                     <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-ana-green" aria-hidden="true" />
+                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-surface-brand" aria-hidden="true" />
                       {item}
                     </li>
                   ))}
@@ -371,7 +371,7 @@ export function NursesWeek26Page() {
 
         {/* ── Donate ───────────────────────────────────────────────────────── */}
         <section
-          className="ds-section bg-ana-navy text-white"
+          className="ds-section bg-surface-dark text-white"
           aria-labelledby="donate-heading"
         >
           <div className="ds-container">
@@ -384,7 +384,7 @@ export function NursesWeek26Page() {
                 />
               </figure>
               <div>
-                <p className="ds-eyebrow text-[var(--ana-green-100)]">American Nurses Foundation</p>
+                <p className="ds-eyebrow text-[var(--color-text-eyebrow-on-dark)]">American Nurses Foundation</p>
                 <h2 className="mt-2 text-white" id="donate-heading">Your donation makes an impact</h2>
                 <p className="mt-4 text-white/85">
                   The American Nurses Foundation advances the nursing profession by serving as a
@@ -475,13 +475,13 @@ export function NursesWeek26Page() {
 
         {/* ── Membership ───────────────────────────────────────────────────── */}
         <section
-          className="ds-section bg-ana-navy text-white"
+          className="ds-section bg-surface-dark text-white"
           aria-labelledby="membership-heading"
         >
           <div className="ds-container">
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
               <div>
-                <p className="ds-eyebrow text-[var(--ana-green-100)]">American Nurses Association</p>
+                <p className="ds-eyebrow text-[var(--color-text-eyebrow-on-dark)]">American Nurses Association</p>
                 <h2 className="mt-2 text-white" id="membership-heading">
                   Proudly celebrating 130 years of leadership
                 </h2>
@@ -498,7 +498,7 @@ export function NursesWeek26Page() {
                     'Community, mentorship, and advocacy support',
                   ].map(benefit => (
                     <li key={benefit} className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-ana-green" aria-hidden="true" />
+                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-surface-brand" aria-hidden="true" />
                       {benefit}
                     </li>
                   ))}
@@ -539,10 +539,10 @@ export function NursesWeek26Page() {
                 Sign the Petition
               </Button>
             </div>
-            <ul className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-semibold text-ana-navy">
+            <ul className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-semibold text-[var(--color-text-brand)]">
               {['Prevent Workplace Violence', 'Medicaid Still Matters', 'Improve Access to Care'].map(item => (
                 <li key={item} className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-ana-blue" aria-hidden="true" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-border-info)]" aria-hidden="true" />
                   {item}
                 </li>
               ))}

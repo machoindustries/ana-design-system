@@ -12,7 +12,7 @@ export function Page({ eyebrow, title, intro, actions, children }) {
           <div className="max-w-content">
             {eyebrow ? <p className="ds-eyebrow">{eyebrow}</p> : null}
             <h1 className="mt-2">{title}</h1>
-            {intro ? <p className="mt-3 text-slate-700">{intro}</p> : null}
+            {intro ? <p className="mt-3 text-[var(--color-text-secondary)]">{intro}</p> : null}
           </div>
           {actions ? <div className="ds-page-actions">{actions}</div> : null}
         </header>
