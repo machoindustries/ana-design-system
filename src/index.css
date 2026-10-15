@@ -78,4 +78,125 @@
   .ds-notice a:visited { color: var(--color-link-on-tint); text-decoration: underline; }
   .ds-notice a:hover { text-decoration-thickness: 2px; }
   .ds-notice > * + * { margin-top: var(--space-3); }
+
+/*
+ * Mobile first: one column. The rail is hidden below lg (DesignKitSidebar's
+ * `hidden lg:block`), so a two-column grid here would put <main> in the
+ * 272px rail column and leave the 1fr column empty.
+ */
+.ds-page-with-rail {
+  display: block;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .ds-page-with-rail {
+    display: grid;
+    grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 100vh;
+  }
+}
+
+.ds-page-with-rail > main {
+  min-width: 0;
+  width: 100%;
+}
+
+.ds-rail {
+  box-sizing: border-box;
+  width: var(--layout-sidebar-width);
+  min-height: 100%;
+  padding: var(--density-space-5) var(--density-space-4);
+  border-right: var(--elevation-border);
+  background: var(--color-background-page);
+  font-size: 0.875rem;
+}
+
+.ds-rail-list,
+.ds-rail-sublist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-rail-group {
+  margin-bottom: var(--density-space-4);
+}
+
+.ds-rail-link {
+  display: block;
+  padding: var(--density-space-2) var(--density-space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-weight: var(--font-subheading-weight);
+  text-decoration: none;
+}
+
+.ds-rail-link.is-active {
+  border-left: 3px solid var(--color-border-info);
+  background: var(--color-background-info);
+  padding-left: calc(var(--density-space-3) - 3px);
+}
+
+.ds-rail-sublist {
+  margin-top: var(--density-space-1);
+  padding-left: var(--density-space-3);
+}
+
+.ds-rail-sublink {
+  display: block;
+  padding: var(--density-space-1) var(--density-space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: 0.8125rem;
+  text-decoration: none;
+}
+
+.ds-rail-sublink.is-active { color: var(--color-text-brand); font-weight: 600; }
+.ds-rail-sublink:hover, .ds-rail-link:hover { background: var(--elevation-tint-panel); }
+
+/* Set on <html> while the mobile menu is open, so the page behind it can't scroll. */
+@media (max-width: 1023px) {
+  .ds-menu-open,
+  .ds-menu-open body { overflow: hidden; }
+}
+
+.ds-page-main {
+  min-width: 0;
+}
+  .ds-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--density-space-4);
+    padding: var(--density-space-5) 0;
+    border-bottom: var(--elevation-border);
+    margin-bottom: var(--density-space-5);
+  }
+
+  .ds-page-body { min-width: 0; }
+
+  .ds-page-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--density-space-3);
+    flex-shrink: 0;
+  }
+
+  .ds-section-tight {
+    padding-block: var(--layout-section-padding-y);
+  }
+  .ds-section-tinted {
+    background: var(--elevation-tint-panel);
+    border: var(--elevation-border);
+    border-radius: var(--radius-md);
+    padding: var(--density-space-5);
+  }
+  .ds-section-title {
+    font-size: var(--type-h4-size);
+    font-weight: var(--font-subheading-weight);
+    margin-bottom: var(--density-space-3);
+    padding-bottom: var(--density-space-2);
+    border-bottom: var(--elevation-border);
+  }
 }

@@ -90,13 +90,6 @@
   --font-subheading-weight: 600;
   --font-button-weight: 600;
 
-  /*
-   * Type scale — desktop values.
-   * Mobile overrides for this same set of tokens live in the
-   * "Type scale — mobile" block at the bottom of this file. Keeping both
-   * scales in one file (rather than splitting the mobile override into
-   * index.css) makes tokens.css the single source of truth for typography.
-   */
   --type-body-size: 1rem;
   --type-body-line-height: 1.5rem;
   --type-h1-size: 3.5rem;
@@ -154,6 +147,39 @@
   --component-card-border: var(--color-border-default);
   --component-card-radius: var(--radius-md);
   --component-quick-links-background: var(--ana-navy-500);
+
+  /* NOTE: --color-donation (red) and --color-member (blue) are a
+     brand-restricted pairing (Nurses Red + Nurses Blue is a documented
+     NO in the Brand Playbook, Section 4, "Color Combinations"). Do not place a donation-tagged and a
+     member-tagged element directly adjacent to one another (e.g. a
+     donation card next to a membership card in the same row/section).
+     This cannot be enforced at the token level — flag in page-level
+     design review. See design system backlog: "brand-compliance
+     scanner" for a possible automated adjacency check. */
+}
+
+/* ---------------------------------------------------------------
+   Layout & density tokens used by the design-kit shell: the sidebar
+   rail (.ds-rail, .ds-page-with-rail) and Page / Section / Stack.
+
+   The density scale aliases the base --space-* scale rather than
+   restating values, so there is one spacing source of truth. It is a
+   tighter subset (4, 8, 12, 16, 24, 32, 48px) for dense UI.
+   --------------------------------------------------------------- */
+:root {
+  --density-space-1: var(--space-1);   /* 4px */
+  --density-space-2: var(--space-2);   /* 8px */
+  --density-space-3: var(--space-3);   /* 12px */
+  --density-space-4: var(--space-4);   /* 16px */
+  --density-space-5: var(--space-6);   /* 24px */
+  --density-space-6: var(--space-8);   /* 32px */
+  --density-space-7: var(--space-12);  /* 48px */
+
+  --layout-section-padding-y: var(--density-space-6);
+  --layout-sidebar-width: 272px;
+
+  --elevation-border: 1px solid var(--color-border-default);
+  --elevation-tint-panel: var(--color-background-soft);
 }
 
 /*
@@ -195,3 +221,4 @@
     --type-eyebrow-line-height: 1.25rem;
   }
 }
+
