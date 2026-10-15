@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [v0.4.2] - 2026-10-15
+
+Brand gradient and color-combination tokens from the Brand Playbook
+
+### Added
+
+- Gradient tokens and `.ds-gradient-*` classes, per the American Nurses Brand Playbook (updated October 12, 2026), Section 4, "Background Gradients" (p. 54):
+  - analogous pairs: green → navy, blue → navy, yellow → orange
+  - every palette color, including Nurses Red and Nurses Gray, with up to 25% black
+  - all run left to right, as the playbook draws them
+- Duo tokens and `.ds-duo-*` classes for the 14 recommended pairs in "Color Combinations" (p. 53), plus `--on-ana-*` text colors matching the playbook's chips
+- The playbook's "NO" pairs are listed in comments next to each block
+
+### Accessibility
+
+- White on Nurses Green is 3.68:1. AA needs large text, so duos that include green set their text at h4 size (24px). The other on-colors pass at any size: red 5.10, blue 4.54, navy 11.46, gray 12.31, orange 5.41, yellow 8.28
+
 ## [v0.4.1] - 2026-10-15
 
 One page wrapper and a clean heading outline on every page

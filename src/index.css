@@ -91,12 +91,22 @@
   .ds-gradient-blue-black { background-image: var(--gradient-blue-black); }
   .ds-gradient-orange-black { background-image: var(--gradient-orange-black); }
   .ds-gradient-yellow-black { background-image: var(--gradient-yellow-black); }
+  .ds-gradient-gray-black { background-image: var(--gradient-gray-black); }
 
   /* Duo utility classes for two-tone split banners and paired badges.
      Each is a flex row of two blocks; every block sets its own on-color
      so no combination can accidentally end up with poor text contrast. */
   .ds-duo { display: flex; overflow: hidden; border-radius: var(--radius-md); }
   .ds-duo > span { flex: 1; padding: var(--space-3) var(--space-4); font-weight: var(--font-subheading-weight); }
+
+  /* White on Nurses Green is 3.68:1: AA only for large text (24px+, or
+     18.66px+ bold). Every duo that includes green sets both blocks at
+     h4 size (24px) so the pair stays balanced and the green block passes. */
+  .ds-duo-gray-green,
+  .ds-duo-green-orange,
+  .ds-duo-green-yellow,
+  .ds-duo-green-blue,
+  .ds-duo-green-navy { font-size: var(--type-h4-size); line-height: var(--type-h4-line-height); }
 
   .ds-duo-red-gray > :first-child { background: var(--duo-red-gray-a); color: var(--on-ana-red); }
   .ds-duo-red-gray > :last-child { background: var(--duo-red-gray-b); color: var(--on-ana-gray); }
