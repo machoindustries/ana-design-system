@@ -44,4 +44,38 @@
   .ds-field-error { @apply border-[var(--color-border-error)]; }
   .ds-label { @apply block text-sm font-semibold text-[var(--color-text-primary)]; }
   .ds-help { @apply mt-1 text-sm text-[var(--color-text-secondary)]; }
+
+  /*
+   * Data bar: a native <progress> styled as a thin bar. Used by StepProgress
+   * and ReadinessResult, always with aria-hidden="true" next to a written value.
+   * A <progress> takes its fill from value/max, so no inline width is needed.
+   *
+   * Each engine needs its own pseudo-element. Keep these as separate rules: a
+   * selector list mixing -webkit- and -moz- pseudo-elements is dropped whole
+   * by the engine that doesn't know the other one.
+   */
+  .ds-data-bar {
+    display: block;
+    width: 100%;
+    height: var(--space-2);
+    appearance: none;
+    border: 0;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    background-color: var(--color-data-track);
+    color: var(--color-data-fill);
+  }
+  .ds-data-bar::-webkit-progress-bar { background-color: var(--color-data-track); }
+  .ds-data-bar::-webkit-progress-value { background-color: var(--color-data-fill); border-radius: var(--radius-full); }
+  .ds-data-bar::-moz-progress-bar { background-color: var(--color-data-fill); border-radius: var(--radius-full); }
+  /* Animates the fill in Chromium and Safari only; Firefox can't transition ::-moz-progress-bar. */
+  @media (prefers-reduced-motion: no-preference) {
+    .ds-data-bar-animated::-webkit-progress-value { transition: width var(--duration-slow) ease; }
+  }
+
+  /* Editor-supplied rich text on a tinted notice: links switch to the colour that passes on tints. */
+  .ds-notice a,
+  .ds-notice a:visited { color: var(--color-link-on-tint); text-decoration: underline; }
+  .ds-notice a:hover { text-decoration-thickness: 2px; }
+  .ds-notice > * + * { margin-top: var(--space-3); }
 }
