@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [v0.4.0] - 2026-10-15
+
+Side navigation for the design kit, and the layout primitives behind it
+
+### Added
+
+- Design kit sidebar: a desktop rail of grouped page links (from lg up), with `aria-current` on the current page
+- `Page`, `Section` and `Stack` layout components, used by the Foundations and Docs pages
+- Layout tokens: `--density-space-1` to `-7` (aliases of the `--space-*` scale), `--layout-section-padding-y`, `--layout-sidebar-width`, `--elevation-border`, `--elevation-tint-panel`
+
+### Changed
+
+- Header: the desktop dropdown nav moved to the sidebar. The nav row now has navigation on the left (menu toggle, Docs) and search on the right
+- Header logo, Docs button, sidebar and mobile menu use real links (React Router `Link`/`NavLink`) instead of buttons
+- Component categories regrouped into nine single-home groups (Navigation, Layout & Structure, Media, Cards & Content Display, Data Display, Forms, Actions, Feedback & Status, Foundations)
+
+### Fixed
+
+- Phone layout: the page is a single column below 1024px instead of sitting in the hidden sidebar's column
+- Mobile menu scrolls on its own when taller than the screen, and the page behind it is locked while it's open
+- Nurses Week hero: the secondary CTA was white text on a white button
+
+### Removed
+
+- `my_changes.patch`, committed by mistake (it duplicated an earlier commit)
+
 ## [v0.3.0] - 2026-10-15
 
 Survey and ARNI assessment patterns from NursingWorld, rebuilt the kit's way

@@ -58,7 +58,7 @@ function CampaignHero({ eyebrow, heading, body, primaryCta, secondaryCta, imageS
                 <Button href={primaryCta.href} variant="primary">{primaryCta.label}</Button>
               )}
               {secondaryCta && (
-                <Button href={secondaryCta.href} variant="secondary" className="border-white text-white hover:bg-white/10">
+                <Button href={secondaryCta.href} variant="secondary" className="border-[var(--color-text-inverse)] bg-transparent text-[var(--color-text-inverse)] hover:bg-white/10">
                   {secondaryCta.label}
                 </Button>
               )}

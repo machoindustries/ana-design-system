@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { FiBookOpen, FiChevronDown, FiMenu, FiSearch, FiX } from 'react-icons/fi'
 import { designKitNavItems } from '../data/designKitNavigation'
 import { SearchOverlay } from '../components/core/SearchOverlay'
@@ -91,14 +91,14 @@ export function DesignKitHeader({ activePage, onNavigate }) {
           so neither has to compromise its own sizing for the other. */}
       <div className="ds-container">
         <div className="flex items-center justify-between gap-4 py-4">
-          <button
-            type="button"
-            onClick={() => navigate('home')}
-            className="rounded-button focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ana-blue"
+          <Link
+            to="/"
+            onClick={closeMenu}
+            className="inline-block rounded-button focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-focus-ring)]"
             aria-label="ANA Design System home"
           >
             <LogoMark />
-          </button>
+          </Link>
 
           <span className="hidden text-sm font-semibold uppercase tracking-wide text-[var(--color-text-secondary)] sm:inline">
             Design System &middot; Reference Kit
@@ -124,14 +124,15 @@ export function DesignKitHeader({ activePage, onNavigate }) {
                 {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
               </button>
 
-              <button
-                type="button"
-                onClick={() => navigate('docs')}
-                className={`hidden min-h-11 items-center gap-2 rounded-button border border-[var(--color-border-default)] px-4 text-sm font-bold transition md:inline-flex
-                  ${activePage === 'docs' ? 'bg-ana-navy text-white' : 'text-ana-navy hover:bg-surface-muted'}`}
+              <NavLink
+                to={pathFor('docs')}
+                end
+                onClick={closeMenu}
+                className={({ isActive }) => `hidden min-h-11 items-center gap-2 rounded-button border border-[var(--color-border-default)] px-4 text-sm font-bold no-underline transition md:inline-flex
+                  ${isActive ? 'bg-surface-dark text-[var(--color-text-inverse)]' : 'text-[var(--color-text-brand)] hover:bg-surface-muted'}`}
               >
                 <FiBookOpen aria-hidden="true" /> Docs
-              </button>
+              </NavLink>
             </div>
 
             {/* Search on the right */}
