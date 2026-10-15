@@ -65,6 +65,24 @@
 
   --color-focus-ring: var(--ana-blue-500);
 
+  /*
+   * Links on tinted surfaces. --color-link-default passes on white (4.54:1)
+   * but fails on every tint: 4.23:1 on background-soft, 3.94:1 on
+   * background-muted, 3.49:1 on background-info. Navy holds 8.81:1 or better
+   * on all of them. Keep the underline, since navy alone reads as text.
+   */
+  --color-link-on-tint: var(--ana-navy-500);
+
+  /* Icons and decorative accents on dark surfaces (6.97:1 on background-dark). */
+  --color-accent-on-dark: var(--ana-green-200);
+
+  /*
+   * Data and progress bars. Kept apart from --color-action-* so a bar never
+   * reads as something to click. The fill is 3.94:1 against its track.
+   */
+  --color-data-fill: var(--ana-blue-500);
+  --color-data-track: var(--ana-gray-100);
+
   --font-family-sans: "Source Sans Pro", Arial, sans-serif;
   --font-family-fallback: Arial, sans-serif;
   --font-body-weight: 400;

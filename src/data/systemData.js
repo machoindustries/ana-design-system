@@ -36,6 +36,10 @@ export const semanticColors = [
   ['Background error', 'color-background-error', 'Validation and error surfaces'],
   ['Border default', 'color-border-default', 'Standard component boundaries'],
   ['Focus ring', 'color-focus-ring', 'Keyboard-visible focus outline'],
+  ['Link on tint', 'color-link-on-tint', 'Links on tinted surfaces (soft, muted, info), where link default fails AA'],
+  ['Accent on dark', 'color-accent-on-dark', 'Decorative icons and accents, such as check marks, on dark surfaces'],
+  ['Data fill', 'color-data-fill', 'Filled part of progress and data bars; not for actions'],
+  ['Data track', 'color-data-track', 'Unfilled track behind a data fill (fill is 3.94:1 against it)'],
 ]
 
 export const typography = [
@@ -73,6 +77,12 @@ export const components = [
   ['Button', 'Actions', 'Primary, secondary, accent, disabled', 'Use action-specific labels and preserve 10px radius.'],
   ['Card', 'Cards', 'Resource, news, product, event, certification', 'Use one flexible card framework with variants.'],
   ['Form Controls', 'Forms', 'Inputs, selects, radios, checkboxes, validation', 'Use semantic labels, helper text, and clear errors.'],
+  ['Step Progress', 'Forms', 'Step text, decorative progress bar', 'Text is the accessible version; native <progress> bar is aria-hidden and respects reduced motion.'],
+  ['Likert Scale', 'Forms', 'Fieldset, numbered radio points, end labels, error', 'Stacked rows below md, one row of columns from md; 48px points; end labels in the radio names.'],
+  ['Error Summary', 'Forms', 'Heading, linked list of field errors', 'Takes focus on a failed submit and links to each invalid field.'],
+  ['Consent Step', 'Forms', 'Rich-text notice, required checkbox or message only, Continue', 'Use for legal notices in a flow, not cookie banners.'],
+  ['Readiness Result', 'Content / Assessment', 'Score card, dimensions with bars, recommendations, scoring label, withheld state', 'Use for scored self-assessments such as ARNI.'],
+  ['Hero (Checklist Panel)', 'Page Structure', 'Eyebrow, heading, intro, CTAs, navy checklist card', 'Use for assessment and survey landing pages where a checklist replaces the image.'],
   ['HTML Table', 'Data Display', 'Native table with caption and mobile scroll', 'Use for tabular data only.'],
   ['Cart / Checkout', 'Transactional', 'Cart item, order summary, forms, confirmation', 'Powered by Optimizely Commerce 14.'],
 ]
