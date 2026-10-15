@@ -75,15 +75,15 @@ function MetadataGroupExample() {
   return (
     <dl className="grid gap-3 rounded-card border border-[var(--color-border-default)] bg-white p-5 text-sm sm:grid-cols-3">
       <div>
-        <dt className="font-bold text-ana-navy">Published</dt>
+        <dt className="font-bold text-[var(--color-text-brand)]">Published</dt>
         <dd className="mt-1 text-[var(--color-text-secondary)]">June 8, 2026</dd>
       </div>
       <div>
-        <dt className="font-bold text-ana-navy">Category</dt>
+        <dt className="font-bold text-[var(--color-text-brand)]">Category</dt>
         <dd className="mt-1 text-[var(--color-text-secondary)]">Policy</dd>
       </div>
       <div>
-        <dt className="font-bold text-ana-navy">Organization</dt>
+        <dt className="font-bold text-[var(--color-text-brand)]">Organization</dt>
         <dd className="mt-1 text-[var(--color-text-secondary)]">American Nurses Association</dd>
       </div>
     </dl>
@@ -92,13 +92,13 @@ function MetadataGroupExample() {
 
 function DownloadCardExample() {
   return (
-    <a href="#components" className="group flex flex-col gap-4 rounded-card border border-[var(--color-border-default)] bg-white p-5 no-underline transition hover:border-ana-blue hover:shadow-ana sm:flex-row sm:items-start">
-      <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-card bg-surface-info text-ana-blue">
+    <a href="#components" className="group flex flex-col gap-4 rounded-card border border-[var(--color-border-default)] bg-white p-5 no-underline transition hover:border-[var(--color-border-info)] hover:shadow-ana sm:flex-row sm:items-start">
+      <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-card bg-surface-info text-[var(--color-text-info)]">
         <FiDownload aria-hidden="true" size={24} />
       </span>
       <span>
         <span className="ds-tag">PDF</span>
-        <span className="mt-3 block text-xl font-bold text-[var(--color-text-primary)] group-hover:text-ana-blue">Workplace violence prevention toolkit</span>
+        <span className="mt-3 block text-xl font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-link-default)]">Workplace violence prevention toolkit</span>
         <span className="mt-2 block text-sm text-[var(--color-text-secondary)]">Download guidance, checklists, and advocacy resources. PDF, 1.2 MB.</span>
       </span>
     </a>
@@ -108,12 +108,12 @@ function DownloadCardExample() {
 function QuickLinksExample() {
   const links = ['Code of Ethics', 'Practice standards', 'Position statements', 'Advocacy resources']
   return (
-    <nav aria-labelledby="quick-links-heading" className="rounded-card bg-ana-navy p-5 text-white">
+    <nav aria-labelledby="quick-links-heading" className="rounded-card bg-surface-dark p-5 text-white">
       <h3 id="quick-links-heading" className="text-xl text-white">Quick links</h3>
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">
         {links.map(link => (
           <li key={link}>
-            <a className="block rounded-button border border-white/30 px-4 py-3 font-bold text-white no-underline hover:bg-white hover:text-ana-navy" href="#components">{link}</a>
+            <a className="block rounded-button border border-white/30 px-4 py-3 font-bold text-white no-underline hover:bg-white hover:text-[var(--color-link-hover)]" href="#components">{link}</a>
           </li>
         ))}
       </ul>
@@ -131,7 +131,7 @@ function TimelineExample() {
     <ol className="space-y-4">
       {steps.map(([number, title, text]) => (
         <li className="grid grid-cols-[3rem_1fr] gap-4" key={title}>
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ana-green font-bold text-white">{number}</span>
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-brand font-bold text-white">{number}</span>
           <span className="border-b border-[var(--color-border-default)] pb-4">
             <strong className="block text-lg text-[var(--color-text-primary)]">{title}</strong>
             <span className="mt-1 block text-sm text-[var(--color-text-secondary)]">{text}</span>
@@ -147,7 +147,7 @@ function LogoGridExample() {
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {logos.map(logo => (
-        <div className="flex min-h-24 items-center justify-center rounded-card border border-[var(--color-border-default)] bg-white p-4 text-xl font-bold text-ana-navy" key={logo}>{logo}</div>
+        <div className="flex min-h-24 items-center justify-center rounded-card border border-[var(--color-border-default)] bg-white p-4 text-xl font-bold text-[var(--color-text-brand)]" key={logo}>{logo}</div>
       ))}
     </div>
   )
@@ -195,7 +195,7 @@ function ContentFeedExample() {
       {items.map(([type, title]) => (
         <article className="p-4 sm:flex sm:items-center sm:justify-between sm:gap-6" key={title}>
           <div>
-            <span className="text-xs font-bold uppercase tracking-wide text-ana-blue">{type}</span>
+            <span className="text-xs font-bold uppercase tracking-wide text-[var(--color-text-eyebrow)]">{type}</span>
             <h3 className="mt-1 text-lg font-semibold"><a href="#components">{title}</a></h3>
           </div>
           <a className="mt-3 inline-block font-bold sm:mt-0" href="#components">View</a>
@@ -208,7 +208,7 @@ function ContentFeedExample() {
 function CredentialBadgeExample() {
   return (
     <div className="inline-flex items-center gap-4 rounded-2xl border border-[var(--color-border-default)] bg-white p-5 shadow-ana">
-      <span className="flex h-16 w-16 items-center justify-center rounded-full bg-ana-green text-2xl font-bold text-white">RN</span>
+      <span className="flex h-16 w-16 items-center justify-center rounded-full bg-surface-brand text-2xl font-bold text-white">RN</span>
       <span>
         <span className="ds-tag">Credential</span>
         <strong className="mt-2 block text-xl text-[var(--color-text-primary)]">AGPCNP-BC</strong>
@@ -239,7 +239,7 @@ function EventScheduleExample() {
     <div className="rounded-card border border-[var(--color-border-default)] bg-white">
       {sessions.map(([time, title, place]) => (
         <article className="grid gap-2 border-b border-[var(--color-border-default)] p-4 last:border-b-0 sm:grid-cols-[8rem_1fr]" key={title}>
-          <time className="font-bold text-ana-navy">{time}</time>
+          <time className="font-bold text-[var(--color-text-brand)]">{time}</time>
           <div>
             <h3 className="text-lg font-semibold">{title}</h3>
             <p className="mt-1 inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)]"><FiMapPin aria-hidden="true" /> {place}</p>
@@ -253,10 +253,10 @@ function EventScheduleExample() {
 function SpeakerCardExample() {
   return (
     <article className="rounded-2xl border border-[var(--color-border-default)] bg-white p-5 shadow-ana sm:flex sm:gap-5">
-      <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-surface-muted text-ana-navy"><FiUser aria-hidden="true" size={32} /></div>
+      <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-surface-muted text-[var(--color-text-brand)]"><FiUser aria-hidden="true" size={32} /></div>
       <div className="mt-4 sm:mt-0">
         <h3 className="text-2xl">Jordan Sample, RN</h3>
-        <p className="mt-1 font-semibold text-ana-blue">Nurse leader and policy advocate</p>
+        <p className="mt-1 font-semibold text-[var(--color-text-info)]">Nurse leader and policy advocate</p>
         <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Use for speakers, authors, experts, leaders, and nurse story profiles.</p>
       </div>
     </article>

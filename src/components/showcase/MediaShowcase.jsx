@@ -12,26 +12,26 @@ const sampleCards = [
   {
     title: 'Creating healthier work environments',
     type: 'Article',
-    image: 'linear-gradient(135deg, var(--ana-green-500), var(--ana-blue-500))',
+    gradient: 'ds-gradient-green-navy',
     description: 'Use image cards when the visual helps users understand the content before clicking.',
   },
   {
     title: 'Nurses leading change',
     type: 'Story',
-    image: 'linear-gradient(135deg, var(--ana-navy-500), var(--ana-green-500))',
+    gradient: 'ds-gradient-yellow-orange',
     description: 'Story cards should preserve faces, expressions, and authentic nursing contexts.',
   },
   {
     title: 'Professional development resources',
     type: 'Resource',
-    image: 'linear-gradient(135deg, var(--ana-orange-500), var(--ana-red-500))',
+    gradient: 'ds-gradient-red-black',
     description: 'Resource cards can include images, icons, or text-only layouts depending on content type.',
   },
 ]
 
 function PlaceholderImage({ label = 'Image area', className = '' }) {
   return (
-    <div className={`flex min-h-56 items-center justify-center bg-[linear-gradient(135deg,var(--ana-green-500),var(--ana-blue-500))] text-white ${className}`}>
+    <div className={`flex min-h-56 items-center justify-center ds-gradient-green-navy text-white ${className}`}>
       <div className="rounded-xl border border-white/40 bg-black/10 p-5 text-center backdrop-blur-sm">
         <FiImage className="mx-auto text-3xl" aria-hidden="true" />
         <p className="mt-2 font-bold">{label}</p>
@@ -80,7 +80,7 @@ export function MediaShowcase() {
         <div className="mt-6 grid gap-5 md:grid-cols-3">
           {sampleCards.map(card => (
             <article className="overflow-hidden rounded-card border border-[var(--color-border-default)] bg-white shadow-ana" key={card.title}>
-              <div className="aspect-[4/3]" style={{ background: card.image }} aria-hidden="true" />
+              <div className={`aspect-[4/3] ${card.gradient}`} aria-hidden="true" />
               <div className="p-5">
                 <span className="ds-tag">{card.type}</span>
                 <h3 className="mt-4 text-2xl">{card.title}</h3>

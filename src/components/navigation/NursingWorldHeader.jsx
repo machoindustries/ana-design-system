@@ -7,7 +7,7 @@ function IconButton({ children, label, className = '', onClick }) {
   return (
     <button
       type="button"
-      className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] bg-white text-ana-navy transition hover:bg-surface-muted ${className}`}
+      className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] bg-white text-[var(--color-text-brand)] transition hover:bg-surface-muted ${className}`}
       aria-label={label}
       onClick={onClick}
     >
@@ -21,14 +21,14 @@ function DesktopMenuItem({ item }) {
     <div className="group relative">
       <button
         type="button"
-        className="inline-flex items-center gap-2 rounded-button px-3 py-3 text-sm font-bold text-ana-navy hover:bg-surface-muted"
+        className="inline-flex items-center gap-2 rounded-button px-3 py-3 text-sm font-bold text-[var(--color-text-brand)] hover:bg-surface-muted"
         aria-haspopup="true"
       >
         {item.label}
         <FiChevronDown aria-hidden="true" />
       </button>
       <div className="invisible absolute left-0 top-full z-50 w-[28rem] translate-y-2 rounded-card border border-[var(--color-border-default)] bg-white p-5 opacity-0 shadow-ana-lg transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-        <p className="font-bold text-ana-navy">{item.label}</p>
+        <p className="font-bold text-[var(--color-text-brand)]">{item.label}</p>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{item.description}</p>
         <ul className="mt-4 grid gap-2">
           {item.links.map(link => (
@@ -50,7 +50,7 @@ function MobileMenu() {
       <div className="grid gap-4">
         {primaryNav.map(item => (
           <details className="rounded-card border border-[var(--color-border-default)] bg-white p-4" key={item.label}>
-            <summary className="cursor-pointer font-bold text-ana-navy">{item.label}</summary>
+            <summary className="cursor-pointer font-bold text-[var(--color-text-brand)]">{item.label}</summary>
             <p className="mt-2 text-sm text-[var(--color-text-secondary)]">{item.description}</p>
             <ul className="mt-3 grid gap-2">
               {item.links.map(link => (
@@ -124,15 +124,15 @@ export function NursingWorldHeader() {
             <IconButton label="Open search" onClick={() => setSearchOpen(!searchOpen)}>
               <FiSearch aria-hidden="true" />
             </IconButton>
-            <a href="/" aria-label="Shopping cart" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] bg-white text-ana-navy no-underline hover:bg-surface-muted">
+            <a href="/" aria-label="Shopping cart" className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] bg-white text-[var(--color-text-brand)] no-underline hover:bg-surface-muted">
               <FiShoppingCart aria-hidden="true" />
             </a>
-            <a href="/" aria-label="My account" className="hidden min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] bg-white text-ana-navy no-underline hover:bg-surface-muted sm:inline-flex">
+            <a href="/" aria-label="My account" className="hidden min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] bg-white text-[var(--color-text-brand)] no-underline hover:bg-surface-muted sm:inline-flex">
               <FiUser aria-hidden="true" />
             </a>
             <button
               type="button"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-ana-navy text-white lg:hidden"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-surface-dark text-white lg:hidden"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen(!menuOpen)}

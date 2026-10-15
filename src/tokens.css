@@ -73,6 +73,11 @@
    */
   --color-link-on-tint: var(--ana-navy-500);
 
+  /* Eyebrow labels (.ds-eyebrow): 4.54:1 on white. On dark surfaces use
+     the light tint, 9.00:1 on background-dark. */
+  --color-text-eyebrow: var(--ana-blue-500);
+  --color-text-eyebrow-on-dark: var(--ana-green-100);
+
   /* Icons and decorative accents on dark surfaces (6.97:1 on background-dark). */
   --color-accent-on-dark: var(--ana-green-200);
 
@@ -147,6 +152,13 @@
   --component-card-border: var(--color-border-default);
   --component-card-radius: var(--radius-md);
   --component-quick-links-background: var(--ana-navy-500);
+
+  /* PromoBanner eyebrows, one per variant. KNOWN ISSUE: brand (2.89:1 on
+     green) and accent (2.72:1 on red) fail AA; highlight passes (6.58:1 on
+     navy). Kept as-is pending brand review — see CHANGELOG v0.5.0. */
+  --component-promo-brand-eyebrow: var(--ana-green-100);
+  --component-promo-highlight-eyebrow: var(--ana-blue-200);
+  --component-promo-accent-eyebrow: var(--ana-red-200);
 
   /* NOTE: --color-donation (red) and --color-member (blue) are a
      brand-restricted pairing (Nurses Red + Nurses Blue is a documented

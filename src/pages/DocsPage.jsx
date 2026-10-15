@@ -129,7 +129,7 @@ export function DocsPage() {
               'Every interactive element must be reachable and operable by keyboard.',
             ].map(item => (
               <li key={item} className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ana-green" aria-hidden="true" />
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-surface-brand" aria-hidden="true" />
                 {item}
               </li>
             ))}

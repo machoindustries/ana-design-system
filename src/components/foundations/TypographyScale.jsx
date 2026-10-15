@@ -12,13 +12,13 @@ export function TypographyScale() {
       <div className="mb-6">
         <p className="ds-eyebrow">Typography foundation</p>
         <h3 className="mt-2">Source Sans Pro heading system</h3>
-        <p className="mt-2 text-slate-700">Headings use Source Sans Pro Bold by default. H1 starts at 3.5rem / 56px on desktop and scales down for mobile.</p>
+        <p className="mt-2 text-[var(--color-text-secondary)]">Headings use Source Sans Pro Bold by default. H1 starts at 3.5rem / 56px on desktop and scales down for mobile.</p>
       </div>
       <div className="space-y-7">
         {typeSamples.map(([label, className, meta, text]) => (
           <div className="border-t border-[var(--color-border-default)] pt-5" key={label}>
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-ana-blue">
-              {label} <span className="normal-case tracking-normal text-slate-500">{meta}</span>
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-[var(--color-text-eyebrow)]">
+              {label} <span className="normal-case tracking-normal text-[var(--color-text-secondary)]">{meta}</span>
             </p>
             <p className={className}>{text}</p>
           </div>

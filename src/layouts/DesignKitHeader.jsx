@@ -116,7 +116,7 @@ export function DesignKitHeader({ activePage, onNavigate }) {
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-ana-navy text-white lg:hidden"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-surface-dark text-white lg:hidden"
                 aria-label={menuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={menuOpen}
                 onClick={toggleMenu}
@@ -138,7 +138,7 @@ export function DesignKitHeader({ activePage, onNavigate }) {
             {/* Search on the right */}
             <button
               type="button"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] text-ana-navy hover:bg-surface-muted"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] text-[var(--color-text-brand)] hover:bg-surface-muted"
               aria-label="Search the design kit (⌘K)"
               aria-expanded={searchOpen}
               onClick={() => setSearchOpen(prev => !prev)}
@@ -177,7 +177,7 @@ export function DesignKitHeader({ activePage, onNavigate }) {
                           aria-expanded={isGroupOpen}
                           onClick={() => setOpenMobileGroup(isGroupOpen ? null : item.id)}
                           className={`flex w-full items-center justify-between rounded-button px-4 py-3 text-left font-bold transition
-                            ${isGroupActive ? 'bg-surface-muted text-ana-navy' : 'bg-surface-soft text-ana-navy'}`}
+                            ${isGroupActive ? 'bg-surface-muted text-[var(--color-text-brand)]' : 'bg-surface-soft text-[var(--color-text-brand)]'}`}
                         >
                           <span>
                             {item.label}
@@ -201,8 +201,8 @@ export function DesignKitHeader({ activePage, onNavigate }) {
                                   onClick={closeMenu}
                                   className={({ isActive }) => `block w-full rounded-button px-4 py-3 text-left no-underline transition
                                     ${isActive
-                                      ? 'bg-ana-navy text-white'
-                                      : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
+                                      ? 'bg-surface-dark text-white'
+                                      : 'bg-surface-soft text-[var(--color-text-brand)] hover:bg-surface-muted'}`}
                                 >
                                   {({ isActive }) => (
                                     <>
@@ -229,8 +229,8 @@ export function DesignKitHeader({ activePage, onNavigate }) {
                         onClick={closeMenu}
                         className={({ isActive }) => `block w-full rounded-button px-4 py-3 text-left font-bold no-underline transition
                           ${isActive
-                            ? 'bg-ana-navy text-white'
-                            : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
+                            ? 'bg-surface-dark text-white'
+                            : 'bg-surface-soft text-[var(--color-text-brand)] hover:bg-surface-muted'}`}
                       >
                         {({ isActive }) => (
                           <>

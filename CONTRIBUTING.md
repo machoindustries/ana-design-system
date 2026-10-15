@@ -201,6 +201,7 @@ background-color: var(--ana-blue-100);
 - **Mobile-first.** Write base styles for small screens and add `sm:`, `md:`, `lg:` modifiers for larger screens.
 - **No inline styles.** If something needs a value from `tokens.css`, reference it via a Tailwind class or a CSS variable. If a Tailwind class doesn't exist for it, add a component class to `index.css`.
 - **Run the linter before committing.** `npm run lint` will catch unused imports, missing keys, and accessibility issues. Fix everything it flags.
+- **Tokens are checked too.** `npm run lint` also runs `npm run lint:tokens`, which fails on primitive tokens (`var(--ana-*)`), Tailwind palette classes such as `bg-ana-navy`, Tailwind grays, hex colors and inline styles. Each failure suggests the semantic token to use. The few allowed exceptions (such as `ColorSwatch`, which displays the primitives) are listed in `scripts/check-tokens.mjs`.
 - **No hard-coded hex values in component files.** Colors belong in `tokens.css`.
 
 ---

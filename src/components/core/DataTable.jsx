@@ -5,7 +5,7 @@ export function DataTable({ columns, rows }) {
         <thead className="bg-surface-muted">
           <tr>
             {columns.map(column => (
-              <th className="px-4 py-3 font-bold text-ana-navy" key={column} scope="col">
+              <th className="px-4 py-3 font-bold text-[var(--color-text-brand)]" key={column} scope="col">
                 {column}
               </th>
             ))}
@@ -15,7 +15,7 @@ export function DataTable({ columns, rows }) {
           {rows.map(row => (
             <tr key={row.join('-')}>
               {row.map(cell => (
-                <td className="px-4 py-3 align-top text-slate-700" key={cell}>
+                <td className="px-4 py-3 align-top text-[var(--color-text-secondary)]" key={cell}>
                   {cell}
                 </td>
               ))}

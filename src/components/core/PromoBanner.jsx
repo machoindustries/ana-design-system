@@ -16,7 +16,7 @@ import { FiArrowRight, FiX } from 'react-icons/fi'
  * Uses ANA brand action tokens rather than status tokens, since promotions
  * are not status states:
  *   brand     — bg-action-primary (green)    default — general announcements
- *   highlight — bg-ana-navy                  darker, higher-contrast — flagship campaigns
+ *   highlight — bg-surface-dark                  darker, higher-contrast — flagship campaigns
  *   accent    — bg-action-accent (red)       urgent calls to action, fundraising pushes
  *
  * Usage:
@@ -41,19 +41,19 @@ const variantConfig = {
   brand: {
     bg: 'bg-action-primary',
     text: 'text-white',
-    eyebrowText: 'text-[var(--ana-green-100)]',
+    eyebrowText: 'text-[var(--component-promo-brand-eyebrow)]',
     actionHover: 'hover:bg-white/10',
   },
   highlight: {
-    bg: 'bg-ana-navy',
+    bg: 'bg-surface-dark',
     text: 'text-white',
-    eyebrowText: 'text-[var(--ana-blue-200)]',
+    eyebrowText: 'text-[var(--component-promo-highlight-eyebrow)]',
     actionHover: 'hover:bg-white/10',
   },
   accent: {
     bg: 'bg-action-accent',
     text: 'text-white',
-    eyebrowText: 'text-[var(--ana-red-200)]',
+    eyebrowText: 'text-[var(--component-promo-accent-eyebrow)]',
     actionHover: 'hover:bg-white/10',
   },
 }

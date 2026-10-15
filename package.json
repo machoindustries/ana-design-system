@@ -1,6 +1,6 @@
 {
   "name": "ana-digital-design-system",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "private": true,
   "description": "ANA Digital Design System reference site built with React, Vite, and Tailwind CSS v4.",
   "type": "module",
@@ -8,7 +8,8 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "lint": "eslint ."
+    "lint": "eslint . && node scripts/check-tokens.mjs",
+    "lint:tokens": "node scripts/check-tokens.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.3.0",

@@ -3,7 +3,7 @@ import { footerGroups } from '../../data/navigation'
 
 function SocialLink({ href, label, children }) {
   return (
-    <a href={href} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/30 text-white no-underline transition hover:bg-white hover:text-ana-navy" aria-label={label}>
+    <a href={href} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/30 text-white no-underline transition hover:bg-white hover:text-[var(--color-link-hover)]" aria-label={label}>
       {children}
     </a>
   )
@@ -11,7 +11,7 @@ function SocialLink({ href, label, children }) {
 
 export function NursingWorldFooter() {
   return (
-    <footer className="bg-ana-navy text-white">
+    <footer className="bg-surface-dark text-white">
       <div className="ds-container py-12 md:py-16">
         <div className="grid gap-10 lg:grid-cols-[1.25fr_2fr]">
           <div>

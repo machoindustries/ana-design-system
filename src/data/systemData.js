@@ -40,6 +40,8 @@ export const semanticColors = [
   ['Accent on dark', 'color-accent-on-dark', 'Decorative icons and accents, such as check marks, on dark surfaces'],
   ['Data fill', 'color-data-fill', 'Filled part of progress and data bars; not for actions'],
   ['Data track', 'color-data-track', 'Unfilled track behind a data fill (fill is 3.94:1 against it)'],
+  ['Eyebrow', 'color-text-eyebrow', 'Eyebrow labels above headings on light surfaces (4.54:1 on white)'],
+  ['Eyebrow on dark', 'color-text-eyebrow-on-dark', 'Eyebrow labels on dark surfaces such as navy heroes and bands (9.00:1 on navy)'],
 ]
 
 export const typography = [

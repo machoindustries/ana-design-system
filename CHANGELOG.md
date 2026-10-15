@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [v0.5.0] - 2026-10-15
+
+Every component and page now styles through the semantic token layer
+
+### Added
+
+- `npm run lint:tokens` (also run by `npm run lint`). It fails on primitive tokens (`var(--ana-*)`), Tailwind palette classes (`bg-ana-navy` and similar), Tailwind grays, hex colors in JS/JSX and inline styles. Allowed exceptions are listed in `scripts/check-tokens.mjs`
+- Semantic tokens: `--color-text-eyebrow` (4.54:1 on white), `--color-text-eyebrow-on-dark` (9.00:1 on navy)
+- Component tokens: `--component-promo-brand-eyebrow`, `--component-promo-highlight-eyebrow`, `--component-promo-accent-eyebrow`
+
+### Changed
+
+- 77 Tailwind palette classes, the `var(--ana-*)` uses outside `tokens.css` and 9 Tailwind slate colors now use semantic tokens. Rendered colors are unchanged except:
+  - secondary text and `.ds-code` backgrounds move from Tailwind slate to ANA gray (`--color-text-secondary`, `--color-background-muted`)
+  - image placeholders use the Brand Playbook gradients, running left to right: green → navy (Media, Content Hub, hero showcase), yellow → orange (second image card) and Nurses Red → 25% black (third image card)
+- `ColorSwatch` and `MediaShowcase` no longer use inline styles
+
+### Known issues
+
+- PromoBanner contrast, kept as-is pending brand review: brand variant eyebrow 2.89:1 and white body text 3.68:1 on green; accent variant eyebrow 2.72:1 on red
+- White text on the primary button (Nurses Green) is 3.68:1, which fails AA for its 14px label
+
 ## [v0.4.2] - 2026-10-15
 
 Brand gradient and color-combination tokens from the Brand Playbook

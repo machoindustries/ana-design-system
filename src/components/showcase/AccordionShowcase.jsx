@@ -21,7 +21,7 @@ export function AccordionShowcase() {
             <h3 className="type-h4">
               <button
                 id={buttonId}
-                className="flex w-full items-center justify-between px-5 py-4 text-left font-bold text-ana-navy"
+                className="flex w-full items-center justify-between px-5 py-4 text-left font-bold text-[var(--color-text-brand)]"
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
@@ -32,7 +32,7 @@ export function AccordionShowcase() {
               </button>
             </h3>
             {isOpen ? (
-              <div id={panelId} role="region" aria-labelledby={buttonId} className="px-5 pb-5 text-slate-700">
+              <div id={panelId} role="region" aria-labelledby={buttonId} className="px-5 pb-5 text-[var(--color-text-secondary)]">
                 {body}
               </div>
             ) : null}

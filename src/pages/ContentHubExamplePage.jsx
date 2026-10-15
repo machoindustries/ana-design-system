@@ -32,7 +32,7 @@ export function ContentHubExamplePage() {
               <form className="mt-8 grid gap-3 sm:grid-cols-[1fr_auto]" role="search" aria-label="Search Content Hub">
                 <label htmlFor="content-hub-search" className="sr-only">Search Content Hub</label>
                 <div className="relative">
-                  <FiSearch className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ana-blue" aria-hidden="true" />
+                  <FiSearch className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-text-info)]" aria-hidden="true" />
                   <input id="content-hub-search" className="ds-field pl-11" type="search" placeholder="Search Content Hub" />
                 </div>
                 <button className="ds-button ds-button-primary" type="submit">Search</button>
@@ -75,7 +75,7 @@ export function ContentHubExamplePage() {
             Feature one high-value resource so the page has a clear editorial priority instead of presenting all content at the same visual weight.
           </SectionHeading>
           <article className="mt-8 overflow-hidden rounded-2xl bg-white shadow-ana lg:grid lg:grid-cols-[.95fr_1.05fr]">
-            <div className="min-h-64 bg-[linear-gradient(135deg,var(--ana-green-500),var(--ana-blue-500))] p-6 text-white lg:min-h-full">
+            <div className="min-h-64 ds-gradient-green-navy p-6 text-white lg:min-h-full">
               <div className="flex h-full min-h-56 items-end rounded-xl border border-white/35 p-5">
                 <p className="max-w-sm text-2xl font-bold leading-8">Image-enabled featured resource area. Replace with approved ANA photography.</p>
               </div>
@@ -122,7 +122,7 @@ export function ContentHubExamplePage() {
         </div>
       </section>
 
-      <section className="bg-ana-navy text-white">
+      <section className="bg-surface-dark text-white">
         <div className="ds-container py-12 md:py-16">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
@@ -132,7 +132,7 @@ export function ContentHubExamplePage() {
                 Connect the Content Hub to the broader ANA ecosystem with clear next steps for membership, education, and advocacy.
               </p>
             </div>
-            <a href="/" className="ds-button bg-white text-ana-navy hover:bg-[var(--ana-blue-100)]">Join ANA</a>
+            <a href="/" className="ds-button bg-white text-[var(--color-text-brand)] hover:bg-[var(--color-background-info)]">Join ANA</a>
           </div>
         </div>
       </section>
