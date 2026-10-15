@@ -1,14 +1,19 @@
-import { PageShell } from "../components/core"
-import { EnterpriseComponentsShowcase } from "../components/showcase/EnterpriseComponentsShowcase"  
+import { Page, Section, SectionHeading, Stack } from "../components/core"
+import { EnterpriseComponentsShowcase } from "../components/showcase/EnterpriseComponentsShowcase"
 import { ReadinessResultShowcase } from "../components/showcase/ReadinessResultShowcase"
 
 export function ContentComponentsPage() {
   return (
-    <PageShell eyebrow="Component examples" title="Content components" intro="Reusable content, structure, resource, people, event, and authority patterns added as part of the design-system evolution.">
-      <div className="space-y-10">
+    <Page eyebrow="Component examples" title="Content components" intro="Reusable content, structure, resource, people, event, and authority patterns added as part of the design-system evolution.">
+      <Section>
         <EnterpriseComponentsShowcase />
-        <section><h3 className="mb-4">Readiness profile result</h3><ReadinessResultShowcase /></section>
-      </div>
-    </PageShell>
+      </Section>
+      <Section>
+        <Stack gap={6}>
+          <SectionHeading title="Readiness profile result" />
+          <ReadinessResultShowcase />
+        </Stack>
+      </Section>
+    </Page>
   )
 }

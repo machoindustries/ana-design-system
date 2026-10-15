@@ -18,7 +18,7 @@ export function AccordionShowcase() {
 
         return (
           <div key={title}>
-            <h4>
+            <h3 className="type-h4">
               <button
                 id={buttonId}
                 className="flex w-full items-center justify-between px-5 py-4 text-left font-bold text-ana-navy"
@@ -30,7 +30,7 @@ export function AccordionShowcase() {
                 {title}
                 <span aria-hidden="true">{isOpen ? '−' : '+'}</span>
               </button>
-            </h4>
+            </h3>
             {isOpen ? (
               <div id={panelId} role="region" aria-labelledby={buttonId} className="px-5 pb-5 text-slate-700">
                 {body}

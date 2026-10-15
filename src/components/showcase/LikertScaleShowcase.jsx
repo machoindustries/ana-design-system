@@ -26,7 +26,7 @@ export function LikertScaleShowcase() {
   return (
     <form noValidate onSubmit={handleSubmit} className="grid gap-5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-surface-page p-5 shadow-ana sm:p-6">
       {error ? (
-        <ErrorSummary key={attempt} headingLevel={4} errors={[{ id: `${SCALE_ID}-1`, message: error }]} />
+        <ErrorSummary key={attempt} headingLevel={3} errors={[{ id: `${SCALE_ID}-1`, message: error }]} />
       ) : null}
       <LikertScale
         id={SCALE_ID}

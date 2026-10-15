@@ -24,7 +24,7 @@ export function FoundationsPage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {semanticColors.map(([name, token, role]) => (
               <article className="ds-card" key={token}>
-                <h4>{name}</h4>
+                <h3 className="type-h4">{name}</h3>
                 <p className="ds-code mt-2 inline-block">--{token}</p>
                 <p className="mt-2 text-sm text-[var(--color-text-secondary)]">{role}</p>
               </article>

@@ -15,7 +15,7 @@ export function ReadinessResultShowcase() {
     <div className="grid gap-10">
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-surface-page p-5 shadow-ana sm:p-6">
         <ReadinessResult
-          headingLevel={4}
+          headingLevel={3}
           heading="Your readiness profile, Jordan"
           disclaimer={disclaimer}
           score={{
@@ -42,7 +42,7 @@ export function ReadinessResultShowcase() {
       <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-surface-page p-5 shadow-ana sm:p-6">
         <p className="ds-eyebrow mb-4">Withheld state</p>
         <ReadinessResult
-          headingLevel={4}
+          headingLevel={3}
           heading="Your readiness profile"
           disclaimer={disclaimer}
           score={{

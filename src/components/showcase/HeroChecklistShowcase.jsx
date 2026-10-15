@@ -4,7 +4,7 @@ export function HeroChecklistShowcase() {
   return (
     <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-5 sm:px-8">
       <HeroChecklist
-        headingLevel={4}
+        headingLevel={3}
         eyebrow="Readiness assessment"
         heading="How ready is your practice for digital change?"
         actions={
@@ -15,7 +15,7 @@ export function HeroChecklistShowcase() {
         }
         panel={
           <ChecklistPanel
-            headingLevel={5}
+            headingLevel={4}
             heading="In about 10 minutes you'll get"
             items={[
               'A readiness score out of 100',
