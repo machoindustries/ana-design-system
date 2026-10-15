@@ -54,6 +54,7 @@ export const searchIndex = [
       'page header', 'section heading', 'intro', 'eyebrow', 'feed',
       'resource', 'quick links', 'related', 'download', 'person card',
       'logo grid', 'metadata', 'tag', 'pill',
+      'assessment', 'score', 'readiness', 'arni', 'result', 'recommendation',
     ],
   },
   {
@@ -63,6 +64,7 @@ export const searchIndex = [
     group: 'Components',
     keywords: [
       'button', 'cta', 'call to action', 'card', 'hero', 'accordion',
+      'checklist', 'hero checklist',
       'collapse', 'expand', 'search', 'alert', 'alertbar', 'alert bar',
       'banner', 'promo', 'modal', 'dialog', 'overlay', 'notification',
       'maintenance', 'outage', 'status', 'warning', 'error', 'success',
@@ -76,6 +78,8 @@ export const searchIndex = [
     keywords: [
       'form', 'input', 'field', 'label', 'select', 'checkbox', 'radio',
       'textarea', 'table', 'data table', 'link', 'inline link',
+      'survey', 'progress', 'step', 'likert', 'scale', 'rating', 'consent',
+      'error summary', 'validation',
     ],
   },
   {

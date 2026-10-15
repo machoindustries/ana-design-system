@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [v0.3.0] - 2026-10-15
+
+Survey and ARNI assessment patterns from NursingWorld, rebuilt the kit's way
+
+### Added
+
+- `StepProgress`: "Step 2 of 5" text with a native `<progress>` bar (aria-hidden) that respects reduced motion (Forms & Data)
+- `LikertScale`: a numbered radio scale with end labels. Rows stack below md and sit in one row of columns from md up. Every point is a 48px target (Forms & Data)
+- `ErrorSummary`: a focusable, linked list of form errors (Forms & Data)
+- `ConsentStep`: a legal notice with a required "I agree" checkbox, or the message alone (Forms & Data)
+- `ReadinessResult`: score card, dimensions with bars, recommendations, scoring label and the withheld state (Content components)
+- `HeroChecklist` and `ChecklistPanel`: the "text with a checklist panel" hero variant (Actions & Cards)
+- `.ds-data-bar` and `.ds-notice` component classes in `index.css`
+- Semantic tokens: `--color-link-on-tint`, `--color-accent-on-dark`, `--color-data-fill`, `--color-data-track`
+
+### Changed
+
+- Search keywords for Forms & Data, Content components and Actions & Cards
+
 ## [v0.2.9] - 2026-07-12
 
 Subtle changes to the mobile tokens
