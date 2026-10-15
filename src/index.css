@@ -79,6 +79,77 @@
   .ds-notice a:hover { text-decoration-thickness: 2px; }
   .ds-notice > * + * { margin-top: var(--space-3); }
 
+  /* Brand gradients and duo pairings — Brand Playbook, Section 4. Tokens live in tokens.css. */
+  /* Gradient utility classes — use these instead of inline background-image
+     so an off-brand gradient is not constructible at the call site. */
+  .ds-gradient-green-navy { background-image: var(--gradient-green-navy); }
+  .ds-gradient-blue-navy { background-image: var(--gradient-blue-navy); }
+  .ds-gradient-yellow-orange { background-image: var(--gradient-yellow-orange); }
+  .ds-gradient-red-black { background-image: var(--gradient-red-black); }
+  .ds-gradient-green-black { background-image: var(--gradient-green-black); }
+  .ds-gradient-navy-black { background-image: var(--gradient-navy-black); }
+  .ds-gradient-blue-black { background-image: var(--gradient-blue-black); }
+  .ds-gradient-orange-black { background-image: var(--gradient-orange-black); }
+  .ds-gradient-yellow-black { background-image: var(--gradient-yellow-black); }
+  .ds-gradient-gray-black { background-image: var(--gradient-gray-black); }
+
+  /* Duo utility classes for two-tone split banners and paired badges.
+     Each is a flex row of two blocks; every block sets its own on-color
+     so no combination can accidentally end up with poor text contrast. */
+  .ds-duo { display: flex; overflow: hidden; border-radius: var(--radius-md); }
+  .ds-duo > span { flex: 1; padding: var(--space-3) var(--space-4); font-weight: var(--font-subheading-weight); }
+
+  /* White on Nurses Green is 3.68:1: AA only for large text (24px+, or
+     18.66px+ bold). Every duo that includes green sets both blocks at
+     h4 size (24px) so the pair stays balanced and the green block passes. */
+  .ds-duo-gray-green,
+  .ds-duo-green-orange,
+  .ds-duo-green-yellow,
+  .ds-duo-green-blue,
+  .ds-duo-green-navy { font-size: var(--type-h4-size); line-height: var(--type-h4-line-height); }
+
+  .ds-duo-red-gray > :first-child { background: var(--duo-red-gray-a); color: var(--on-ana-red); }
+  .ds-duo-red-gray > :last-child { background: var(--duo-red-gray-b); color: var(--on-ana-gray); }
+
+  .ds-duo-red-navy > :first-child { background: var(--duo-red-navy-a); color: var(--on-ana-red); }
+  .ds-duo-red-navy > :last-child { background: var(--duo-red-navy-b); color: var(--on-ana-navy); }
+
+  .ds-duo-red-orange > :first-child { background: var(--duo-red-orange-a); color: var(--on-ana-red); }
+  .ds-duo-red-orange > :last-child { background: var(--duo-red-orange-b); color: var(--on-ana-orange); }
+
+  .ds-duo-red-yellow > :first-child { background: var(--duo-red-yellow-a); color: var(--on-ana-red); }
+  .ds-duo-red-yellow > :last-child { background: var(--duo-red-yellow-b); color: var(--on-ana-yellow); }
+
+  .ds-duo-gray-green > :first-child { background: var(--duo-gray-green-a); color: var(--on-ana-gray); }
+  .ds-duo-gray-green > :last-child { background: var(--duo-gray-green-b); color: var(--on-ana-green); }
+
+  .ds-duo-gray-blue > :first-child { background: var(--duo-gray-blue-a); color: var(--on-ana-gray); }
+  .ds-duo-gray-blue > :last-child { background: var(--duo-gray-blue-b); color: var(--on-ana-blue); }
+
+  .ds-duo-green-orange > :first-child { background: var(--duo-green-orange-a); color: var(--on-ana-green); }
+  .ds-duo-green-orange > :last-child { background: var(--duo-green-orange-b); color: var(--on-ana-orange); }
+
+  .ds-duo-green-yellow > :first-child { background: var(--duo-green-yellow-a); color: var(--on-ana-green); }
+  .ds-duo-green-yellow > :last-child { background: var(--duo-green-yellow-b); color: var(--on-ana-yellow); }
+
+  .ds-duo-green-blue > :first-child { background: var(--duo-green-blue-a); color: var(--on-ana-green); }
+  .ds-duo-green-blue > :last-child { background: var(--duo-green-blue-b); color: var(--on-ana-blue); }
+
+  .ds-duo-green-navy > :first-child { background: var(--duo-green-navy-a); color: var(--on-ana-green); }
+  .ds-duo-green-navy > :last-child { background: var(--duo-green-navy-b); color: var(--on-ana-navy); }
+
+  .ds-duo-blue-navy > :first-child { background: var(--duo-blue-navy-a); color: var(--on-ana-blue); }
+  .ds-duo-blue-navy > :last-child { background: var(--duo-blue-navy-b); color: var(--on-ana-navy); }
+
+  .ds-duo-blue-orange > :first-child { background: var(--duo-blue-orange-a); color: var(--on-ana-blue); }
+  .ds-duo-blue-orange > :last-child { background: var(--duo-blue-orange-b); color: var(--on-ana-orange); }
+
+  .ds-duo-blue-yellow > :first-child { background: var(--duo-blue-yellow-a); color: var(--on-ana-blue); }
+  .ds-duo-blue-yellow > :last-child { background: var(--duo-blue-yellow-b); color: var(--on-ana-yellow); }
+
+  .ds-duo-orange-yellow > :first-child { background: var(--duo-orange-yellow-a); color: var(--on-ana-orange); }
+  .ds-duo-orange-yellow > :last-child { background: var(--duo-orange-yellow-b); color: var(--on-ana-yellow); }
+
 /*
  * Mobile first: one column. The rail is hidden below lg (DesignKitSidebar's
  * `hidden lg:block`), so a two-column grid here would put <main> in the
