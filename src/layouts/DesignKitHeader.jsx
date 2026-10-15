@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { FiBookOpen, FiChevronDown, FiMenu, FiSearch, FiX } from 'react-icons/fi'
 import { designKitNavItems } from '../data/designKitNavigation'
 import { SearchOverlay } from '../components/core/SearchOverlay'
@@ -23,6 +24,15 @@ function LogoMark() {
   )
 }
 
+function pathFor(id) {
+  return id === 'home' ? '/' : `/${id}`
+}
+
+// The group holding the current page, so the mobile menu opens with it expanded.
+function groupFor(pageId) {
+  return designKitNavItems.find(item => item.children?.some(child => child.id === pageId))?.id ?? null
+}
+
 // ---------------------------------------------------------------------------
 // DesignKitHeader
 // ---------------------------------------------------------------------------
@@ -43,15 +53,37 @@ export function DesignKitHeader({ activePage, onNavigate }) {
     return () => document.removeEventListener('keydown', handleKey)
   }, [])
 
-  function navigate(id) {
-    onNavigate(id)
+  // Lock the page behind the open menu. The class only takes effect below lg
+  // (see .ds-menu-open in index.css), where the menu is shown.
+  useEffect(() => {
+    document.documentElement.classList.toggle('ds-menu-open', menuOpen)
+    return () => document.documentElement.classList.remove('ds-menu-open')
+  }, [menuOpen])
+
+  function closeMenu() {
     setMenuOpen(false)
     setOpenMobileGroup(null)
+  }
+
+  function toggleMenu() {
+    if (menuOpen) {
+      closeMenu()
+    } else {
+      setOpenMobileGroup(groupFor(activePage))
+      setMenuOpen(true)
+    }
+  }
+
+  function navigate(id) {
+    onNavigate(id)
+    closeMenu()
     window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }))
   }
 
+  // The header is a flex column capped at the viewport height: when the
+  // mobile menu is taller than the screen, the menu (not the page) scrolls.
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--color-border-default)] bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 flex max-h-dvh flex-col border-b border-[var(--color-border-default)] bg-white/95 backdrop-blur">
       <a className="skip-link" href="#main">Skip to main content</a>
 
       {/* Branding row — sized to the logo's real minimum height (100px) plus
@@ -75,23 +107,21 @@ export function DesignKitHeader({ activePage, onNavigate }) {
       </div>
 
       {/* Nav row — its own compact bar, unaffected by the logo's height */}
-      <div className="border-t border-[var(--color-border-default)] bg-surface-soft">
-        <div className="ds-container">
-          <div className="flex min-h-16 items-center justify-end gap-4">
+      <div className="flex min-h-0 flex-col border-t border-[var(--color-border-default)] bg-surface-soft">
+        <div className="ds-container flex min-h-0 flex-col">
+          <div className="flex min-h-16 items-center justify-between gap-4 py-2">
 
-            {/* Desktop nav — moved to DesignKitSidebar.jsx, rendered
-                alongside <main> in SiteLayout.jsx for the lg: breakpoint. */}
-
-            {/* Utility buttons */}
-            <div className="flex items-center gap-2 py-2">
+            {/* Navigation on the left: the menu toggle below lg (the sidebar
+                takes over from lg up) and the Docs link. */}
+            <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] text-ana-navy hover:bg-surface-muted"
-                aria-label="Search the design kit (⌘K)"
-                aria-expanded={searchOpen}
-                onClick={() => setSearchOpen(prev => !prev)}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-ana-navy text-white lg:hidden"
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={menuOpen}
+                onClick={toggleMenu}
               >
-                <FiSearch aria-hidden="true" />
+                {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
               </button>
 
               <button
@@ -102,17 +132,18 @@ export function DesignKitHeader({ activePage, onNavigate }) {
               >
                 <FiBookOpen aria-hidden="true" /> Docs
               </button>
-
-              <button
-                type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button bg-ana-navy text-white lg:hidden"
-                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={menuOpen}
-                onClick={() => setMenuOpen(prev => !prev)}
-              >
-                {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
-              </button>
             </div>
+
+            {/* Search on the right */}
+            <button
+              type="button"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-button border border-[var(--color-border-default)] text-ana-navy hover:bg-surface-muted"
+              aria-label="Search the design kit (⌘K)"
+              aria-expanded={searchOpen}
+              onClick={() => setSearchOpen(prev => !prev)}
+            >
+              <FiSearch aria-hidden="true" />
+            </button>
           </div>
 
           {/* Search overlay — rendered at the end of the header so it
@@ -130,7 +161,7 @@ export function DesignKitHeader({ activePage, onNavigate }) {
           {menuOpen && (
             <nav
               aria-label="Mobile design kit navigation"
-              className="border-t border-[var(--color-border-default)] py-4 lg:hidden"
+              className="min-h-0 overflow-y-auto overscroll-contain border-t border-[var(--color-border-default)] py-4 lg:hidden"
             >
               <ul className="grid gap-1">
                 {designKitNavItems.map(item => {
@@ -163,19 +194,24 @@ export function DesignKitHeader({ activePage, onNavigate }) {
                           <ul className="ml-4 mt-1 grid gap-1 border-l-2 border-[var(--color-border-default)] pl-3">
                             {item.children.map(child => (
                               <li key={child.id}>
-                                <button
-                                  type="button"
-                                  onClick={() => navigate(child.id)}
-                                  className={`w-full rounded-button px-4 py-3 text-left transition
-                                    ${activePage === child.id
+                                <NavLink
+                                  to={pathFor(child.id)}
+                                  end
+                                  onClick={closeMenu}
+                                  className={({ isActive }) => `block w-full rounded-button px-4 py-3 text-left no-underline transition
+                                    ${isActive
                                       ? 'bg-ana-navy text-white'
                                       : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
                                 >
-                                  <span className="block font-bold">{child.label}</span>
-                                  <span className={`mt-0.5 block text-sm font-normal ${activePage === child.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
-                                    {child.description}
-                                  </span>
-                                </button>
+                                  {({ isActive }) => (
+                                    <>
+                                      <span className="block font-bold">{child.label}</span>
+                                      <span className={`mt-0.5 block text-sm font-normal ${isActive ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
+                                        {child.description}
+                                      </span>
+                                    </>
+                                  )}
+                                </NavLink>
                               </li>
                             ))}
                           </ul>
@@ -186,19 +222,24 @@ export function DesignKitHeader({ activePage, onNavigate }) {
 
                   return (
                     <li key={item.id}>
-                      <button
-                        type="button"
-                        onClick={() => navigate(item.id)}
-                        className={`w-full rounded-button px-4 py-3 text-left font-bold transition
-                          ${activePage === item.id
+                      <NavLink
+                        to={pathFor(item.id)}
+                        end
+                        onClick={closeMenu}
+                        className={({ isActive }) => `block w-full rounded-button px-4 py-3 text-left font-bold no-underline transition
+                          ${isActive
                             ? 'bg-ana-navy text-white'
                             : 'bg-surface-soft text-ana-navy hover:bg-surface-muted'}`}
                       >
-                        {item.label}
-                        <span className={`mt-0.5 block text-sm font-normal ${activePage === item.id ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
-                          {item.description}
-                        </span>
-                      </button>
+                        {({ isActive }) => (
+                          <>
+                            {item.label}
+                            <span className={`mt-0.5 block text-sm font-normal ${isActive ? 'text-white/75' : 'text-[var(--color-text-secondary)]'}`}>
+                              {item.description}
+                            </span>
+                          </>
+                        )}
+                      </NavLink>
                     </li>
                   )
                 })}

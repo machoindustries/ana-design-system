@@ -45,12 +45,22 @@
   .ds-label { @apply block text-sm font-semibold text-[var(--color-text-primary)]; }
   .ds-help { @apply mt-1 text-sm text-[var(--color-text-secondary)]; }
 
+/*
+ * Mobile first: one column. The rail is hidden below lg (DesignKitSidebar's
+ * `hidden lg:block`), so a two-column grid here would put <main> in the
+ * 272px rail column and leave the 1fr column empty.
+ */
 .ds-page-with-rail {
-  display: grid;
-  grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr);
-  align-items: stretch;
+  display: block;
   width: 100%;
-  min-height: 100vh;
+}
+@media (min-width: 1024px) {
+  .ds-page-with-rail {
+    display: grid;
+    grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 100vh;
+  }
 }
 
 .ds-page-with-rail > main {
@@ -110,6 +120,12 @@
 
 .ds-rail-sublink.is-active { color: var(--color-text-brand); font-weight: 600; }
 .ds-rail-sublink:hover, .ds-rail-link:hover { background: var(--elevation-tint-panel); }
+
+/* Set on <html> while the mobile menu is open, so the page behind it can't scroll. */
+@media (max-width: 1023px) {
+  .ds-menu-open,
+  .ds-menu-open body { overflow: hidden; }
+}
 
 .ds-page-main {
   min-width: 0;

@@ -17,10 +17,7 @@ export function SiteLayout() {
       <ScrollToTop />
       <DesignKitHeader activePage={activePage} onNavigate={(id) => navigate(id === 'home' ? '/' : `/${id}`)} />
       <div className="ds-page-with-rail">
-        <DesignKitSidebar
-          activeId={activePage}
-          onNavigate={(id) => navigate(id === 'home' ? '/' : `/${id}`)}
-        />
+        <DesignKitSidebar />
         <main id="main">
           <Outlet />
         </main>
