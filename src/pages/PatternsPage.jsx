@@ -1,5 +1,4 @@
-import { PageShell } from "../components/core"
-import { DataTable } from "../components/core"
+import { DataTable, Page, Section } from "../components/core"
 
 export function PatternsPage() {
   const patternRows = [
@@ -11,8 +10,10 @@ export function PatternsPage() {
     ['Conference Microsite Pattern', 'Microsite nav, hero, agenda, sessions, speakers, sponsors, registration'],
   ]
   return (
-    <PageShell eyebrow="Reusable experiences" title="Patterns" intro="Patterns combine components into repeatable experiences. They sit between individual components and full page templates.">
-      <DataTable columns={['Pattern', 'Core composition']} rows={patternRows} />
-    </PageShell>
+    <Page eyebrow="Reusable experiences" title="Patterns" intro="Patterns combine components into repeatable experiences. They sit between individual components and full page templates.">
+      <Section>
+        <DataTable columns={['Pattern', 'Core composition']} rows={patternRows} />
+      </Section>
+    </Page>
   )
 }

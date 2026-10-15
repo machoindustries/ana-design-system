@@ -53,7 +53,7 @@ export function DocsPage() {
           <div className="grid gap-4 md:grid-cols-3">
             <article className="ds-card">
               <p className="ds-eyebrow">Step 1</p>
-              <h4 className="mt-2">Create the page file</h4>
+              <h3 className="type-h4 mt-2">Create the page file</h3>
               <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
                 Add <code className="ds-code">src/pages/YourNewPage.jsx</code> using{' '}
                 <code className="ds-code">Page</code> to keep the layout consistent.
@@ -61,7 +61,7 @@ export function DocsPage() {
             </article>
             <article className="ds-card">
               <p className="ds-eyebrow">Step 2</p>
-              <h4 className="mt-2">Register the route</h4>
+              <h3 className="type-h4 mt-2">Register the route</h3>
               <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
                 Add the import and a <code className="ds-code">&lt;Route&gt;</code> entry in{' '}
                 <code className="ds-code">DesignSystemHome.jsx</code>.
@@ -69,7 +69,7 @@ export function DocsPage() {
             </article>
             <article className="ds-card">
               <p className="ds-eyebrow">Step 3</p>
-              <h4 className="mt-2">Add it to navigation</h4>
+              <h3 className="type-h4 mt-2">Add it to navigation</h3>
               <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
                 Add an entry to <code className="ds-code">designKitNavigation.js</code>. The{' '}
                 <code className="ds-code">id</code> must match the route path exactly.
@@ -87,7 +87,7 @@ export function DocsPage() {
           </SectionHeading>
           <Stack gap={4}>
             <article className="ds-card">
-              <h4>Use semantic tokens, not primitives</h4>
+              <h3 className="type-h4">Use semantic tokens, not primitives</h3>
               <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
                 Prefer <code className="ds-code">var(--color-background-info)</code> over{' '}
                 <code className="ds-code">var(--ana-blue-100)</code>. Semantic tokens are what
@@ -96,7 +96,7 @@ export function DocsPage() {
               </p>
             </article>
             <article className="ds-card">
-              <h4>Pair it with a showcase</h4>
+              <h3 className="type-h4">Pair it with a showcase</h3>
               <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
                 Add a matching file in <code className="ds-code">components/showcase/</code> with a
                 few real, representative examples — not lorem ipsum — and wire it into the relevant
@@ -104,7 +104,7 @@ export function DocsPage() {
               </p>
             </article>
             <article className="ds-card">
-              <h4>Keep props simple</h4>
+              <h3 className="type-h4">Keep props simple</h3>
               <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
                 If a component needs more than five or six props, it&apos;s probably doing too much.
                 Consider splitting it into two components instead.

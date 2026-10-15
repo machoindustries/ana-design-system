@@ -5,24 +5,24 @@ function ComponentDoc({ eyebrow, title, purpose, whenToUse, anatomy, children, c
     <article className="rounded-2xl border border-[var(--color-border-default)] bg-white shadow-ana">
       <div className="border-b border-[var(--color-border-default)] p-5 sm:p-6">
         <p className="ds-eyebrow">{eyebrow}</p>
-        <h3 className="mt-2 text-2xl">{title}</h3>
+        <h2 className="mt-2 text-2xl">{title}</h2>
         <p className="mt-3 max-w-content text-[var(--color-text-secondary)]">{purpose}</p>
       </div>
       <div className="grid gap-6 p-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(16rem,0.65fr)] sm:p-6">
         <div>{children}</div>
         <aside className="space-y-4 rounded-card bg-surface-muted p-4">
           <div>
-            <h4 className="text-base">When to use</h4>
+            <h3 className="text-base font-semibold">When to use</h3>
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{whenToUse}</p>
           </div>
           <div>
-            <h4 className="text-base">Anatomy</h4>
+            <h3 className="text-base font-semibold">Anatomy</h3>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-[var(--color-text-secondary)]">
               {anatomy.map(item => <li key={item}>{item}</li>)}
             </ul>
           </div>
           <div>
-            <h4 className="text-base">Example</h4>
+            <h3 className="text-base font-semibold">Example</h3>
             <code className="ds-code mt-2 block overflow-x-auto whitespace-nowrap">{code}</code>
           </div>
         </aside>
@@ -44,7 +44,7 @@ function PageHeaderExample() {
         </ol>
       </nav>
       <p className="ds-eyebrow mt-8">Practice & Advocacy</p>
-      <h2 className="mt-2">Advancing the nursing profession</h2>
+      <h3 className="type-h2 mt-2">Advancing the nursing profession</h3>
       <p className="mt-4 max-w-content text-lg text-[var(--color-text-secondary)]">Explore ANA advocacy priorities, position statements, and resources that help nurses shape safer and more equitable care.</p>
       <div className="mt-5 flex flex-wrap gap-3 text-sm text-[var(--color-text-secondary)]">
         <span className="inline-flex items-center gap-2"><FiFileText aria-hidden="true" /> Resource hub</span>
@@ -60,7 +60,7 @@ function SectionIntroExample() {
       <p className="ds-eyebrow">Resources for nurses</p>
       <div className="mt-3 grid gap-4 md:grid-cols-[minmax(0,0.7fr)_minmax(0,0.3fr)] md:items-end">
         <div>
-          <h2>Tools to support your practice</h2>
+          <h3 className="type-h2">Tools to support your practice</h3>
           <p className="mt-3 max-w-content text-[var(--color-text-secondary)]">Use curated standards, toolkits, and policy guidance to advocate for patients, colleagues, and the profession.</p>
         </div>
         <div className="md:text-right">
@@ -196,7 +196,7 @@ function ContentFeedExample() {
         <article className="p-4 sm:flex sm:items-center sm:justify-between sm:gap-6" key={title}>
           <div>
             <span className="text-xs font-bold uppercase tracking-wide text-ana-blue">{type}</span>
-            <h4 className="mt-1 text-lg"><a href="#components">{title}</a></h4>
+            <h3 className="mt-1 text-lg font-semibold"><a href="#components">{title}</a></h3>
           </div>
           <a className="mt-3 inline-block font-bold sm:mt-0" href="#components">View</a>
         </article>
@@ -241,7 +241,7 @@ function EventScheduleExample() {
         <article className="grid gap-2 border-b border-[var(--color-border-default)] p-4 last:border-b-0 sm:grid-cols-[8rem_1fr]" key={title}>
           <time className="font-bold text-ana-navy">{time}</time>
           <div>
-            <h4 className="text-lg">{title}</h4>
+            <h3 className="text-lg font-semibold">{title}</h3>
             <p className="mt-1 inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)]"><FiMapPin aria-hidden="true" /> {place}</p>
           </div>
         </article>

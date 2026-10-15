@@ -20,11 +20,11 @@ function Example({ title, requireCheckbox }) {
 
   return (
     <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-surface-page p-5 shadow-ana sm:p-6">
-      <h4 className="mb-4">{title}</h4>
+      <h3 className="type-h4 mb-4">{title}</h3>
       <ConsentStep
         requireCheckbox={requireCheckbox}
         checkboxLabel="I have read the notice above and agree to take part."
-        headingLevel={5}
+        headingLevel={4}
         onContinue={() => setAccepted(true)}
       >
         <Notice />

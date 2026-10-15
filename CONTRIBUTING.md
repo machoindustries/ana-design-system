@@ -59,23 +59,30 @@ Every new section follows the same three steps.
 
 ### Step 1 — Create the page file
 
-Create `src/pages/YourNewPage.jsx`. Use `PageShell` to keep the layout consistent with all other pages:
+Create `src/pages/YourNewPage.jsx`. Use `Page` for the title, then one `Section` per topic, so the layout and heading outline match every other page:
 
 ```jsx
-import { PageShell } from '../components/core/PageShell'
+import { Page, Section, SectionHeading, Stack } from '../components/core'
 
 export function YourNewPage() {
   return (
-    <PageShell
+    <Page
       eyebrow="Category"
       title="Your New Section"
       intro="A short description of what this section covers."
     >
-      {/* Your content here */}
-    </PageShell>
+      <Section>
+        <Stack gap={6}>
+          <SectionHeading title="First topic">Optional supporting copy.</SectionHeading>
+          {/* Your content here */}
+        </Stack>
+      </Section>
+    </Page>
   )
 }
 ```
+
+`Page` renders the page's only `<h1>`; each `SectionHeading` is an `<h2>`. Headings inside a section start at `<h3>` and never skip a level. When a heading needs a different size than its level, keep the right tag and add a `.type-h*` class (for example `<h3 className="type-h4">`).
 
 ### Step 2 — Register the route
 

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [v0.4.1] - 2026-10-15
+
+One page wrapper and a clean heading outline on every page
+
+### Changed
+
+- Every documentation page uses `Page` (the Foundations and Docs pattern): one `<h1>` title, then `Section` + `SectionHeading` (`<h2>`) per topic. Previously most pages had no `<h1>`
+- Heading outline: every route now reads h1 → h2 → h3 with no skipped levels, including inside showcases. Visual sizes are kept with the `.type-h*` classes
+- Home keeps its hero; the principles block is now a `Section`
+- Actions & Cards: the first hero example has its own "Hero" section heading
+- CONTRIBUTING.md: the "Adding a new documentation page" example uses `Page`, and explains the heading rule
+
+### Fixed
+
+- Home: the "Explore foundations" and "View components" buttons did nothing (they called a navigation prop the route never passed). They are now links
+
+### Removed
+
+- `PageShell`, replaced by `Page`
+
 ## [v0.4.0] - 2026-10-15
 
 Side navigation for the design kit, and the layout primitives behind it
