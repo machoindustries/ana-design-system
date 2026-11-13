@@ -25,6 +25,11 @@ import { FiX } from 'react-icons/fi'
  *     destructive confirmations where an accidental click should not dismiss)
  *   - Uses role="dialog", aria-modal, and is labelled by its title
  *
+ * Sizes: sm and md suit a confirmation (a sentence and a couple of buttons).
+ * lg is for longer content, such as a form or a few paragraphs, and gets more
+ * room inside as well as more width: 2rem padding from the sm breakpoint,
+ * where sm and md keep 1.25rem. On a phone every size keeps 1.25rem.
+ *
  * Usage:
  *   const [open, setOpen] = useState(false)
  *
@@ -52,6 +57,13 @@ const sizeClasses = {
   sm: 'max-w-md',
   md: 'max-w-lg',
   lg: 'max-w-2xl',
+}
+
+// Padding for the header, body and footer. See "Sizes" above.
+const paddingClasses = {
+  sm: 'p-5',
+  md: 'p-5',
+  lg: 'p-5 sm:p-8',
 }
 
 export function Modal({
@@ -125,7 +137,7 @@ export function Modal({
         aria-labelledby={titleId}
         className={`relative w-full ${sizeClasses[size]} rounded-2xl bg-white shadow-ana-lg`}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-[var(--color-border-default)] p-5">
+        <div className={`flex items-start justify-between gap-4 border-b border-[var(--color-border-default)] ${paddingClasses[size]}`}>
           <h2 id={titleId} className="text-2xl">{title}</h2>
           <button
             type="button"
@@ -137,10 +149,10 @@ export function Modal({
           </button>
         </div>
 
-        <div className="p-5 text-[var(--color-text-primary)]">{children}</div>
+        <div className={`${paddingClasses[size]} text-[var(--color-text-primary)]`}>{children}</div>
 
         {footer && (
-          <div className="flex flex-wrap justify-end gap-3 border-t border-[var(--color-border-default)] p-5">
+          <div className={`flex flex-wrap justify-end gap-3 border-t border-[var(--color-border-default)] ${paddingClasses[size]}`}>
             {footer}
           </div>
         )}
