@@ -1,6 +1,6 @@
 import { FaQuoteLeft } from 'react-icons/fa'
-import { FiClock, FiDownload, FiFileText, FiMapPin, FiUser } from 'react-icons/fi'
-import { useEffect, useRef } from 'react'
+import { FiChevronDown, FiClock, FiDownload, FiFileText, FiFilter, FiMapPin, FiUser } from 'react-icons/fi'
+import { useEffect, useId, useRef, useState } from 'react'
 
 function ComponentDoc({ eyebrow, title, purpose, whenToUse, anatomy, children, code }) {
   return (
@@ -246,6 +246,84 @@ function StatHighlightsExample() {
   )
 }
 
+const filterGroups = [
+  { label: 'Media type', options: [
+    { id: 'article', label: 'Article', count: 142 },
+    { id: 'podcast', label: 'Podcast', count: 38 },
+    { id: 'video', label: 'Video', count: 27 },
+    { id: 'toolkit', label: 'Toolkit', count: 15 },
+  ] },
+  { label: 'Topic', options: [
+    { id: 'workplace', label: 'Workplace', count: 96, children: [
+      { id: 'staffing', label: 'Staffing', count: 41 },
+      { id: 'safety', label: 'Workplace safety', count: 33 },
+    ] },
+    { id: 'leadership', label: 'Nursing leadership', count: 64 },
+    { id: 'becoming', label: 'Becoming a nurse', count: 52 },
+  ] },
+]
+
+const allFilterOptions = filterGroups.flatMap(group => group.options.flatMap(option => [option, ...(option.children ?? [])]))
+
+function FilterOption({ option, selected, onToggle }) {
+  return (
+    <li>
+      <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm">
+        <input checked={selected.includes(option.id)} className="h-5 w-5 shrink-0 accent-[var(--color-action-primary)]" onChange={() => onToggle(option.id)} type="checkbox" />
+        <span className="flex-1">{option.label}</span>
+        <span className="text-[var(--color-text-secondary)]">{option.count}<span className="sr-only"> results</span></span>
+      </label>
+      {option.children ? (
+        <ul className="ml-8 border-l border-[var(--color-border-default)] pl-3">
+          {option.children.map(child => <FilterOption key={child.id} onToggle={onToggle} option={child} selected={selected} />)}
+        </ul>
+      ) : null}
+    </li>
+  )
+}
+
+function SearchFiltersExample() {
+  const [selected, setSelected] = useState(['article', 'workplace'])
+  const [open, setOpen] = useState(false)
+  const panelId = useId()
+  const toggle = id => setSelected(current => current.includes(id) ? current.filter(item => item !== id) : [...current, id])
+  const shown = selected.length ? Math.min(320, selected.reduce((sum, id) => sum + allFilterOptions.find(option => option.id === id).count, 0)) : 320
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p aria-live="polite" className="font-semibold">Showing {shown} of 320 resources</p>
+        <button aria-controls={panelId} aria-expanded={open} className="ds-button ds-button-secondary gap-2 lg:hidden" onClick={() => setOpen(!open)} type="button">
+          <FiFilter aria-hidden="true" /> Filters{selected.length ? ` (${selected.length})` : ''}
+        </button>
+      </div>
+      {selected.length ? (
+        <div className="flex flex-wrap items-center gap-2">
+          <h3 className="sr-only">Active filters</h3>
+          {selected.map(id => (
+            <button aria-label={`Remove filter: ${allFilterOptions.find(option => option.id === id).label}`} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--color-border-default)] px-3 text-sm font-semibold" key={id} onClick={() => toggle(id)} type="button">
+              {allFilterOptions.find(option => option.id === id).label} <span aria-hidden="true">×</span>
+            </button>
+          ))}
+          <button className="min-h-11 px-2 text-sm font-semibold text-[var(--color-text-link)] underline underline-offset-4" onClick={() => setSelected([])} type="button">Clear all</button>
+        </div>
+      ) : null}
+      <div className={`${open ? 'block' : 'hidden'} space-y-2 rounded-card border border-[var(--color-border-default)] bg-white p-4 lg:block`} id={panelId}>
+        {filterGroups.map(group => (
+          <details className="group border-b border-[var(--color-border-default)] py-2 last:border-b-0" key={group.label} open>
+            <summary className="flex min-h-11 cursor-pointer items-center justify-between font-semibold">{group.label}<FiChevronDown aria-hidden="true" className="transition group-open:rotate-180" /></summary>
+            <fieldset>
+              <legend className="sr-only">{group.label}</legend>
+              <ul>
+                {group.options.map(option => <FilterOption key={option.id} onToggle={toggle} option={option} selected={selected} />)}
+              </ul>
+            </fieldset>
+          </details>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function SearchResultCardExample() {
   return (
     <article className="rounded-card border border-[var(--color-border-default)] bg-white p-5">
@@ -369,6 +447,7 @@ export function EnterpriseComponentsShowcase() {
       <ComponentDoc eyebrow="Trust" title="Quote" purpose="A static pull quote or testimonial with attribution, for member stories, endorsements, and expert statements." whenToUse="Landing pages, campaign pages, resource hubs, and nurse stories. Place two or three side by side in a grid instead of rotating them." anatomy={['Decorative quote mark', 'Quote text', 'Name', 'Role or organization', 'Optional photo']} code="<Quote />"><QuoteExample /></ComponentDoc>
       <ComponentDoc eyebrow="Trust" title="Stat Highlights" purpose="A band of two to four headline numbers with short labels. Each number counts up once when it scrolls into view." whenToUse="Full-width sections on landing pages, campaign pages, annual reports, and membership pages, not side columns or narrow containers. Up to four numbers of about seven characters (70,000+); write larger values short (4.5M+). Numbers move to two per row, then one, when the space is narrower. Keep labels to a few words, and use numbers that are current and sourced. Not for years or dates, which should not count up." anatomy={['Optional heading (visible or screen-reader only)', 'Number, entered as text such as 70,000+', 'Label', 'Count-up: once, about 1.5 seconds; none when reduced motion is on']} code="<StatHighlights />"><StatHighlightsExample /></ComponentDoc>
       <ComponentDoc eyebrow="Search" title="Search Result Card" purpose="A structured card for Optimizely Search & Navigation results with content type, title, excerpt, and URL." whenToUse="Site search, resource search, certification search, news search, and event search." anatomy={['Content type', 'Title link', 'Excerpt', 'URL', 'Optional metadata']} code="<SearchResultCard />"><SearchResultCardExample /></ComponentDoc>
+      <ComponentDoc eyebrow="Search" title="Search Filters" purpose="Checkbox facets with result counts, grouped under collapsible headings, with an active-filters row and a live result count. Below the large breakpoint the panel sits behind a Filters button." whenToUse="Resource hubs, site search, news, events, and any listing where users narrow more than about 20 results. Results update when a box changes; the count is announced to screen readers. Keep one level of nesting at most." anatomy={['Result count (announced when it changes)', 'Filters button on small screens, showing how many are on', 'Active filter chips, each removable, and Clear all', 'Collapsible groups: a heading, then checkboxes with counts', 'Optional sub-options, indented under their parent']} code="<SearchFilters />"><SearchFiltersExample /></ComponentDoc>
       <ComponentDoc eyebrow="Content" title="Related Content" purpose="A flexible manual or dynamic section for related resources, news, events, programs, or certification content." whenToUse="Bottom container zones and detail pages where next steps improve findability." anatomy={['Heading', 'Related item cards', 'Optional CTA']} code="<RelatedContent />"><RelatedContentExample /></ComponentDoc>
       <ComponentDoc eyebrow="Dynamic content" title="Content Feed" purpose="A generalized feed that extends the current Latest News model to news, events, resources, products, and mixed content." whenToUse="Landing pages, campaign pages, resource hubs, and bottom container zones." anatomy={['Content type label', 'Title link', 'Optional metadata', 'Action']} code="<ContentFeed />"><ContentFeedExample /></ComponentDoc>
       <ComponentDoc eyebrow="ANCC" title="Credential Badge" purpose="A compact authority element for credentials, recognition, certification status, and ANCC programs." whenToUse="Certification detail pages, account dashboards, recognition pages, and credential directories." anatomy={['Badge mark', 'Credential name', 'Description', 'Status label']} code="<CredentialBadge />"><CredentialBadgeExample /></ComponentDoc>
