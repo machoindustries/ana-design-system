@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [Unreleased]
+
+### Added
+
+- Quote pattern on the Content components page: a static quote or testimonial with a decorative quote mark, the quote text, a name, a role or organization, and an optional photo. It uses `<figure>`, `<blockquote>` and `<figcaption>`. It does not rotate: place two or three side by side in a grid instead
+
 ## [v0.5.0] - 2026-10-15
 
 Every component and page now styles through the semantic token layer

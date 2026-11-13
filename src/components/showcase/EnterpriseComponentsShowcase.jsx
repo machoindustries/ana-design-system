@@ -1,3 +1,4 @@
+import { FaQuoteLeft } from 'react-icons/fa'
 import { FiClock, FiDownload, FiFileText, FiMapPin, FiUser } from 'react-icons/fi'
 
 function ComponentDoc({ eyebrow, title, purpose, whenToUse, anatomy, children, code }) {
@@ -153,6 +154,34 @@ function LogoGridExample() {
   )
 }
 
+function QuoteExample() {
+  const quotes = [
+    { text: 'The ANA Leadership Institute gave me the confidence to lead my unit through a year of change.', name: 'Jordan Sample, RN', role: 'Nurse Manager, Medical-Surgical Unit', photo: true },
+    { text: 'Being part of ANA connects me to nurses who are shaping policy, not just reacting to it.', name: 'Alex Example, MSN, RN', role: 'Member since 2014' },
+  ]
+  return (
+    <div className="grid gap-4 md:grid-cols-2">
+      {quotes.map(quote => (
+        <figure className="flex flex-col rounded-card bg-surface-muted p-5 sm:p-6" key={quote.name}>
+          <FaQuoteLeft aria-hidden="true" className="text-[var(--color-text-eyebrow)]" size={28} />
+          <blockquote className="mt-4 flex-1 text-xl text-[var(--color-text-primary)]">
+            <p className="leading-8">{quote.text}</p>
+          </blockquote>
+          <figcaption className="mt-6 flex items-center gap-4">
+            {quote.photo ? (
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-[var(--color-text-brand)]"><FiUser aria-hidden="true" size={24} /></div>
+            ) : null}
+            <div>
+              <p className="font-semibold leading-6">{quote.name}</p>
+              <p className="text-sm leading-6 text-[var(--color-text-secondary)]">{quote.role}</p>
+            </div>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  )
+}
+
 function SearchResultCardExample() {
   return (
     <article className="rounded-card border border-[var(--color-border-default)] bg-white p-5">
@@ -273,6 +302,7 @@ export function EnterpriseComponentsShowcase() {
       <ComponentDoc eyebrow="Navigation" title="Quick Links" purpose="A short curated list that helps users jump to high-value pages or tasks." whenToUse="Landing pages, resource pages, portals, conference microsites, and long-form content pages." anatomy={['Heading', 'List of links', 'Optional icons']} code="<QuickLinks />"><QuickLinksExample /></ComponentDoc>
       <ComponentDoc eyebrow="Process" title="Timeline" purpose="A mobile-first sequence for steps, milestones, agendas, certification processes, or policy activity." whenToUse="Certification steps, donation funnels, event agendas, application processes, or historical timelines." anatomy={['Step marker', 'Step title', 'Description']} code="<Timeline />"><TimelineExample /></ComponentDoc>
       <ComponentDoc eyebrow="Trust" title="Logo Grid" purpose="Displays partner, sponsor, affiliate, or entity logos in a consistent and accessible grid." whenToUse="Foundation partners, conference sponsors, accreditation partners, and enterprise affiliations." anatomy={['Section heading', 'Logo item', 'Accessible label']} code="<LogoGrid />"><LogoGridExample /></ComponentDoc>
+      <ComponentDoc eyebrow="Trust" title="Quote" purpose="A static pull quote or testimonial with attribution, for member stories, endorsements, and expert statements." whenToUse="Landing pages, campaign pages, resource hubs, and nurse stories. Place two or three side by side in a grid instead of rotating them." anatomy={['Decorative quote mark', 'Quote text', 'Name', 'Role or organization', 'Optional photo']} code="<Quote />"><QuoteExample /></ComponentDoc>
       <ComponentDoc eyebrow="Search" title="Search Result Card" purpose="A structured card for Optimizely Search & Navigation results with content type, title, excerpt, and URL." whenToUse="Site search, resource search, certification search, news search, and event search." anatomy={['Content type', 'Title link', 'Excerpt', 'URL', 'Optional metadata']} code="<SearchResultCard />"><SearchResultCardExample /></ComponentDoc>
       <ComponentDoc eyebrow="Content" title="Related Content" purpose="A flexible manual or dynamic section for related resources, news, events, programs, or certification content." whenToUse="Bottom container zones and detail pages where next steps improve findability." anatomy={['Heading', 'Related item cards', 'Optional CTA']} code="<RelatedContent />"><RelatedContentExample /></ComponentDoc>
       <ComponentDoc eyebrow="Dynamic content" title="Content Feed" purpose="A generalized feed that extends the current Latest News model to news, events, resources, products, and mixed content." whenToUse="Landing pages, campaign pages, resource hubs, and bottom container zones." anatomy={['Content type label', 'Title link', 'Optional metadata', 'Action']} code="<ContentFeed />"><ContentFeedExample /></ComponentDoc>
