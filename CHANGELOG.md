@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ## [Unreleased]
 
+### Added
+
+- Product Card pattern on the Content components page, after the product teaser in the early Coho redesign: a band in a playbook gradient by product type (certifications yellow to orange, books navy, courses and workshops blue to navy), with an optional product group tag on it, or a taller band with a book cover rising out of it that lifts on hover (not with reduced motion); the title link and a short description; Price from in a muted box and Member price outlined and emphasized in green, as a definition list; an optional sale, struck through with Was and Now for screen readers; and an action by product type: Apply for a certification, which needs an application, and Add to cart for a book, course or workshop, after a format select when there is more than one format. The title link covers the card, and the actions sit above it. Up to four in a row
+
 ### Changed
 
 - `Modal` with `size="lg"` has 2rem padding in its header, body and footer from the `sm` breakpoint, up from 1.25rem, so a form or a few paragraphs at that width are not cramped. `sm` and `md` keep 1.25rem, as does every size on a phone
