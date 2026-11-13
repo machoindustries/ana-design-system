@@ -1,5 +1,6 @@
 import { FaQuoteLeft } from 'react-icons/fa'
 import { FiClock, FiDownload, FiFileText, FiMapPin, FiUser } from 'react-icons/fi'
+import { useEffect, useRef } from 'react'
 
 function ComponentDoc({ eyebrow, title, purpose, whenToUse, anatomy, children, code }) {
   return (
@@ -182,6 +183,69 @@ function QuoteExample() {
   )
 }
 
+// Counts the digits up from 0 the first time the number scrolls into view.
+// The real value is rendered first and stays there for screen readers, for
+// no-JS and for anyone who prefers reduced motion.
+function CountUp({ value }) {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    const match = value.match(/^(\D*)([\d,]+)(.*)$/)
+    if (!el || !match || !('IntersectionObserver' in window)) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const [, prefix, digits, suffix] = match
+    const target = Number(digits.replace(/,/g, ''))
+    const format = n => prefix + (digits.includes(',') ? n.toLocaleString('en-US') : String(n)) + suffix
+    let frame
+    el.textContent = format(0)
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      observer.disconnect()
+      const start = performance.now()
+      const tick = now => {
+        const progress = Math.min((now - start) / 1500, 1)
+        el.textContent = format(Math.round(target * (1 - Math.pow(1 - progress, 3))))
+        if (progress < 1) frame = requestAnimationFrame(tick)
+      }
+      frame = requestAnimationFrame(tick)
+    }, { threshold: 0.5 })
+    observer.observe(el)
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(frame)
+      el.textContent = value
+    }
+  }, [value])
+  return (
+    <>
+      <span className="sr-only">{value}</span>
+      <span aria-hidden="true" className="tabular-nums" ref={ref}>{value}</span>
+    </>
+  )
+}
+
+function StatHighlightsExample() {
+  const stats = [
+    { value: '70,000+', label: 'Members' },
+    { value: '33,000+', label: 'Newsletter subscribers' },
+    { value: '1,200', label: 'Continuing education courses' },
+    { value: '54', label: 'State and territorial associations' },
+  ]
+  return (
+    <section aria-labelledby="stat-highlights-heading" className="rounded-card bg-[var(--color-background-dark)] px-5 py-10 sm:px-8 sm:py-12">
+      <h3 className="sr-only" id="stat-highlights-heading">ANA by the numbers</h3>
+      <ul className="grid grid-cols-[repeat(auto-fit,minmax(min(14rem,100%),1fr))] gap-8 text-center">
+        {stats.map(stat => (
+          <li key={stat.label}>
+            <p className="type-h1 text-[var(--color-text-inverse)]"><CountUp value={stat.value} /></p>
+            <p className="mt-1 text-[var(--color-text-eyebrow-on-dark)]">{stat.label}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
 function SearchResultCardExample() {
   return (
     <article className="rounded-card border border-[var(--color-border-default)] bg-white p-5">
@@ -303,6 +367,7 @@ export function EnterpriseComponentsShowcase() {
       <ComponentDoc eyebrow="Process" title="Timeline" purpose="A mobile-first sequence for steps, milestones, agendas, certification processes, or policy activity." whenToUse="Certification steps, donation funnels, event agendas, application processes, or historical timelines." anatomy={['Step marker', 'Step title', 'Description']} code="<Timeline />"><TimelineExample /></ComponentDoc>
       <ComponentDoc eyebrow="Trust" title="Logo Grid" purpose="Displays partner, sponsor, affiliate, or entity logos in a consistent and accessible grid." whenToUse="Foundation partners, conference sponsors, accreditation partners, and enterprise affiliations." anatomy={['Section heading', 'Logo item', 'Accessible label']} code="<LogoGrid />"><LogoGridExample /></ComponentDoc>
       <ComponentDoc eyebrow="Trust" title="Quote" purpose="A static pull quote or testimonial with attribution, for member stories, endorsements, and expert statements." whenToUse="Landing pages, campaign pages, resource hubs, and nurse stories. Place two or three side by side in a grid instead of rotating them." anatomy={['Decorative quote mark', 'Quote text', 'Name', 'Role or organization', 'Optional photo']} code="<Quote />"><QuoteExample /></ComponentDoc>
+      <ComponentDoc eyebrow="Trust" title="Stat Highlights" purpose="A band of two to four headline numbers with short labels. Each number counts up once when it scrolls into view." whenToUse="Full-width sections on landing pages, campaign pages, annual reports, and membership pages, not side columns or narrow containers. Up to four numbers of about seven characters (70,000+); write larger values short (4.5M+). Numbers move to two per row, then one, when the space is narrower. Keep labels to a few words, and use numbers that are current and sourced. Not for years or dates, which should not count up." anatomy={['Optional heading (visible or screen-reader only)', 'Number, entered as text such as 70,000+', 'Label', 'Count-up: once, about 1.5 seconds; none when reduced motion is on']} code="<StatHighlights />"><StatHighlightsExample /></ComponentDoc>
       <ComponentDoc eyebrow="Search" title="Search Result Card" purpose="A structured card for Optimizely Search & Navigation results with content type, title, excerpt, and URL." whenToUse="Site search, resource search, certification search, news search, and event search." anatomy={['Content type', 'Title link', 'Excerpt', 'URL', 'Optional metadata']} code="<SearchResultCard />"><SearchResultCardExample /></ComponentDoc>
       <ComponentDoc eyebrow="Content" title="Related Content" purpose="A flexible manual or dynamic section for related resources, news, events, programs, or certification content." whenToUse="Bottom container zones and detail pages where next steps improve findability." anatomy={['Heading', 'Related item cards', 'Optional CTA']} code="<RelatedContent />"><RelatedContentExample /></ComponentDoc>
       <ComponentDoc eyebrow="Dynamic content" title="Content Feed" purpose="A generalized feed that extends the current Latest News model to news, events, resources, products, and mixed content." whenToUse="Landing pages, campaign pages, resource hubs, and bottom container zones." anatomy={['Content type label', 'Title link', 'Optional metadata', 'Action']} code="<ContentFeed />"><ContentFeedExample /></ComponentDoc>
