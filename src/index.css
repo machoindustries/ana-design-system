@@ -33,7 +33,7 @@
   .ds-button-secondary { @apply border border-[var(--color-action-secondary)] bg-white text-[var(--color-action-secondary)] hover:bg-[var(--color-background-info)]; }
   .ds-button-accent { @apply bg-action-accent text-white hover:bg-[var(--color-action-accent-hover)]; }
   .ds-button-disabled { @apply cursor-not-allowed bg-[var(--color-action-disabled-bg)] text-[var(--color-action-disabled-text)]; }
-  .ds-tag { @apply inline-flex rounded-full bg-[var(--color-background-info)] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--color-text-brand)]; }
+  .ds-tag { @apply inline-flex rounded-full bg-[var(--color-background-info)] px-3 py-1 text-xs font-bold text-[var(--color-text-brand)]; }
   .ds-code { @apply rounded bg-surface-muted px-2 py-1 font-mono text-sm text-[var(--color-text-primary)]; }
   .type-hero { font-size: var(--type-hero-size); line-height: var(--type-hero-line-height); font-weight: var(--font-heading-weight); }
   .type-h1 { font-size: var(--type-h1-size); line-height: var(--type-h1-line-height); font-weight: var(--font-heading-weight); }
