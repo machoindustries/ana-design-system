@@ -155,6 +155,90 @@ function LogoGridExample() {
   )
 }
 
+function ProductCardExample() {
+  const products = [
+    {
+      id: 'fnp', band: 'ds-gradient-yellow-orange', tag: 'Nurse Practitioner', title: 'FNP-BC™',
+      description: 'Family Nurse Practitioner Certification', price: '$395', member: '$295', apply: true,
+    },
+    {
+      id: 'magnet', band: 'ds-gradient-navy-black', cover: '/assets/example-book-cover.webp', title: '2023 Magnet® Application Manual',
+      description: 'Paperback, also available as an eBook', price: '$39.95', member: '$19.95', formats: ['Paperback', 'eBook'],
+    },
+    {
+      id: 'course', band: 'ds-gradient-blue-navy', tag: 'Online course', title: 'Foundations of Nursing Leadership',
+      description: '3.5 contact hours', hours: true, was: '$79', price: '$59', member: '$39',
+    },
+  ]
+  return (
+    // As many 14rem columns as fit, so four sit in a row on a full-width page and two in a sidebar.
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(14rem,1fr))] gap-5">
+      {products.map(({ id, band, tag, cover, title, description, hours, was, price, member, formats, apply }) => (
+        // The title link stretches over the whole card; the actions sit above it so they stay usable.
+        <article className="group ds-card relative flex flex-col overflow-hidden p-0" key={id}>
+          {/* The band: a playbook gradient by product type. A book's cover is its own image, laid over a
+              taller band and rising out of it, so any cover works on it; books use navy, which few covers
+              match, and the shadow keeps the cover's edge visible when one does. */}
+          <div className={`relative overflow-hidden p-4 ${band} ${cover ? 'h-48' : 'h-20'}`}>
+            {tag ? <span className="ds-tag bg-white text-[var(--color-text-primary)]">{tag}</span> : null}
+            {cover ? (
+              <img
+                className="absolute left-1/2 top-6 w-32 -translate-x-1/2 translate-y-4 rounded-md shadow-ana-lg transition-transform duration-700 group-hover:translate-y-0 motion-reduce:transition-none"
+                src={cover}
+                alt=""
+              />
+            ) : null}
+          </div>
+          <div className="flex flex-1 flex-col p-5">
+            <h3 className="text-xl">
+              <a className="no-underline after:absolute after:inset-0 hover:underline" href="#components">{title}</a>
+            </h3>
+            <p className="mt-1 flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
+              {hours ? <FiClock aria-hidden="true" size={16} /> : null}
+              {description}
+            </p>
+            {/* mt-auto lines the prices up along the bottom of a row; pt-4 keeps a gap above them. */}
+            <dl className="mt-auto flex flex-wrap gap-2 pt-4">
+              <div className="rounded-card border-2 border-transparent bg-surface-muted px-3 py-2 text-center">
+                <dt className="text-xs text-[var(--color-text-secondary)]">Price from</dt>
+                <dd className="mt-1 text-2xl leading-none text-[var(--color-commerce-price)]">
+                  {was ? (
+                    <>
+                      <del className="mb-1 block text-sm text-[var(--color-text-secondary)]"><span className="sr-only">Was </span>{was}</del>
+                      <span className="text-[var(--color-commerce-sale)]"><span className="sr-only">Now </span>{price}</span>
+                    </>
+                  ) : price}
+                </dd>
+              </div>
+              <div className="rounded-card border-2 border-[var(--color-border-success)] px-3 py-2 text-center">
+                <dt className="text-xs text-[var(--color-text-secondary)]">Member price</dt>
+                <dd className="mt-1 text-2xl font-bold leading-none text-[var(--color-text-success)]">{member}</dd>
+              </div>
+            </dl>
+            {/* A certification needs an application, so Apply is a link; everything else goes in the cart. */}
+            {apply ? (
+              <a className="ds-button ds-button-secondary relative z-10 mt-4" href="#components">Apply</a>
+            ) : (
+              // When the card is too narrow for both, the select takes its own row and the button fills the next.
+              <form className="relative z-10 mt-4 flex flex-wrap gap-2" onSubmit={event => event.preventDefault()}>
+                {formats ? (
+                  <>
+                    <label className="sr-only" htmlFor={`${id}-format`}>Format</label>
+                    <select className="ds-field flex-[1_1_8rem] py-2" id={`${id}-format`} defaultValue={formats[0]}>
+                      {formats.map(format => <option key={format}>{format}</option>)}
+                    </select>
+                  </>
+                ) : null}
+                <button className="ds-button ds-button-secondary flex-auto" type="submit">Add to cart</button>
+              </form>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  )
+}
+
 function QuoteExample() {
   const quotes = [
     { text: 'The ANA Leadership Institute gave me the confidence to lead my unit through a year of change.', name: 'Jordan Sample, RN', role: 'Nurse Manager, Medical-Surgical Unit', photo: true },
@@ -525,12 +609,13 @@ export function EnterpriseComponentsShowcase() {
       <ComponentDoc eyebrow="Trust" title="Logo Grid" purpose="Displays partner, sponsor, affiliate, or entity logos in a consistent and accessible grid." whenToUse="Foundation partners, conference sponsors, accreditation partners, and enterprise affiliations." anatomy={['Section heading', 'Logo item', 'Accessible label']} code="<LogoGrid />"><LogoGridExample /></ComponentDoc>
       <ComponentDoc eyebrow="Trust" title="Quote" purpose="A static pull quote or testimonial with attribution, for member stories, endorsements, and expert statements." whenToUse="Landing pages, campaign pages, resource hubs, and nurse stories. Place two or three side by side in a grid instead of rotating them." anatomy={['Decorative quote mark', 'Quote text', 'Name', 'Role or organization', 'Optional photo']} code="<Quote />"><QuoteExample /></ComponentDoc>
       <ComponentDoc eyebrow="Trust" title="Stat Highlights" purpose="A band of two to four headline numbers with short labels. Each number counts up once when it scrolls into view." whenToUse="Full-width sections on landing pages, campaign pages, annual reports, and membership pages, not side columns or narrow containers. Up to four numbers of about seven characters (70,000+); write larger values short (4.5M+). Numbers move to two per row, then one, when the space is narrower. Keep labels to a few words, and use numbers that are current and sourced. Not for years or dates, which should not count up." anatomy={['Optional heading (visible or screen-reader only)', 'Number, entered as text such as 70,000+', 'Label', 'Count-up: once, about 1.5 seconds; none when reduced motion is on']} code="<StatHighlights />"><StatHighlightsExample /></ComponentDoc>
-      <ComponentDoc eyebrow="Search" title="Search Result Card" purpose="A structured card for Optimizely Search & Navigation results with content type, title, excerpt, and URL." whenToUse="Site search, resource search, certification search, news search, and event search." anatomy={['Content type', 'Title link', 'Excerpt', 'URL', 'Optional metadata']} code="<SearchResultCard />"><SearchResultCardExample /></ComponentDoc>
+      <ComponentDoc eyebrow="Commerce" title="Product Card" purpose="A card for a Commerce product in a listing: certifications, books, courses and workshops, with the price and the member price." whenToUse="Featured or related products on content pages, store listings and category pages. Up to four in a row. The band color follows the product type, the same everywhere: certifications yellow to orange, books navy, courses and workshops blue to navy. The category tag on the band is the product group, such as Nurse Practitioner. The member price is the emphasized one, because it is the reason to join. The action follows the product type: a certification needs an application, so it has Apply, a link to the application or to the certification page where it starts (a renewal-only certification shows its renewal link instead); books, courses and workshops have Add to cart, with a format select first when there is more than one format. A sale shows the old price struck through, with Was and Now for screen readers. Prices come from Commerce, never typed into the card." anatomy={['Band: a playbook gradient by product type (certification yellow to orange, book navy, course or workshop blue to navy)', 'Optional category tag on the band: the product group', 'Book cover rising out of a taller band, lifting on hover (not with reduced motion)', 'Title link, which covers the card', 'Short description: the full name, formats or contact hours', 'Price from, and Member price outlined and emphasized', 'Optional sale: old price struck through, new price in the sale color', 'Action by product type: Apply (a link) for a certification; Add to cart for a book, course or workshop, after a format select when there is more than one']} code="<ProductCard />"><ProductCardExample /></ComponentDoc>
+      <ComponentDoc eyebrow="Search" title="Search Result Card" purpose="A structured card for Optimizely Search & Navigation results with content type, title, excerpt, and URL." whenToUse="Site search, resource search, certification search, news search, and event search." anatomy={['Content type', 'Title link, which covers the card', 'Excerpt', 'URL', 'Optional metadata']} code="<SearchResultCard />"><SearchResultCardExample /></ComponentDoc>
       <ComponentDoc eyebrow="Search" title="Search Filters" purpose="Checkbox facets with result counts, grouped under collapsible headings, with an active-filters row and a live result count. Below the large breakpoint the panel sits behind a Filters button." whenToUse="Resource hubs, site search, news, events, and any listing where users narrow more than about 20 results. Results update when a box changes; the count is announced to screen readers. Keep one level of nesting at most." anatomy={['Result count (announced when it changes)', 'Filters button on small screens, showing how many are on', 'Active filter chips, each removable, and Clear all', 'Collapsible groups: a heading, then checkboxes with counts', 'Optional sub-options, indented under their parent']} code="<SearchFilters />"><SearchFiltersExample /></ComponentDoc>
       <ComponentDoc eyebrow="Search" title="Pagination" purpose="Numbered pages for search results and long listings: Previous and Next, the first and last page, and the pages either side of the current one. On small screens it shortens to Previous, Page 4 of 12, Next." whenToUse="Site search, news, events, and any listing where people compare or return to a position. Every page is a real link with its own URL, and the current page is marked for screen readers." anatomy={['Navigation landmark labelled Pagination', 'Previous and Next (shown but inactive at the ends)', 'Page links; the current page has aria-current', 'Gap markers where more than one page is skipped', 'Page X of Y on small screens']} code="<Pagination />"><PaginationExample /></ComponentDoc>
       <ComponentDoc eyebrow="Search" title="Load More" purpose="A button under a list that adds the next set of results in place, with a count of how many are showing." whenToUse="Browsing feeds such as resource hubs, where people scan rather than return to a position. It is a real link to the next page, so it works without JavaScript. After loading, focus moves to the first new result and the count is announced. Use Pagination instead for search results." anatomy={['Results list', 'Showing X of Y (announced when it changes)', 'Load more button, hidden when everything is shown']} code="<LoadMore />"><LoadMoreExample /></ComponentDoc>
       <ComponentDoc eyebrow="Content" title="Related Content" purpose="A flexible manual or dynamic section for related resources, news, events, programs, or certification content." whenToUse="Bottom container zones and detail pages where next steps improve findability." anatomy={['Heading', 'Related item cards', 'Optional CTA']} code="<RelatedContent />"><RelatedContentExample /></ComponentDoc>
-      <ComponentDoc eyebrow="Dynamic content" title="Content Feed" purpose="A generalized feed that extends the current Latest News model to news, events, resources, products, and mixed content." whenToUse="Landing pages, campaign pages, resource hubs, and bottom container zones." anatomy={['Content type label', 'Title link', 'Optional metadata', 'Action']} code="<ContentFeed />"><ContentFeedExample /></ComponentDoc>
+      <ComponentDoc eyebrow="Dynamic content" title="Content Feed" purpose="A generalized feed that extends the current Latest News model to news, events, resources, products, and mixed content." whenToUse="Landing pages, campaign pages, resource hubs, and bottom container zones." anatomy={['Content type label', 'Title link, which covers the card', 'Optional metadata', 'Action']} code="<ContentFeed />"><ContentFeedExample /></ComponentDoc>
       <ComponentDoc eyebrow="ANCC" title="Credential Badge" purpose="A compact authority element for credentials, recognition, certification status, and ANCC programs." whenToUse="Certification detail pages, account dashboards, recognition pages, and credential directories." anatomy={['Badge mark', 'Credential name', 'Description', 'Status label']} code="<CredentialBadge />"><CredentialBadgeExample /></ComponentDoc>
       <ComponentDoc eyebrow="Membership" title="Membership Status Card" purpose="A personalized portal card for membership state, renewal date, and next action." whenToUse="My Account dashboards, member portals, and renewal experiences." anatomy={['Status label', 'Status title', 'Renewal detail', 'CTA']} code="<MembershipStatusCard />"><MembershipStatusExample /></ComponentDoc>
       <ComponentDoc eyebrow="Events" title="Event Schedule" purpose="A readable agenda module for events, conferences, webinars, and session listings." whenToUse="Event pages, conference microsites, and session detail pages." anatomy={['Time', 'Session title', 'Location', 'Optional speaker']} code="<EventSchedule />"><EventScheduleExample /></ComponentDoc>
