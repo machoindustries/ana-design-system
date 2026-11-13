@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ### Changed
 
+- `.ds-tag` is normal case: no `uppercase` or `tracking-wide`. A tag reads as written ("Audio/Podcast", "Nurse Practitioner Certifications"), and a long one takes less room. Write tag text in the case it should appear
 - Product Card grid: one column per product, up to four, each at least 16rem, set by `--product-columns` (the product count, two at least). It was as many 14rem columns as fit, which left three products narrow beside empty columns on a wide page
 - `Modal` with `size="lg"` has 2rem padding in its header, body and footer from the `sm` breakpoint, up from 1.25rem, so a form or a few paragraphs at that width are not cramped. `sm` and `md` keep 1.25rem, as does every size on a phone
 
