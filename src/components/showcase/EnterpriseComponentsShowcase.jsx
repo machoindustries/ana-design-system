@@ -1,5 +1,5 @@
 import { FaQuoteLeft } from 'react-icons/fa'
-import { FiChevronDown, FiClock, FiDownload, FiFileText, FiFilter, FiMapPin, FiUser } from 'react-icons/fi'
+import { FiChevronDown, FiChevronLeft, FiChevronRight, FiClock, FiDownload, FiFileText, FiFilter, FiMapPin, FiUser } from 'react-icons/fi'
 import { useEffect, useId, useRef, useState } from 'react'
 
 function ComponentDoc({ eyebrow, title, purpose, whenToUse, anatomy, children, code }) {
@@ -324,6 +324,85 @@ function SearchFiltersExample() {
   )
 }
 
+// Pages to show: the first, the last, and one either side of the current
+// page. A gap of one page shows that page; longer gaps show a gap marker.
+function pageItems(current, total) {
+  const pages = [...new Set([1, current - 1, current, current + 1, total])].filter(page => page >= 1 && page <= total).sort((a, b) => a - b)
+  return pages.flatMap((page, index) => {
+    const skipped = index ? page - pages[index - 1] - 1 : 0
+    if (skipped === 1) return [page - 1, page]
+    return skipped > 1 ? ['gap-' + page, page] : [page]
+  })
+}
+
+function PaginationExample() {
+  const total = 12
+  const [current, setCurrent] = useState(4)
+  const go = page => event => {
+    event.preventDefault()
+    setCurrent(page)
+  }
+  const step = 'inline-flex min-h-11 items-center gap-1 rounded-button px-3 text-sm font-semibold'
+  return (
+    <nav aria-label="Pagination">
+      <ul className="grid grid-cols-[1fr_auto_1fr] items-center gap-1 sm:flex sm:flex-wrap sm:justify-center">
+        <li className="justify-self-end">
+          {current > 1
+            ? <a className={`${step} no-underline hover:bg-[var(--color-background-info)]`} href={`?page=${current - 1}`} onClick={go(current - 1)}><FiChevronLeft aria-hidden="true" />Previous</a>
+            : <span aria-disabled="true" className={`${step} text-[var(--color-action-disabled-text)]`}><FiChevronLeft aria-hidden="true" />Previous</span>}
+        </li>
+        <li className="px-2 text-center text-sm sm:hidden">Page {current} of {total}</li>
+        {pageItems(current, total).map(item => typeof item === 'string'
+          ? <li aria-hidden="true" className="hidden px-1 text-[var(--color-text-secondary)] sm:block" key={item}>…</li>
+          : (
+            <li className="hidden sm:block" key={item}>
+              {item === current
+                ? <span aria-current="page" className="inline-flex h-11 min-w-11 items-center justify-center rounded-button bg-[var(--color-background-dark)] px-3 font-bold text-[var(--color-text-inverse)]"><span className="sr-only">Page </span>{item}</span>
+                : <a className="inline-flex h-11 min-w-11 items-center justify-center rounded-button px-3 font-semibold no-underline hover:bg-[var(--color-background-info)]" href={`?page=${item}`} onClick={go(item)}><span className="sr-only">Page </span>{item}</a>}
+            </li>
+          ))}
+        <li className="justify-self-start">
+          {current < total
+            ? <a className={`${step} no-underline hover:bg-[var(--color-background-info)]`} href={`?page=${current + 1}`} onClick={go(current + 1)}>Next<FiChevronRight aria-hidden="true" /></a>
+            : <span aria-disabled="true" className={`${step} text-[var(--color-action-disabled-text)]`}>Next<FiChevronRight aria-hidden="true" /></span>}
+        </li>
+      </ul>
+    </nav>
+  )
+}
+
+const loadMoreResults = ['Safe staffing toolkit', 'Speaking up about workplace violence', 'New nurse residency guide', 'Leading through change', 'Self-care for night shift', 'Mentoring new graduates', 'Delegation essentials', 'Understanding the Code of Ethics', 'Advocating at the state level']
+
+function LoadMoreExample() {
+  const pageSize = 3
+  const [shown, setShown] = useState(pageSize)
+  const firstNew = useRef(null)
+  const loaded = useRef(false)
+  useEffect(() => {
+    if (loaded.current) firstNew.current?.focus()
+  }, [shown])
+  const loadMore = event => {
+    event.preventDefault()
+    loaded.current = true
+    setShown(Math.min(shown + pageSize, loadMoreResults.length))
+  }
+  return (
+    <div className="space-y-4">
+      <ul className="space-y-2">
+        {loadMoreResults.slice(0, shown).map((title, index) => (
+          <li key={title}>
+            <a className="font-semibold" href="#results" ref={index === shown - pageSize && shown > pageSize ? firstNew : null}>{title}</a>
+          </li>
+        ))}
+      </ul>
+      <p aria-live="polite" className="text-sm text-[var(--color-text-secondary)]">Showing {shown} of {loadMoreResults.length} resources</p>
+      {shown < loadMoreResults.length
+        ? <a className="ds-button ds-button-secondary" href={`?page=${shown / pageSize + 1}`} onClick={loadMore}>Load more resources</a>
+        : null}
+    </div>
+  )
+}
+
 function SearchResultCardExample() {
   return (
     <article className="rounded-card border border-[var(--color-border-default)] bg-white p-5">
@@ -448,6 +527,8 @@ export function EnterpriseComponentsShowcase() {
       <ComponentDoc eyebrow="Trust" title="Stat Highlights" purpose="A band of two to four headline numbers with short labels. Each number counts up once when it scrolls into view." whenToUse="Full-width sections on landing pages, campaign pages, annual reports, and membership pages, not side columns or narrow containers. Up to four numbers of about seven characters (70,000+); write larger values short (4.5M+). Numbers move to two per row, then one, when the space is narrower. Keep labels to a few words, and use numbers that are current and sourced. Not for years or dates, which should not count up." anatomy={['Optional heading (visible or screen-reader only)', 'Number, entered as text such as 70,000+', 'Label', 'Count-up: once, about 1.5 seconds; none when reduced motion is on']} code="<StatHighlights />"><StatHighlightsExample /></ComponentDoc>
       <ComponentDoc eyebrow="Search" title="Search Result Card" purpose="A structured card for Optimizely Search & Navigation results with content type, title, excerpt, and URL." whenToUse="Site search, resource search, certification search, news search, and event search." anatomy={['Content type', 'Title link', 'Excerpt', 'URL', 'Optional metadata']} code="<SearchResultCard />"><SearchResultCardExample /></ComponentDoc>
       <ComponentDoc eyebrow="Search" title="Search Filters" purpose="Checkbox facets with result counts, grouped under collapsible headings, with an active-filters row and a live result count. Below the large breakpoint the panel sits behind a Filters button." whenToUse="Resource hubs, site search, news, events, and any listing where users narrow more than about 20 results. Results update when a box changes; the count is announced to screen readers. Keep one level of nesting at most." anatomy={['Result count (announced when it changes)', 'Filters button on small screens, showing how many are on', 'Active filter chips, each removable, and Clear all', 'Collapsible groups: a heading, then checkboxes with counts', 'Optional sub-options, indented under their parent']} code="<SearchFilters />"><SearchFiltersExample /></ComponentDoc>
+      <ComponentDoc eyebrow="Search" title="Pagination" purpose="Numbered pages for search results and long listings: Previous and Next, the first and last page, and the pages either side of the current one. On small screens it shortens to Previous, Page 4 of 12, Next." whenToUse="Site search, news, events, and any listing where people compare or return to a position. Every page is a real link with its own URL, and the current page is marked for screen readers." anatomy={['Navigation landmark labelled Pagination', 'Previous and Next (shown but inactive at the ends)', 'Page links; the current page has aria-current', 'Gap markers where more than one page is skipped', 'Page X of Y on small screens']} code="<Pagination />"><PaginationExample /></ComponentDoc>
+      <ComponentDoc eyebrow="Search" title="Load More" purpose="A button under a list that adds the next set of results in place, with a count of how many are showing." whenToUse="Browsing feeds such as resource hubs, where people scan rather than return to a position. It is a real link to the next page, so it works without JavaScript. After loading, focus moves to the first new result and the count is announced. Use Pagination instead for search results." anatomy={['Results list', 'Showing X of Y (announced when it changes)', 'Load more button, hidden when everything is shown']} code="<LoadMore />"><LoadMoreExample /></ComponentDoc>
       <ComponentDoc eyebrow="Content" title="Related Content" purpose="A flexible manual or dynamic section for related resources, news, events, programs, or certification content." whenToUse="Bottom container zones and detail pages where next steps improve findability." anatomy={['Heading', 'Related item cards', 'Optional CTA']} code="<RelatedContent />"><RelatedContentExample /></ComponentDoc>
       <ComponentDoc eyebrow="Dynamic content" title="Content Feed" purpose="A generalized feed that extends the current Latest News model to news, events, resources, products, and mixed content." whenToUse="Landing pages, campaign pages, resource hubs, and bottom container zones." anatomy={['Content type label', 'Title link', 'Optional metadata', 'Action']} code="<ContentFeed />"><ContentFeedExample /></ComponentDoc>
       <ComponentDoc eyebrow="ANCC" title="Credential Badge" purpose="A compact authority element for credentials, recognition, certification status, and ANCC programs." whenToUse="Certification detail pages, account dashboards, recognition pages, and credential directories." anatomy={['Badge mark', 'Credential name', 'Description', 'Status label']} code="<CredentialBadge />"><CredentialBadgeExample /></ComponentDoc>
