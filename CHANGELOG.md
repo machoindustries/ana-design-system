@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [Unreleased]
+
+### Changed
+
+- `Modal` with `size="lg"` has 2rem padding in its header, body and footer from the `sm` breakpoint, up from 1.25rem, so a form or a few paragraphs at that width are not cramped. `sm` and `md` keep 1.25rem, as does every size on a phone
+
 ## [v0.6.0] - 2026-11-12
 
 Patterns for the Content Hub: Quote, Stat Highlights, an icon on Card, Search Filters, Pagination and Load More
