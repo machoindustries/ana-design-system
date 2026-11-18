@@ -139,9 +139,10 @@
      The content rises from the bottom of its block into place, fading in
      as it goes. The distance is the content's own height, so it starts at
      the block's bottom edge whatever its length; the block clips it. Only
-     under prefers-reduced-motion: no-preference. */
-  --duration-entrance: 900ms;
-  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+     under prefers-reduced-motion: no-preference. The timing is the common
+     "fade in up" (animate.css fadeInUp, as on sidecar.ai): 0.6s on ease. */
+  --duration-entrance: 600ms;
+  --ease-entrance: ease;
   --motion-entrance-distance: 100%;
 }
 
