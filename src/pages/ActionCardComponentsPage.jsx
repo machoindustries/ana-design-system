@@ -1,6 +1,7 @@
 import { Page, Section, SectionHeading, Stack } from "../components/core"
 import { HeroShowcase } from "../components/showcase/HeroShowcase"
 import { HeroChecklistShowcase } from "../components/showcase/HeroChecklistShowcase"
+import { StatementHeroShowcase } from "../components/showcase/StatementHeroShowcase"
 import { ButtonShowcase } from "../components/showcase/ButtonShowcase"
 import { CardShowcase } from "../components/showcase/CardShowcase"
 import { AccordionShowcase } from "../components/showcase/AccordionShowcase"
@@ -10,6 +11,7 @@ import { SearchShowcase } from "../components/showcase/SearchShowcase"
 const sections = [
   ['Hero', HeroShowcase],
   ['Hero: text with a checklist panel', HeroChecklistShowcase],
+  ['Statement Hero: text only, with an entrance', StatementHeroShowcase],
   ['Buttons', ButtonShowcase],
   ['Cards', CardShowcase],
   ['Alert and Modal', AlertModalShowcase],

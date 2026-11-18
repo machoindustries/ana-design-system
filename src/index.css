@@ -73,6 +73,22 @@
     .ds-data-bar-animated::-webkit-progress-value { transition: width var(--duration-slow) ease; }
   }
 
+  /* Entrance motion (Statement Hero): the content rises from the bottom of its block into place
+     and fades in, once, on page load. The block must clip (overflow: hidden) so the content
+     appears from its bottom edge rather than over the section below. Screen only, and never with
+     reduced motion: the content is in place and visible without it, and there is no script to
+     wait for. */
+  @keyframes ds-entrance {
+    from { opacity: 0; transform: translateY(var(--motion-entrance-distance)); }
+  }
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .ds-entrance { animation: ds-entrance var(--duration-entrance) var(--ease-entrance) both; }
+  }
+
+  /* On a dark Statement Hero the primary button's navy hover would vanish into the background,
+     so it turns white with navy text instead. */
+  .ds-statement-hero-on-dark .ds-button-primary:hover { background-color: var(--color-background-page); color: var(--color-text-brand); }
+
   /* Editor-supplied rich text on a tinted notice: links switch to the colour that passes on tints. */
   .ds-notice a,
   .ds-notice a:visited { color: var(--color-link-on-tint); text-decoration: underline; }

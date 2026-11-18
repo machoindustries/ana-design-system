@@ -134,6 +134,16 @@
   --duration-fast: 150ms;
   --duration-default: 200ms;
   --duration-slow: 300ms;
+
+  /* Entrance motion: content that arrives on page load (Statement Hero).
+     The content rises from the bottom of its block into place, fading in
+     as it goes. The distance is the content's own height, so it starts at
+     the block's bottom edge whatever its length; the block clips it. Only
+     under prefers-reduced-motion: no-preference. The timing is the common
+     "fade in up" (animate.css fadeInUp, as on sidecar.ai): 0.6s on ease. */
+  --duration-entrance: 600ms;
+  --ease-entrance: ease;
+  --motion-entrance-distance: 100%;
 }
 
 /* Domain semantic tokens for future ANA experiences. */
