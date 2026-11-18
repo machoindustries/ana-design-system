@@ -73,6 +73,23 @@
     .ds-data-bar-animated::-webkit-progress-value { transition: width var(--duration-slow) ease; }
   }
 
+  /* Entrance motion (Statement Hero): each direct child rises and fades in once on page load,
+     a stagger after the one before. Screen only, and never with reduced motion: the content is
+     in place and visible without it, and there is no script to wait for. */
+  @keyframes ds-entrance {
+    from { opacity: 0; transform: translateY(var(--motion-entrance-distance)); }
+  }
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .ds-entrance > * { animation: ds-entrance var(--duration-entrance) var(--ease-entrance) both; }
+    .ds-entrance > :nth-child(2) { animation-delay: var(--motion-entrance-stagger); }
+    .ds-entrance > :nth-child(3) { animation-delay: calc(var(--motion-entrance-stagger) * 2); }
+    .ds-entrance > :nth-child(n + 4) { animation-delay: calc(var(--motion-entrance-stagger) * 3); }
+  }
+
+  /* On a dark Statement Hero the primary button's navy hover would vanish into the background,
+     so it turns white with navy text instead. */
+  .ds-statement-hero-on-dark .ds-button-primary:hover { background-color: var(--color-background-page); color: var(--color-text-brand); }
+
   /* Editor-supplied rich text on a tinted notice: links switch to the colour that passes on tints. */
   .ds-notice a,
   .ds-notice a:visited { color: var(--color-link-on-tint); text-decoration: underline; }
