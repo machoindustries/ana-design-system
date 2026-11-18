@@ -5,8 +5,8 @@ import { useId } from 'react'
  *
  * A text-only page opener: eyebrow, a large heading, a short intro and up to
  * two actions, with no image. The background is the page, a surface (soft,
- * muted, dark) or one of three playbook gradients. On load the text rises and
- * fades in once, each part a stagger after the last (.ds-entrance); nothing
+ * muted, dark) or one of three playbook gradients. On load the text rises from
+ * the bottom of the block into place and fades in (.ds-entrance); nothing
  * moves with reduced motion, and the text is visible without it.
  *
  * Gradients are the dark, analogous playbook pairs that keep white text at AA:
@@ -45,7 +45,7 @@ export function StatementHero({ eyebrow, heading, children, actions, background 
   const eyebrowColor = bg.gradient ? 'text-[var(--color-text-inverse)]' : bg.dark ? 'text-[var(--color-text-eyebrow-on-dark)]' : ''
 
   return (
-    <section aria-labelledby={headingId} className={`ds-statement-hero ${bg.dark ? 'ds-statement-hero-on-dark' : ''} ${bg.className} px-5 py-14 sm:px-8 md:py-24`}>
+    <section aria-labelledby={headingId} className={`ds-statement-hero ${bg.dark ? 'ds-statement-hero-on-dark' : ''} ${bg.className} overflow-hidden px-5 py-14 sm:px-8 md:py-24`}>
       <div className={`ds-entrance max-w-3xl ${centered ? 'mx-auto text-center' : ''}`}>
         {eyebrow ? <p className={`ds-eyebrow mb-4 ${eyebrowColor}`}>{eyebrow}</p> : null}
         <Heading id={headingId} className={`text-[length:var(--type-h2-size)] leading-[var(--type-h2-line-height)] font-bold md:text-[length:var(--type-h1-size)] md:leading-[var(--type-h1-line-height)] ${bg.dark ? 'text-[var(--color-text-inverse)]' : 'text-[var(--color-text-brand)]'}`}>

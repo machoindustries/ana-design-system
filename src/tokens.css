@@ -136,12 +136,13 @@
   --duration-slow: 300ms;
 
   /* Entrance motion: content that arrives on page load (Statement Hero).
-     A short rise and fade, each item a stagger after the last, all done in
-     under a second. Only under prefers-reduced-motion: no-preference. */
-  --duration-entrance: 600ms;
+     The content rises from the bottom of its block into place, fading in
+     as it goes. The distance is the content's own height, so it starts at
+     the block's bottom edge whatever its length; the block clips it. Only
+     under prefers-reduced-motion: no-preference. */
+  --duration-entrance: 900ms;
   --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
-  --motion-entrance-distance: 24px;
-  --motion-entrance-stagger: 80ms;
+  --motion-entrance-distance: 100%;
 }
 
 /* Domain semantic tokens for future ANA experiences. */
